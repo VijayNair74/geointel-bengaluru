@@ -1,0 +1,66 @@
+name: GeoIntel production smoke test
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test tool
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify GeoIntel loads on the actual public Cloudflare URL
+        env:
+          SITE_URL: https://geointel-bengaluru.vijaynath-nair.workers.dev/
+        run: |
+          node --input-type=module <<'JS'
+          import { chromium } from 'playwright';
+          const browser = await chromium.launch({headless:true});
+          const url = process.env.SITE_URL;
+          let passed = false;
+          let lastError = 'No successful check';
+          for (let attempt=1; attempt<=12; attempt++) {
+            const page = await browser.newPage();
+            const browserErrors = [];
+            page.on('pageerror',error=>browserErrors.push(error.message));
+            try {
+              const response = await page.goto(url,{waitUntil:'domcontentloaded',timeout:20000});
+              const status = response?.status();
+              await page.waitForTimeout(2000);
+              const title = await page.title();
+              const text = await page.locator('body').innerText();
+              const scriptURLs = await page.locator('script[src]').evaluateAll(items=>items.map(e=>e.getAttribute('src')));
+              console.log(JSON.stringify({attempt,status,title,bodyStart:text.slice(0,280),scriptURLs,browserErrors}));
+              if (status===200 && text.includes('Explore Bengaluru') && text.includes('Area indicators') && browserErrors.length===0) {
+                passed=true;
+                await page.screenshot({path:'geointel-live.png',fullPage:true});
+                break;
+              }
+              lastError='Body missing dashboard, bad HTTP response, or JS errors';
+            } catch(error) {
+              lastError=String(error);
+              console.log('Check failed:',lastError);
+            } finally {
+              await page.close();
+            }
+            await new Promise(resolve=>setTimeout(resolve,10000));
+          }
+          await browser.close();
+          if (!passed) throw new Error('Live Cloudflare smoke test FAILED: '+lastError);
+          console.log('PASS: Live Cloudflare site rendered the dashboard.');
+          JS
+      - name: Upload live screenshot
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: geointel-live-smoke
+          path: geointel-live.png
