@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-18T21:48:17.280290+00:00",
+  "generated_at_utc": "2026-11-18T22:12:19.475668+00:00",
   "layers": [
     {
       "layer": "airports",
@@ -14,6 +14,18 @@
     {
       "layer": "buildings",
       "feature_count": 29405,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "MultiPolygon",
+        "Point",
+        "Polygon"
+      ]
+    },
+    {
+      "layer": "developer_projects",
+      "feature_count": 578,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
