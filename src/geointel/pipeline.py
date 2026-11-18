@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 import geopandas as gpd
+import pandas as pd
 import yaml
 from shapely.geometry import Point
 
@@ -21,6 +22,15 @@ def utc_now() -> str:
 def load_config() -> dict[str, Any]:
     with (ROOT / "config" / "settings.yaml").open("r", encoding="utf-8") as f:
         return yaml.safe_load(f)
+
+
+def load_projects() -> list[dict[str, Any]]:
+    """Named development projects (config/projects.yaml) that get full location reports."""
+    path = ROOT / "config" / "projects.yaml"
+    if not path.exists():
+        return []
+    with path.open("r", encoding="utf-8") as f:
+        return (yaml.safe_load(f) or {}).get("projects", [])
 
 
 def ensure_dirs(cfg: dict[str, Any]) -> tuple[Path, Path]:
@@ -64,7 +74,8 @@ def _write_geojson(gdf: gpd.GeoDataFrame, path: Path) -> None:
 # the published GeoJSON stays compact.
 _KEEP_COLUMNS = ("osm_type", "osm_id", "name", "ref", "amenity", "leisure", "shop",
                  "highway", "natural", "water", "landuse", "building",
-                 "railway", "station", "public_transport", "aeroway", "iata")
+                 "railway", "station", "public_transport", "aeroway", "iata", "waterway",
+                 "construction", "proposed")
 
 
 def _apply_exclude(gdf: gpd.GeoDataFrame, exclude: dict[str, list[str]] | None,
@@ -84,6 +95,27 @@ def _apply_exclude(gdf: gpd.GeoDataFrame, exclude: dict[str, list[str]] | None,
     if exclude_name_pattern and "name" in gdf.columns:
         gdf = gdf.loc[~gdf["name"].fillna("").str.contains(exclude_name_pattern, regex=True)]
     return gdf.reset_index(drop=True)
+
+
+_NOT_OPERATIONAL = r"(?i)\b(?:proposed|u/c|under construction)\b"
+
+
+def _upcoming_only(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    """Keep stations that are NOT operational and label them proposed / under construction."""
+    if gdf.empty:
+        return gdf
+    name = gdf["name"].fillna("") if "name" in gdf.columns else pd.Series([""] * len(gdf), index=gdf.index)
+    railway = gdf["railway"].fillna("") if "railway" in gdf.columns else pd.Series([""] * len(gdf), index=gdf.index)
+    flagged = name.str.contains(_NOT_OPERATIONAL, regex=True)
+    keep = flagged | (railway != "station")
+    out = gdf.loc[keep].copy()
+    n, r = name.loc[keep], railway.loc[keep]
+    out["status"] = [
+        "proposed" if (rw == "proposed" or "proposed" in nm.lower()) else "under construction"
+        for nm, rw in zip(n, r)
+    ]
+    out["name"] = n.str.replace(r"\s*\((?:proposed|u/c|under construction)\)\s*", "", regex=True, case=False).str.strip()
+    return out.reset_index(drop=True)
 
 
 def _normalize_osm(gdf: gpd.GeoDataFrame, layer: str) -> gpd.GeoDataFrame:
@@ -240,7 +272,7 @@ def fetch_osm_layers(refresh: bool = False, pbf_path: str | Path | None = None) 
     raw_dir, processed_dir = ensure_dirs(cfg)
     acq = cfg["acquisition"]
     pause_s = float(acq["pause_between_requests_seconds"])
-    points = [(lat, lon) for _, lat, lon in cfg["demo_locations"]]
+    points = [(lat, lon) for _, lat, lon in cfg["demo_locations"]] + [(p["lat"], p["lon"]) for p in load_projects()]
     ox.settings.use_cache = True
     ox.settings.log_console = True
     ox.settings.requests_timeout = int(acq["request_timeout_seconds"])
@@ -285,6 +317,8 @@ def fetch_osm_layers(refresh: bool = False, pbf_path: str | Path | None = None) 
                 fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s, endpoints)
             gdf = _apply_exclude(_normalize_osm(fetched, layer), definition.get("exclude"),
                                  definition.get("require"), definition.get("exclude_name_pattern"))
+            if definition.get("upcoming_only"):
+                gdf = _upcoming_only(gdf)
             gdf = _simplify(gdf)
         except Exception as exc:
             raise RuntimeError(
@@ -382,6 +416,83 @@ def _building_coverage_pct(gdf: gpd.GeoDataFrame, point: Point, radius_m: int = 
     return round(min(100.0, footprint_area / float(area.area) * 100), 2) if area.area else None
 
 
+def _point_metrics(point: Point, layers: dict[str, gpd.GeoDataFrame], metric_crs: str) -> dict[str, Any]:
+    """All indicators for one point (in metric_crs). Shared by pilot locations and projects."""
+    m: dict[str, Any] = {}
+    definitions = {
+        "schools": [("schools_within_1km", 1000), ("schools_within_3km", 3000)],
+        "healthcare": [("healthcare_within_1km", 1000), ("healthcare_within_5km", 5000)],
+        "parks": [("parks_within_1km", 1000), ("parks_within_3km", 3000)],
+        "retail": [("retail_within_2km", 2000)],
+    }
+    for layer_name, metrics in definitions.items():
+        layer = layers.get(layer_name, _empty_gdf()).to_crs(metric_crs)
+        for key, radius in metrics:
+            m[key] = {
+                "value": _count_within(layer, point, radius), "unit": "mapped_features",
+                "radius_m": radius, "source": "OpenStreetMap contributors", "license": "ODbL-1.0",
+                "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+                "status": "calculated" if not layer.empty else "no_layer_data"
+            }
+
+    water = layers.get("water", _empty_gdf()).to_crs(metric_crs)
+    nearest_water, water_label = _nearest_feature(water, point)
+    m["nearest_mapped_water_km"] = {
+        "value": nearest_water, "unit": "km", "nearest_feature": water_label, "source": "OpenStreetMap contributors",
+        "license": "ODbL-1.0", "method": "Minimum planar distance to mapped water feature geometry.",
+        "status": "calculated" if nearest_water is not None else "no_layer_data"
+    }
+
+    roads = layers.get("roads", _empty_gdf()).to_crs(metric_crs)
+    road_density = _road_density_km_per_sqkm(roads, point)
+    m["road_density_within_1km"] = {
+        "value": road_density, "unit": "km_of_mapped_roads_per_sq_km", "radius_m": 1000,
+        "source": "OpenStreetMap contributors", "license": "ODbL-1.0",
+        "method": "Sum of mapped road-line lengths clipped to a 1 km radius circle, divided by circle area.",
+        "status": "calculated" if road_density is not None else "no_layer_data"
+    }
+
+    buildings = layers.get("buildings", _empty_gdf()).to_crs(metric_crs)
+    coverage = _building_coverage_pct(buildings, point)
+    m["building_footprint_coverage_within_1km"] = {
+        "value": coverage, "unit": "percent", "radius_m": 1000,
+        "source": "OpenStreetMap contributors", "license": "ODbL-1.0",
+        "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+        "status": "calculated" if coverage is not None else "no_layer_data"
+    }
+
+    connectivity = [
+        ("nearest_airport_km", "airports", True,
+         "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport)."),
+        ("nearest_metro_station_km", "metro_stations", False,
+         "Planar distance to the nearest mapped operational metro station (OSM station=subway)."),
+        ("nearest_rail_station_km", "rail_stations", False,
+         "Planar distance to the nearest mapped railway station or halt, excluding metro."),
+        ("nearest_highway_km", "highways", False,
+         "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways)."),
+    ]
+    for key, layer_name, centroid, method in connectivity:
+        layer = layers.get(layer_name, _empty_gdf()).to_crs(metric_crs)
+        if layer_name == "airports" and "iata" in layer.columns:
+            layer = layer.loc[layer["iata"].notna() & (layer["iata"].astype(str).str.len() == 3)]
+        dist_km, label = _nearest_feature(layer, point, use_centroid=centroid)
+        m[key] = {
+            "value": dist_km, "unit": "km", "nearest_feature": label,
+            "source": "OpenStreetMap contributors", "license": "ODbL-1.0", "method": method,
+            "status": "calculated" if dist_km is not None else "no_layer_data"
+        }
+    return m
+
+
+def _load_layers(cfg: dict[str, Any], processed_dir: Path, metric_crs: str) -> dict[str, gpd.GeoDataFrame]:
+    layers: dict[str, gpd.GeoDataFrame] = {}
+    for name in cfg["osm_layers"].keys():
+        layer = _read_layer(processed_dir, name)
+        if not layer.empty:
+            layers[name] = layer.to_crs(metric_crs)
+    return layers
+
+
 def build_metrics() -> Path:
     cfg = load_config()
     _, processed_dir = ensure_dirs(cfg)
@@ -395,12 +506,7 @@ def build_metrics() -> Path:
         geometry=[Point(lon, lat) for n, lat, lon in demo_points], crs="EPSG:4326"
     ).to_crs(metric_crs)
 
-    layer_names = list(cfg["osm_layers"].keys())
-    layers: dict[str, gpd.GeoDataFrame] = {}
-    for name in layer_names:
-        layer = _read_layer(processed_dir, name)
-        if not layer.empty:
-            layers[name] = layer.to_crs(metric_crs)
+    layers = _load_layers(cfg, processed_dir, metric_crs)
 
     results = []
     for _, point_row in points.iterrows():
@@ -414,68 +520,7 @@ def build_metrics() -> Path:
             "data_status": "computed_from_available_layers",
             "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
         }
-        definitions = {
-            "schools": [("schools_within_1km", 1000), ("schools_within_3km", 3000)],
-            "healthcare": [("healthcare_within_1km", 1000), ("healthcare_within_5km", 5000)],
-            "parks": [("parks_within_1km", 1000), ("parks_within_3km", 3000)],
-            "retail": [("retail_within_2km", 2000)],
-        }
-        for layer_name, metrics in definitions.items():
-            layer = layers.get(layer_name, _empty_gdf()).to_crs(metric_crs)
-            for key, radius in metrics:
-                item["metrics"][key] = {
-                    "value": _count_within(layer, point, radius), "unit": "mapped_features",
-                    "radius_m": radius, "source": "OpenStreetMap contributors", "license": "ODbL-1.0",
-                    "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-                    "status": "calculated" if not layer.empty else "no_layer_data"
-                }
-
-        water = layers.get("water", _empty_gdf()).to_crs(metric_crs)
-        nearest_water, water_label = _nearest_feature(water, point)
-        item["metrics"]["nearest_mapped_water_km"] = {
-            "value": nearest_water, "unit": "km", "nearest_feature": water_label, "source": "OpenStreetMap contributors",
-            "license": "ODbL-1.0", "method": "Minimum planar distance to mapped water feature geometry.",
-            "status": "calculated" if nearest_water is not None else "no_layer_data"
-        }
-
-        roads = layers.get("roads", _empty_gdf()).to_crs(metric_crs)
-        road_density = _road_density_km_per_sqkm(roads, point)
-        item["metrics"]["road_density_within_1km"] = {
-            "value": road_density, "unit": "km_of_mapped_roads_per_sq_km", "radius_m": 1000,
-            "source": "OpenStreetMap contributors", "license": "ODbL-1.0",
-            "method": "Sum of mapped road-line lengths clipped to a 1 km radius circle, divided by circle area.",
-            "status": "calculated" if road_density is not None else "no_layer_data"
-        }
-
-        buildings = layers.get("buildings", _empty_gdf()).to_crs(metric_crs)
-        coverage = _building_coverage_pct(buildings, point)
-        item["metrics"]["building_footprint_coverage_within_1km"] = {
-            "value": coverage, "unit": "percent", "radius_m": 1000,
-            "source": "OpenStreetMap contributors", "license": "ODbL-1.0",
-            "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
-            "status": "calculated" if coverage is not None else "no_layer_data"
-        }
-
-        connectivity = [
-            ("nearest_airport_km", "airports", True,
-             "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport)."),
-            ("nearest_metro_station_km", "metro_stations", False,
-             "Planar distance to the nearest mapped operational metro station (OSM station=subway)."),
-            ("nearest_rail_station_km", "rail_stations", False,
-             "Planar distance to the nearest mapped railway station or halt, excluding metro."),
-            ("nearest_highway_km", "highways", False,
-             "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways)."),
-        ]
-        for key, layer_name, centroid, method in connectivity:
-            layer = layers.get(layer_name, _empty_gdf()).to_crs(metric_crs)
-            if layer_name == "airports" and "iata" in layer.columns:
-                layer = layer.loc[layer["iata"].notna() & (layer["iata"].astype(str).str.len() == 3)]
-            dist_km, label = _nearest_feature(layer, point, use_centroid=centroid)
-            item["metrics"][key] = {
-                "value": dist_km, "unit": "km", "nearest_feature": label,
-                "source": "OpenStreetMap contributors", "license": "ODbL-1.0", "method": method,
-                "status": "calculated" if dist_km is not None else "no_layer_data"
-            }
+        item["metrics"] = _point_metrics(point, layers, metric_crs)
         results.append(item)
 
     output = processed_dir / "demo_location_metrics.json"
@@ -487,6 +532,104 @@ def build_metrics() -> Path:
         "locations": results
     }, indent=2), encoding="utf-8")
     return output
+
+
+def _dem_files() -> list[Path]:
+    d = Path(os.getenv("DEM_DIR", ROOT / "data" / "raw" / "dem"))
+    return sorted(d.glob("*.tif")) if d.exists() else []
+
+
+def _dem_median(geom_wgs84) -> float | None:
+    """Median Copernicus GLO-30 surface elevation (m) over a WGS84 geometry, or None."""
+    files = _dem_files()
+    if not files:
+        return None
+    try:
+        import numpy as np
+        import rasterio
+        from rasterio.mask import mask as rio_mask
+    except ImportError:
+        return None
+    vals = []
+    for f in files:
+        with rasterio.open(f) as src:
+            b = src.bounds
+            minx, miny, maxx, maxy = geom_wgs84.bounds
+            if maxx < b.left or minx > b.right or maxy < b.bottom or miny > b.top:
+                continue
+            arr, _ = rio_mask(src, [geom_wgs84.__geo_interface__], crop=True, all_touched=True, filled=False)
+            vals.extend(v for v in arr.compressed().tolist() if v > -100)
+    return round(float(np.median(vals)), 1) if vals else None
+
+
+def _project_evidence(point: Point, layers: dict[str, gpd.GeoDataFrame], metric_crs: str) -> dict[str, Any]:
+    """Lakes, drains, upcoming metro and elevation around a project (point in metric_crs)."""
+    ev: dict[str, Any] = {}
+    water = layers.get("water", _empty_gdf())
+    lakes = []
+    if not water.empty:
+        polys = water.loc[water.geom_type.isin(["Polygon", "MultiPolygon"])].copy()
+        polys["d"] = polys.geometry.distance(point)
+        for _, r in polys.loc[polys["d"] <= 2000].sort_values("d").iterrows():
+            lakes.append({"name": _feature_label(r), "distance_m": int(round(r["d"])),
+                          "area_acres": round(float(r.geometry.area) / 4046.86, 1), "_geom": r.geometry})
+    named = [l for l in lakes if l["name"]]
+    ev["lakes_within_2km"] = [{k: v for k, v in l.items() if k != "_geom"} for l in named[:10]]
+    ev["water_bodies_within_2km"] = len(lakes)
+    nearest = lakes[0] if lakes else None
+    ev["nearest_lake"] = {k: v for k, v in nearest.items() if k != "_geom"} if nearest else None
+
+    drains = layers.get("drains", _empty_gdf())
+    if not drains.empty:
+        d = drains.geometry.distance(point)
+        idx = d.idxmin()
+        ev["nearest_drain"] = {"name": _feature_label(drains.loc[idx]), "type": drains.loc[idx].get("waterway"),
+                               "distance_m": int(round(float(d[idx])))}
+        ev["drains_within_500m"] = int((d <= 500).sum())
+    else:
+        ev["nearest_drain"], ev["drains_within_500m"] = None, 0
+
+    up = layers.get("metro_upcoming", _empty_gdf())
+    ev["upcoming_metro_within_5km"] = []
+    if not up.empty:
+        d = up.geometry.distance(point)
+        for idx in d[d <= 5000].sort_values().index[:8]:
+            ev["upcoming_metro_within_5km"].append({"name": _feature_label(up.loc[idx]), "status": up.loc[idx].get("status"),
+                                                    "distance_km": round(float(d[idx]) / 1000, 2)})
+
+    site = gpd.GeoSeries([point.buffer(40)], crs=metric_crs).to_crs("EPSG:4326").iloc[0]
+    site_m = _dem_median(site)
+    lake_m = None
+    if nearest is not None:
+        lake_geom = gpd.GeoSeries([nearest["_geom"].buffer(-15) or nearest["_geom"]], crs=metric_crs).to_crs("EPSG:4326").iloc[0]
+        lake_m = _dem_median(lake_geom if not lake_geom.is_empty else gpd.GeoSeries([nearest["_geom"]], crs=metric_crs).to_crs("EPSG:4326").iloc[0])
+    ev["elevation"] = {
+        "site_m": site_m, "nearest_lake_surface_m": lake_m,
+        "height_above_lake_m": round(site_m - lake_m, 1) if site_m is not None and lake_m is not None else None,
+        "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
+        "status": "calculated" if site_m is not None else "no_dem_data",
+    }
+    return ev
+
+
+def build_project_reports() -> Path:
+    cfg = load_config()
+    _, processed_dir = ensure_dirs(cfg)
+    metric_crs = cfg["project"]["metric_crs"]
+    layers = _load_layers(cfg, processed_dir, metric_crs)
+    manifest_path = processed_dir / "source_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {"layers": {}}
+    retrieved = sorted({v.get("retrieved_at_utc", "")[:10] for v in manifest.get("layers", {}).values()} - {""})
+    out = []
+    for p in load_projects():
+        pt = gpd.GeoSeries([Point(p["lon"], p["lat"])], crs="EPSG:4326").to_crs(metric_crs).iloc[0]
+        out.append({**{k: p.get(k) for k in ("id", "name", "builder", "address", "lat", "lon", "status", "facts", "source_url", "search_terms")},
+                    "metrics": _point_metrics(pt, layers, metric_crs),
+                    "evidence": _project_evidence(pt, layers, metric_crs)})
+    path = processed_dir / "project_reports.json"
+    path.write_text(json.dumps({"generated_at_utc": utc_now(), "osm_retrieved": retrieved[-1] if retrieved else None,
+                                "projects": out}, indent=2, default=str), encoding="utf-8")
+    return path
 
 
 def quality_report() -> Path:

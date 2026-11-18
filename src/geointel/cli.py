@@ -1,7 +1,7 @@
 from __future__ import annotations
 import argparse
 from .pipeline import (
-    build_metrics, fetch_osm_layers, load_config, quality_report,
+    build_metrics, build_project_reports, fetch_osm_layers, load_config, quality_report,
     source_report, validate_config,
 )
 def main() -> None:
@@ -12,6 +12,7 @@ def main() -> None:
     fetch.add_argument("--refresh", action="store_true", help="Re-fetch layers instead of using cached processed files")
     fetch.add_argument("--pbf", help="Read from a local OSM .pbf extract (needs osmium-tool) instead of Overpass")
     sub.add_parser("build-metrics")
+    sub.add_parser("build-projects")
     sub.add_parser("report")
     sub.add_parser("data-status")
     args = parser.parse_args()
@@ -22,6 +23,8 @@ def main() -> None:
         print(fetch_osm_layers(refresh=args.refresh, pbf_path=args.pbf))
     elif args.command == "build-metrics":
         print(f"Metrics written to: {build_metrics()}")
+    elif args.command == "build-projects":
+        print(f"Project reports written to: {build_project_reports()}")
     elif args.command == "report":
         print(f"Quality report written to: {quality_report()}")
     elif args.command == "data-status":

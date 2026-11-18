@@ -74,3 +74,38 @@ def test_simplify_keeps_points_and_shrinks_lines():
     out = _simplify(gdf)
     assert out.geometry.iloc[0].equals(Point(77.6, 12.9))
     assert len(out.geometry.iloc[1].coords) == 2
+def test_upcoming_only_labels_and_cleans_names():
+    from geointel.pipeline import _upcoming_only
+    gdf = gpd.GeoDataFrame({"railway": ["station", "proposed", "station", "construction"],
+                            "name": ["Kudlu Gate", "Nagawara (Proposed)", "Agara Lake (u/c)", "Tavarekere"]},
+                           geometry=[Point(0, 0)] * 4, crs="EPSG:4326")
+    out = _upcoming_only(gdf)
+    assert out["name"].tolist() == ["Nagawara", "Agara Lake", "Tavarekere"]
+    assert out["status"].tolist() == ["proposed", "under construction", "under construction"]
+
+def test_project_evidence_lakes_drains_upcoming_and_dem(tmp_path, monkeypatch):
+    import numpy as np, rasterio
+    from rasterio.transform import from_origin
+    from geointel.pipeline import _project_evidence
+    crs = "EPSG:32643"
+    site = gpd.GeoSeries([Point(77.64, 12.886)], crs="EPSG:4326").to_crs(crs).iloc[0]
+    lake = box(site.x + 200, site.y - 100, site.x + 500, site.y + 100)
+    layers = {
+        "water": gpd.GeoDataFrame({"name": ["Test Lake"]}, geometry=[lake], crs=crs),
+        "drains": gpd.GeoDataFrame({"name": [None], "waterway": ["drain"]}, geometry=[LineString([(site.x - 80, site.y - 500), (site.x - 80, site.y + 500)])], crs=crs),
+        "metro_upcoming": gpd.GeoDataFrame({"name": ["Future Stn"], "status": ["under construction"]}, geometry=[Point(site.x, site.y + 1500)], crs=crs),
+    }
+    # synthetic DEM: 900 m everywhere, 890 m east of the site (the lake side)
+    lake_wgs = gpd.GeoSeries([lake], crs=crs).to_crs("EPSG:4326").iloc[0]
+    arr = np.full((400, 400), 900, dtype="float32")
+    tr = from_origin(77.62, 12.90, 0.0001, 0.0001)
+    cols_lake = int((lake_wgs.bounds[0] - 77.62) / 0.0001)
+    arr[:, cols_lake:] = 890
+    with rasterio.open(tmp_path / "dem.tif", "w", driver="GTiff", height=400, width=400, count=1, dtype="float32", crs="EPSG:4326", transform=tr) as dst:
+        dst.write(arr, 1)
+    monkeypatch.setenv("DEM_DIR", str(tmp_path))
+    ev = _project_evidence(site, layers, crs)
+    assert ev["nearest_lake"]["name"] == "Test Lake" and 190 <= ev["nearest_lake"]["distance_m"] <= 210
+    assert ev["nearest_drain"]["distance_m"] == 80 and ev["drains_within_500m"] == 1
+    assert ev["upcoming_metro_within_5km"][0]["name"] == "Future Stn"
+    assert ev["elevation"]["height_above_lake_m"] == 10.0

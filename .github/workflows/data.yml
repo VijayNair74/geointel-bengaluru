@@ -9,7 +9,7 @@ on:
   push:
     branches: [main]
     paths:
-      - config/settings.yaml
+      - config/**
       - src/geointel/**
       - scripts/export_web_data.py
       - .github/workflows/data.yml
@@ -42,11 +42,20 @@ jobs:
           curl -fL --retry 3 -o data/raw/southern-zone-latest.osm.pbf \
             https://download.geofabrik.de/asia/india/southern-zone-latest.osm.pbf
           ls -lh data/raw/southern-zone-latest.osm.pbf
+      - name: Download Copernicus GLO-30 elevation tiles (public AWS open data)
+        run: |
+          mkdir -p data/raw/dem
+          for t in N12_00_E077_00 N13_00_E077_00; do
+            curl -fL --retry 3 -o data/raw/dem/$t.tif \
+              https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_${t}_DEM/Copernicus_DSM_COG_10_${t}_DEM.tif
+          done
+          ls -lh data/raw/dem
       - name: Fetch OSM layers, build metrics and reports
         run: |
           geointel validate-config
           geointel fetch-osm --refresh --pbf data/raw/southern-zone-latest.osm.pbf
           geointel build-metrics
+          geointel build-projects
           geointel report
           geointel data-status
       - name: Publish to web/public/data

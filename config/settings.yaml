@@ -82,3 +82,13 @@ osm_layers:
   highways:
     tags: {highway: [motorway, trunk]}
     fetch_scope: aoi
+  # Proposed / under-construction metro stations, shown separately and never
+  # mixed into operational distances.
+  metro_upcoming:
+    tags: {station: [subway]}
+    upcoming_only: true
+    fetch_scope: aoi
+  # Stormwater drains (rajakaluve), canals and streams. OSM coverage is partial.
+  drains:
+    tags: {waterway: [drain, canal, stream, river]}
+    fetch_scope: aoi

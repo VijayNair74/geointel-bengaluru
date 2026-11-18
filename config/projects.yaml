@@ -1,0 +1,17 @@
+# Named development projects that get a full location report.
+# Facts come from the builder's own public listing (source_url); coordinates are
+# the site marker on that listing. GeoIntel is not affiliated with the builders.
+projects:
+  - id: navami-dm-enclave
+    name: Navami DM Enclave
+    builder: Navami
+    address: 88/4, Chikka Begur, Wellington Paradise, Begur, Bengaluru, Karnataka 560068
+    search_terms: [navami, dm enclave, chikka begur, wellington paradise, begur]
+    lat: 12.88625
+    lon: 77.64097
+    status: Pre-launch
+    facts:
+      land_area_acres: 1.66
+      total_units: 144
+      configurations: 2BHK, 2.5BHK, 3BHK
+    source_url: https://discover.talkinglands.com/navami/properties/navami-dm-enclave
