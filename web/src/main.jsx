@@ -5,6 +5,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import './style.css';
 import { computeMetrics } from './geo.js';
 import { Icon } from './icons.jsx';
+import { Report } from './report.jsx';
 
 /* ---------- static config ---------- */
 const places = [
@@ -43,12 +44,14 @@ const compareRows = sections.map((s) => ({ ...s, rows: s.rows.flatMap((r) => r.a
 const layerDefs = [
   { id: 'metro_stations', label: 'Metro', color: { light: '#7C4DDB', dark: '#B48CFF' }, radius: 5 },
   { id: 'rail_stations', label: 'Rail', color: { light: '#D9661F', dark: '#F5A05A' }, radius: 5 },
+  { id: 'metro_upcoming', label: 'Upcoming metro', color: { light: '#B79AF0', dark: '#7D63B8' }, radius: 4.5 },
   { id: 'highways', label: 'Highways', color: { light: '#D49A12', dark: '#E2B04A' }, width: 2.4 },
   { id: 'airports', label: 'Airports', color: { light: '#334155', dark: '#E2E8F0' } },
   { id: 'schools', label: 'Education', color: { light: '#C98A12', dark: '#E9C46A' } },
   { id: 'healthcare', label: 'Healthcare', color: { light: '#D23F6E', dark: '#F07AA0' } },
   { id: 'parks', label: 'Parks', color: { light: '#24915E', dark: '#5FCB9A' } },
   { id: 'water', label: 'Water', color: { light: '#2B87C8', dark: '#5DB6EC' } },
+  { id: 'drains', label: 'Drains', color: { light: '#5FA7D9', dark: '#4C93C4' }, width: 1.4 },
   { id: 'retail', label: 'Retail', color: { light: '#9255D4', dark: '#C59DFF' } },
   { id: 'roads', label: 'Roads', color: { light: '#7B8794', dark: '#8796AE' } },
   { id: 'buildings', label: 'Buildings', color: { light: '#8B97A5', dark: '#C4D0DD' } },
@@ -73,7 +76,17 @@ const parseLatLon = (q) => { const m = q.trim().match(/^(-?\d+(?:\.\d+)?)\s*[, ]
 const coords = (e) => `${e.lat.toFixed(4)}° N · ${e.lon.toFixed(4)}° E`;
 const pilotEntry = (p) => ({ kind: 'pilot', name: p.location, area: p.area, lon: p.longitude, lat: p.latitude });
 const pointEntry = (lon, lat, name = '') => ({ kind: 'point', name: name || 'Selected point', area: '', lon, lat });
-const entryKey = (e) => (e.kind === 'pilot' ? e.name : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`);
+const projectEntry = (p) => ({ kind: 'project', id: p.id, name: p.name, area: p.builder, lon: p.lon, lat: p.lat });
+const pendingProject = (id) => ({ kind: 'project', id, name: 'Loading…', area: '', lon: 77.64, lat: 12.98, pending: true });
+const entryKey = (e) => (e.kind === 'pilot' ? e.name : e.kind === 'project' ? `p:${e.id}` : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`);
+const norm = (t) => (t || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+function matchProjects(projects, q) {
+  const nq = norm(q); if (nq.length < 3) return [];
+  return projects.filter((p) => {
+    const hay = norm([p.name, p.builder, p.address, ...(p.search_terms || [])].join(' '));
+    return hay.includes(nq) || (p.search_terms || []).some((t) => nq.includes(norm(t))) || nq.includes(norm(p.name));
+  });
+}
 
 function fmt(row, m) {
   if (!m) return { v: '—', u: '' };
@@ -89,20 +102,23 @@ function fmt(row, m) {
 function readUrl() {
   const u = new URLSearchParams(location.search);
   const parseEntry = (s) => {
+    if (s?.startsWith('p:')) return pendingProject(s.slice(2));
     const p = places.find((x) => x.location === s); if (p) return pilotEntry(p);
     const ll = parseLatLon(s || ''); return ll ? pointEntry(ll[0], ll[1]) : null;
   };
   const compare = (u.get('c') || '').split(/[|~]/).map(parseEntry).filter(Boolean).slice(0, MAX_COMPARE);
   const lat = parseFloat(u.get('lat')), lon = parseFloat(u.get('lon'));
-  const current = Number.isFinite(lat) && Number.isFinite(lon) ? pointEntry(lon, lat, u.get('label') || '')
+  const current = u.get('project') ? pendingProject(u.get('project'))
+    : Number.isFinite(lat) && Number.isFinite(lon) ? pointEntry(lon, lat, u.get('label') || '')
     : pilotEntry(places.find((x) => x.location === u.get('place')) || places[0]);
-  return { mode: u.get('mode') === 'compare' && compare.length ? 'compare' : 'explore', current, compare };
+  return { mode: u.get('mode') === 'compare' && compare.length ? 'compare' : 'explore', current, compare, report: u.get('report') === '1' };
 }
-function writeUrl(mode, current, compare) {
+function writeUrl(mode, current, compare, report) {
   const u = new URLSearchParams();
-  if (current.kind === 'pilot') u.set('place', current.name);
+  if (current.kind === 'project') { u.set('project', current.id); if (report) u.set('report', '1'); }
+  else if (current.kind === 'pilot') u.set('place', current.name);
   else { u.set('lat', current.lat.toFixed(5)); u.set('lon', current.lon.toFixed(5)); if (current.name !== 'Selected point') u.set('label', current.name); }
-  if (compare.length) u.set('c', compare.map((e) => (e.kind === 'pilot' ? e.name : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`)).join('|'));
+  if (compare.length) u.set('c', compare.map((e) => (e.kind === 'pilot' ? e.name : e.kind === 'project' ? `p:${e.id}` : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`)).join('|'));
   if (mode === 'compare') u.set('mode', 'compare');
   history.replaceState(null, '', `${location.pathname}?${u}`);
 }
@@ -115,6 +131,8 @@ function App() {
   const [current, setCurrent] = useState(init.current);
   const [compare, setCompare] = useState(init.compare);
   const [tab, setTab] = useState('move');
+  const [projects, setProjects] = useState([]), [projMeta, setProjMeta] = useState({});
+  const [reportOpen, setReportOpen] = useState(init.report);
   const [pilotData, setPilotData] = useState(null), [status, setStatus] = useState(null);
   const [available, setAvailable] = useState({}), [enabled, setEnabled] = useState(DEFAULT_LAYERS);
   const [query, setQuery] = useState(''), [results, setResults] = useState(null), [searching, setSearching] = useState(false), [msg, setMsg] = useState('');
@@ -125,9 +143,11 @@ function App() {
 
   const metricsFor = (e) => (e.kind === 'pilot'
     ? pilotData?.locations?.find((l) => l.location === e.name)?.metrics
-    : computeMetrics([e.lon, e.lat], available));
-  const currentMetrics = useMemo(() => metricsFor(current), [current, available, pilotData]);
-  const compareMetrics = useMemo(() => compare.map(metricsFor), [compare, available, pilotData]);
+    : e.kind === 'project' ? projects.find((p) => p.id === e.id)?.metrics
+      : computeMetrics([e.lon, e.lat], available));
+  const currentMetrics = useMemo(() => metricsFor(current), [current, available, pilotData, projects]);
+  const compareMetrics = useMemo(() => compare.map(metricsFor), [compare, available, pilotData, projects]);
+  const currentProject = current.kind === 'project' ? projects.find((p) => p.id === current.id) : null;
 
   /* data */
   const loadLayer = (id) => { if (requested.current.has(id)) return; requested.current.add(id);
@@ -135,10 +155,18 @@ function App() {
   useEffect(() => {
     fetchJSON('/data/demo_location_metrics.json').then(setPilotData).catch(() => {});
     fetchJSON('/data/data_status.json').then(setStatus).catch(() => {});
+    fetchJSON('/data/project_reports.json').then((d) => {
+      const list = d.projects || []; setProjects(list); setProjMeta({ generated: d.generated_at_utc, osm: d.osm_retrieved });
+      const resolve = (e) => { if (e.kind !== 'project' || !e.pending) return e; const p = list.find((x) => x.id === e.id); return p ? projectEntry(p) : pilotEntry(places[0]); };
+      setCurrent(resolve); setCompare((l) => l.map(resolve));
+    }).catch(() => {
+      const drop = (e) => (e.kind === 'project' && e.pending ? pilotEntry(places[0]) : e);
+      setCurrent(drop); setCompare((l) => l.filter((e) => !(e.kind === 'project' && e.pending)));
+    });
     layerDefs.filter((l) => !LAZY.includes(l.id)).forEach((l) => loadLayer(l.id));
   }, []);
   useEffect(() => { enabled.filter((id) => LAZY.includes(id)).forEach(loadLayer); }, [enabled]);
-  useEffect(() => { writeUrl(mode, current, compare); }, [mode, current, compare]);
+  useEffect(() => { if (!current.pending) writeUrl(mode, current, compare, reportOpen); }, [mode, current, compare, reportOpen]);
   useEffect(() => { document.documentElement.dataset.theme = theme; store.set('geointel-theme', theme); }, [theme]);
   useEffect(() => { if (!toast) return undefined; const t = setTimeout(() => setToast(''), 2200); return () => clearTimeout(t); }, [toast]);
 
@@ -148,23 +176,26 @@ function App() {
     if (list.length >= MAX_COMPARE) { setToast(`Compare up to ${MAX_COMPARE} locations`); return list; }
     return [...list, e];
   });
-  const choose = (e) => {
+  const choose = (e0) => {
+    let e = e0;
+    if (e0.projectPick) { const p = projects.find((x) => x.id === e0.id); if (!p) return; e = projectEntry(p); }
     if (!inAoi([e.lon, e.lat], aoi)) { setMsg('That point is outside the covered Bengaluru area.'); return; }
     setMsg(''); setResults(null);
-    if (mode === 'compare') addToCompare(e); else setCurrent(e);
+    if (mode === 'compare') addToCompare(e); else { setCurrent(e); setReportOpen(false); }
   };
   const chooseRef = useRef(choose); chooseRef.current = choose;
   const search = async (ev) => {
     ev.preventDefault(); const q = query.trim(); if (!q) return;
     const ll = parseLatLon(q); if (ll) { choose(pointEntry(ll[0], ll[1])); return; }
     const pilot = places.find((p) => p.location.toLowerCase() === q.toLowerCase()); if (pilot) { choose(pilotEntry(pilot)); return; }
-    setSearching(true); setMsg(''); setResults(null);
+    const projHits = matchProjects(projects, q).map((p) => ({ project: p, name: `${p.name} · ${p.builder}`, sub: p.address }));
+    setSearching(true); setMsg(''); setResults(projHits.length ? projHits : null);
     try {
       const [w, s, e, n] = aoi;
       const res = await fetchJSON(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&countrycodes=in&bounded=1&viewbox=${w},${n},${e},${s}&q=${encodeURIComponent(q)}`);
-      if (!res.length) setMsg('No match inside the covered area. Try a locality, or click the map.');
-      setResults(res.map((r) => ({ lon: +r.lon, lat: +r.lat, name: r.display_name })));
-    } catch { setMsg('Search is unavailable right now. Click the map or enter “lat, lon”.'); }
+      if (!res.length && !projHits.length) setMsg('No match inside the covered area. Try a locality, or click the map.');
+      setResults([...projHits, ...res.map((r) => ({ lon: +r.lon, lat: +r.lat, name: r.display_name }))]);
+    } catch { if (!projHits.length) setMsg('Search is unavailable right now. Click the map or enter “lat, lon”.'); }
     finally { setSearching(false); }
   };
   const share = async () => {
@@ -196,6 +227,8 @@ function App() {
       setMapError(e.error?.message || 'Map rendering error');
     });
     map.on('click', (e) => {
+      const ph = map.getLayer('project-points') ? map.queryRenderedFeatures(e.point, { layers: ['project-points'] }) : [];
+      if (ph.length) { chooseRef.current({ kind: 'project', id: ph[0].properties.id, projectPick: true }); return; }
       const hit = map.getLayer('place-points') ? map.queryRenderedFeatures(e.point, { layers: ['place-points'] }) : [];
       if (hit.length) { const p = places.find((x) => x.location === hit[0].properties.location); if (p) { chooseRef.current(pilotEntry(p)); return; } }
       chooseRef.current(pointEntry(e.lngLat.lng, e.lngLat.lat));
@@ -237,6 +270,16 @@ function App() {
       map.on('mouseenter', 'place-points', () => { map.getCanvas().style.cursor = 'pointer'; });
       map.on('mouseleave', 'place-points', () => { map.getCanvas().style.cursor = 'crosshair'; });
     }
+    const projFc = { type: 'FeatureCollection', features: projects.map((p) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [p.lon, p.lat] }, properties: { id: p.id, name: p.name } })) };
+    if (!map.getSource('projects')) {
+      map.addSource('projects', { type: 'geojson', data: projFc });
+      map.addLayer({ id: 'project-points', type: 'circle', source: 'projects', paint: { 'circle-radius': 7, 'circle-color': ink, 'circle-stroke-color': pinColor, 'circle-stroke-width': 3 } });
+      if (map.getStyle().glyphs) map.addLayer({ id: 'project-labels', type: 'symbol', source: 'projects', minzoom: 11,
+        layout: { 'text-field': ['get', 'name'], 'text-size': 12, 'text-font': ['Noto Sans Bold'], 'text-offset': [0, 1.3], 'text-anchor': 'top' },
+        paint: { 'text-color': theme === 'dark' ? '#EEF2F6' : '#14171A', 'text-halo-color': ink, 'text-halo-width': 1.5 } });
+      map.on('mouseenter', 'project-points', () => { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'project-points', () => { map.getCanvas().style.cursor = 'crosshair'; });
+    } else map.getSource('projects').setData(projFc);
     if (!map.getSource('sel')) {
       map.addSource('sel', { type: 'geojson', data: empty });
       map.addLayer({ id: 'sel-halo', type: 'circle', source: 'sel', paint: { 'circle-radius': 20, 'circle-color': pinColor, 'circle-opacity': 0.16 } });
@@ -245,7 +288,7 @@ function App() {
         layout: { 'text-field': ['get', 'letter'], 'text-size': 12, 'text-font': ['Noto Sans Bold'], 'text-allow-overlap': true },
         paint: { 'text-color': ink } });
     }
-  }, [styleRev, available, enabled, theme]);
+  }, [styleRev, available, enabled, theme, projects]);
   useEffect(() => {
     const map = mapRef.current; if (!map || !styleRev || !map.getSource('sel')) return;
     const pts = mode === 'compare'
@@ -288,8 +331,9 @@ function App() {
           {(results?.length > 0 || msg) && (
             <div className="results glass">
               {results?.map((r, i) => (
-                <button type="button" key={i} onClick={() => choose(pointEntry(r.lon, r.lat, r.name.split(',').slice(0, 2).join(',')))}>
-                  <Icon name="pin" size={16} className="muted" /><span>{r.name}</span>
+                <button type="button" key={i} className={r.project ? 'is-project' : ''} onClick={() => choose(r.project ? projectEntry(r.project) : pointEntry(r.lon, r.lat, r.name.split(',').slice(0, 2).join(',')))}>
+                  <Icon name={r.project ? 'build' : 'pin'} size={16} className={r.project ? 'accent' : 'muted'} />
+                  <span>{r.project && <span className="tag">Project</span>}{r.name}{r.sub && <span className="res-sub">{r.sub}</span>}</span>
                 </button>))}
               {msg && <p className="results-msg">{msg}</p>}
             </div>)}
@@ -315,9 +359,11 @@ function App() {
 
       {mode === 'explore' && (
         <section className="card glass" aria-label="Location summary">
-          <div className="eyebrow">{current.kind === 'pilot' ? `PILOT AREA · ${current.area.toUpperCase()}` : 'SELECTED POINT'}</div>
+          <div className="eyebrow">{current.kind === 'pilot' ? `PILOT AREA · ${current.area.toUpperCase()}` : current.kind === 'project' ? `PROJECT · ${(current.area || '').toUpperCase()}` : 'SELECTED POINT'}</div>
           <h1>{current.name}</h1>
-          <div className="coords">{coords(current)}</div>
+          <div className="coords">{currentProject ? currentProject.address : coords(current)}</div>
+          {currentProject && (
+            <button type="button" className="btn btn-wide" onClick={() => setReportOpen(true)}><Icon name="info" size={16} />Open location report</button>)}
           <div className="tabs" role="tablist" aria-label="Indicator group">
             {sections.map((s) => <button type="button" role="tab" key={s.id} aria-selected={tab === s.id} onClick={() => setTab(s.id)}>{s.title}</button>)}
           </div>
@@ -399,6 +445,9 @@ function App() {
         {status?.generated_at_utc ? ` · Updated ${new Date(status.generated_at_utc).toLocaleDateString()}` : ''}
       </div>
       {toast && <div className="toast glass" role="status">{toast}</div>}
+      {reportOpen && currentProject && (
+        <Report project={{ ...currentProject, _generated: projMeta.generated, _osm: projMeta.osm }} metroFc={available.metro_stations}
+          onClose={() => setReportOpen(false)} onShare={share} />)}
     </div>
   );
 }

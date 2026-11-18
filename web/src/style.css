@@ -173,3 +173,46 @@ td.is-best .num { color: var(--best); }
   .attribution { display: none; }
   .maplibregl-ctrl-bottom-right { display: none; }
 }
+
+/* project search results + card */
+.accent { color: var(--accent); }
+.results button.is-project { background: var(--accent-soft); }
+.tag { display: inline-block; margin-right: 8px; padding: 1px 7px; border-radius: 6px; background: var(--accent); color: var(--accent-ink); font-size: 10.5px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; vertical-align: 1px; }
+.res-sub { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.btn-wide { width: 100%; justify-content: center; margin-top: 14px; height: 42px; }
+
+/* location report */
+.report { position: fixed; inset: 0; z-index: 50; overflow: auto; background: #EEF0EB; color: #14171A; }
+.report-bar { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 20px; background: rgba(238, 240, 235, .92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(17, 24, 39, .08); }
+.report-bar-actions { display: flex; gap: 8px; }
+.report .btn-ghost { background: #fff; display: inline-flex; align-items: center; gap: 6px; height: 40px; }
+.report-page { max-width: 860px; margin: 28px auto 60px; padding: 44px 52px; background: #fff; border-radius: 20px; box-shadow: 0 10px 40px rgba(15, 23, 42, .08); }
+.r-head h1 { margin: 8px 0 6px; font: 600 40px 'Space Grotesk', sans-serif; letter-spacing: -1.2px; }
+.r-addr { margin: 0; color: #5A6470; font-size: 14.5px; }
+.r-facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.r-facts span { padding: 5px 11px; border-radius: 999px; background: #F2F4F1; font-size: 13px; font-weight: 500; }
+.r-highlights { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin: 30px 0 8px; }
+.r-hl { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border: 1px solid rgba(17, 24, 39, .09); border-radius: 16px; }
+.r-hl-val { font: 600 26px 'Space Grotesk', sans-serif; letter-spacing: -.6px; line-height: 1.1; }
+.r-hl-label { font-size: 13.5px; margin-top: 3px; }
+.r-hl-note { font-size: 12px; color: #5A6470; margin-top: 3px; }
+.report section { margin-top: 30px; }
+.report h2 { margin: 0 0 10px; font: 600 18px 'Space Grotesk', sans-serif; }
+.r-table { width: 100%; min-width: 0; border-collapse: collapse; font-size: 14px; }
+.r-table th { width: 44%; text-align: left; font-weight: 500; color: #3E4752; padding: 10px 12px 10px 0; border-top: 1px solid rgba(17, 24, 39, .08); vertical-align: top; }
+.r-table td { padding: 10px 0; border-top: 1px solid rgba(17, 24, 39, .08); border-left: 0; vertical-align: top; }
+.r-val { font-weight: 600; }
+.r-sub { display: block; color: #5A6470; font-size: 12.5px; margin-top: 2px; }
+.r-note { font-size: 13px; color: #3E4752; margin: 10px 0 0; line-height: 1.55; }
+.r-foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid rgba(17, 24, 39, .1); font-size: 12px; color: #5A6470; line-height: 1.6; }
+.r-foot p { margin: 0 0 6px; }
+@media (max-width: 760px) { .report-page { margin: 0; border-radius: 0; padding: 26px 18px; } .r-head h1 { font-size: 30px; } .report-bar { padding: 10px; } }
+@media print {
+  body { overflow: visible; }
+  .app > *:not(.report) { display: none !important; }
+  .app { height: auto; overflow: visible; }
+  .report { position: static; overflow: visible; background: #fff; }
+  .report-bar { display: none; }
+  .report-page { margin: 0; padding: 0; box-shadow: none; max-width: none; }
+  .r-hl, .report section { break-inside: avoid; }
+}
