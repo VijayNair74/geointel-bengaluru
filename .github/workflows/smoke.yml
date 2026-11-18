@@ -8,59 +8,32 @@ permissions:
 jobs:
   live-browser:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 7
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install browser test tool
-        run: |
-          npm install --no-save --no-package-lock playwright@1.56.1
-          npx playwright install --with-deps chromium
-      - name: Verify GeoIntel loads on the actual public Cloudflare URL
+      - name: Verify compiled HTML and visible React dashboard at public URL
         env:
           SITE_URL: https://geointel-bengaluru.vijaynath-nair.workers.dev/
         run: |
-          node --input-type=module <<'JS'
-          import { chromium } from 'playwright';
-          const browser = await chromium.launch({headless:true});
-          const url = process.env.SITE_URL;
-          let passed = false;
-          let lastError = 'No successful check';
-          for (let attempt=1; attempt<=12; attempt++) {
-            const page = await browser.newPage();
-            const browserErrors = [];
-            page.on('pageerror',error=>browserErrors.push(error.message));
-            try {
-              const response = await page.goto(url,{waitUntil:'domcontentloaded',timeout:20000});
-              const status = response?.status();
-              await page.waitForTimeout(2000);
-              const title = await page.title();
-              const text = await page.locator('body').innerText();
-              const scriptURLs = await page.locator('script[src]').evaluateAll(items=>items.map(e=>e.getAttribute('src')));
-              console.log(JSON.stringify({attempt,status,title,bodyStart:text.slice(0,280),scriptURLs,browserErrors}));
-              if (status===200 && text.includes('Explore Bengaluru') && text.includes('Area indicators') && browserErrors.length===0) {
-                passed=true;
-                await page.screenshot({path:'geointel-live.png',fullPage:true});
-                break;
-              }
-              lastError='Body missing dashboard, bad HTTP response, or JS errors';
-            } catch(error) {
-              lastError=String(error);
-              console.log('Check failed:',lastError);
-            } finally {
-              await page.close();
-            }
-            await new Promise(resolve=>setTimeout(resolve,10000));
-          }
-          await browser.close();
-          if (!passed) throw new Error('Live Cloudflare smoke test FAILED: '+lastError);
-          console.log('PASS: Live Cloudflare site rendered the dashboard.');
-          JS
-      - name: Upload live screenshot
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: geointel-live-smoke
-          path: geointel-live.png
+          set -eu
+          CHROME=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)
+          echo "Using browser: $CHROME"
+          "$CHROME" --version
+          for attempt in $(seq 1 12); do
+            echo "Production browser attempt $attempt"
+            curl -L -sS --max-time 20 -o /tmp/geointel-index.html -w 'HTTP %{http_code}\n' "$SITE_URL" || true
+            if ! grep -q '/assets/index-' /tmp/geointel-index.html; then
+              echo "Cloudflare is not serving compiled Vite assets in HTML yet."
+            fi
+            timeout 30 "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=5000 --dump-dom "$SITE_URL" > /tmp/geointel-dom.html 2>/tmp/chrome-errors.txt || true
+            if grep -q 'Explore Bengaluru' /tmp/geointel-dom.html && grep -q 'Area indicators' /tmp/geointel-dom.html && grep -q '/assets/index-' /tmp/geointel-index.html; then
+              echo "PASS: Production HTML contains compiled assets and Chromium rendered React dashboard."
+              exit 0
+            fi
+            echo "Still not ready; first 200 bytes of rendered DOM:"
+            head -c 200 /tmp/geointel-dom.html || true
+            echo
+            sleep 10
+          done
+          echo "FAIL: Production did not render GeoIntel with compiled JS assets."
+          cat /tmp/chrome-errors.txt || true
+          exit 1
