@@ -67,11 +67,22 @@ _KEEP_COLUMNS = ("osm_type", "osm_id", "name", "ref", "amenity", "leisure", "sho
                  "railway", "station", "public_transport", "aeroway", "iata")
 
 
-def _apply_exclude(gdf: gpd.GeoDataFrame, exclude: dict[str, list[str]] | None) -> gpd.GeoDataFrame:
-    """Drop features whose tag value is in an exclusion list, e.g. metro stations from rail."""
+def _apply_exclude(gdf: gpd.GeoDataFrame, exclude: dict[str, list[str]] | None,
+                   require: dict[str, list[str]] | None = None,
+                   exclude_name_pattern: str | None = None) -> gpd.GeoDataFrame:
+    """Filter features after fetch.
+
+    exclude: drop rows whose tag value is listed (e.g. metro stations from rail).
+    require: keep only rows whose tag value is listed (e.g. operational railway=station).
+    exclude_name_pattern: drop rows whose name matches (e.g. "(Proposed)", "(u/c)").
+    """
     for key, values in (exclude or {}).items():
         if key in gdf.columns:
             gdf = gdf.loc[~gdf[key].isin(values)]
+    for key, values in (require or {}).items():
+        gdf = gdf.loc[gdf[key].isin(values)] if key in gdf.columns else gdf.iloc[0:0]
+    if exclude_name_pattern and "name" in gdf.columns:
+        gdf = gdf.loc[~gdf["name"].fillna("").str.contains(exclude_name_pattern, regex=True)]
     return gdf.reset_index(drop=True)
 
 
@@ -260,7 +271,8 @@ def fetch_osm_layers(refresh: bool = False, pbf_path: str | Path | None = None) 
                                                 tags=definition["tags"])
             else:
                 fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s, endpoints)
-            gdf = _apply_exclude(_normalize_osm(fetched, layer), definition.get("exclude"))
+            gdf = _apply_exclude(_normalize_osm(fetched, layer), definition.get("exclude"),
+                                 definition.get("require"), definition.get("exclude_name_pattern"))
         except Exception as exc:
             raise RuntimeError(
                 f"Failed to fetch OSM layer '{layer}'. Public Overpass services are shared "

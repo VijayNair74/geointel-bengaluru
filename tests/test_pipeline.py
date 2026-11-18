@@ -59,3 +59,11 @@ def test_nearest_feature_returns_label():
                            geometry=[Point(5000, 0), Point(1200, 0)], crs="EPSG:32643")
     assert _nearest_feature(gdf, Point(0, 0)) == (1.2, "NH 44")
     assert _nearest_feature(gpd.GeoDataFrame(geometry=[], crs="EPSG:32643"), Point(0, 0)) == (None, None)
+def test_operational_metro_filter():
+    from geointel.pipeline import _apply_exclude, load_config
+    d = load_config()["osm_layers"]["metro_stations"]
+    gdf = gpd.GeoDataFrame({"railway": ["station", "proposed", "station", None],
+                            "name": ["Hebbal", "Nagawara", "Agara Lake (u/c)", "X"]},
+                           geometry=[Point(0, 0)] * 4, crs="EPSG:4326")
+    out = _apply_exclude(gdf, d.get("exclude"), d.get("require"), d.get("exclude_name_pattern"))
+    assert out["name"].tolist() == ["Hebbal"]
