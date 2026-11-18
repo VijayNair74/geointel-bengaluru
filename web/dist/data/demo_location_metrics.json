@@ -1,6 +1,6 @@
 {
   "project": "GeoIntel Bengaluru",
-  "generated_at_utc": "2026-11-18T20:06:19.319656+00:00",
+  "generated_at_utc": "2026-11-18T20:21:04.745229+00:00",
   "metric_crs": "EPSG:32643",
   "source_manifest": "source_manifest.json",
   "locations": [
@@ -75,6 +75,7 @@
         "nearest_mapped_water_km": {
           "value": 0.671,
           "unit": "km",
+          "nearest_feature": "Pattandur Agrahara Lake",
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Minimum planar distance to mapped water feature geometry.",
@@ -97,9 +98,45 @@
           "license": "ODbL-1.0",
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
           "status": "calculated"
+        },
+        "nearest_airport_km": {
+          "value": 25.788,
+          "unit": "km",
+          "nearest_feature": "Kempegowda International Airport",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
+          "status": "calculated"
+        },
+        "nearest_metro_station_km": {
+          "value": 1.784,
+          "unit": "km",
+          "nearest_feature": "Kadugodi Tree Park",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
+          "status": "calculated"
+        },
+        "nearest_rail_station_km": {
+          "value": 3.195,
+          "unit": "km",
+          "nearest_feature": "Whitefield",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
+          "status": "calculated"
+        },
+        "nearest_highway_km": {
+          "value": 3.84,
+          "unit": "km",
+          "nearest_feature": "Dabaspete - Hosur Highway",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
+          "status": "calculated"
         }
       },
-      "method_version": "0.2.0",
+      "method_version": "0.3.0",
       "data_status": "computed_from_available_layers",
       "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
     },
@@ -174,6 +211,7 @@
         "nearest_mapped_water_km": {
           "value": 0.333,
           "unit": "km",
+          "nearest_feature": null,
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Minimum planar distance to mapped water feature geometry.",
@@ -196,9 +234,45 @@
           "license": "ODbL-1.0",
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
           "status": "calculated"
+        },
+        "nearest_airport_km": {
+          "value": 21.637,
+          "unit": "km",
+          "nearest_feature": "Kempegowda International Airport",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
+          "status": "calculated"
+        },
+        "nearest_metro_station_km": {
+          "value": 3.107,
+          "unit": "km",
+          "nearest_feature": "Nagawara (Proposed)",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
+          "status": "calculated"
+        },
+        "nearest_rail_station_km": {
+          "value": 1.385,
+          "unit": "km",
+          "nearest_feature": "Hebbal",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
+          "status": "calculated"
+        },
+        "nearest_highway_km": {
+          "value": 0.674,
+          "unit": "km",
+          "nearest_feature": "Outer Ring Road",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
+          "status": "calculated"
         }
       },
-      "method_version": "0.2.0",
+      "method_version": "0.3.0",
       "data_status": "computed_from_available_layers",
       "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
     },
@@ -273,6 +347,7 @@
         "nearest_mapped_water_km": {
           "value": 0.249,
           "unit": "km",
+          "nearest_feature": null,
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Minimum planar distance to mapped water feature geometry.",
@@ -295,9 +370,45 @@
           "license": "ODbL-1.0",
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
           "status": "calculated"
+        },
+        "nearest_airport_km": {
+          "value": 32.217,
+          "unit": "km",
+          "nearest_feature": "Kempegowda International Airport",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
+          "status": "calculated"
+        },
+        "nearest_metro_station_km": {
+          "value": 5.716,
+          "unit": "km",
+          "nearest_feature": "Agara Lake (u/c)",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
+          "status": "calculated"
+        },
+        "nearest_rail_station_km": {
+          "value": 1.179,
+          "unit": "km",
+          "nearest_feature": "Carmelaram",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
+          "status": "calculated"
+        },
+        "nearest_highway_km": {
+          "value": 2.646,
+          "unit": "km",
+          "nearest_feature": "Outer Ring Road",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
+          "status": "calculated"
         }
       },
-      "method_version": "0.2.0",
+      "method_version": "0.3.0",
       "data_status": "computed_from_available_layers",
       "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
     },
@@ -372,6 +483,7 @@
         "nearest_mapped_water_km": {
           "value": 0.05,
           "unit": "km",
+          "nearest_feature": "Veerasandra Lake",
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Minimum planar distance to mapped water feature geometry.",
@@ -394,9 +506,45 @@
           "license": "ODbL-1.0",
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
           "status": "calculated"
+        },
+        "nearest_airport_km": {
+          "value": 39.873,
+          "unit": "km",
+          "nearest_feature": "Kempegowda International Airport",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
+          "status": "calculated"
+        },
+        "nearest_metro_station_km": {
+          "value": 0.092,
+          "unit": "km",
+          "nearest_feature": "Huskur Road",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
+          "status": "calculated"
+        },
+        "nearest_rail_station_km": {
+          "value": 4.254,
+          "unit": "km",
+          "nearest_feature": "Huskuru",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
+          "status": "calculated"
+        },
+        "nearest_highway_km": {
+          "value": 0.006,
+          "unit": "km",
+          "nearest_feature": "Hosur Road",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
+          "status": "calculated"
         }
       },
-      "method_version": "0.2.0",
+      "method_version": "0.3.0",
       "data_status": "computed_from_available_layers",
       "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
     },
@@ -471,6 +619,7 @@
         "nearest_mapped_water_km": {
           "value": 0.394,
           "unit": "km",
+          "nearest_feature": null,
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Minimum planar distance to mapped water feature geometry.",
@@ -493,9 +642,45 @@
           "license": "ODbL-1.0",
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
           "status": "calculated"
+        },
+        "nearest_airport_km": {
+          "value": 5.368,
+          "unit": "km",
+          "nearest_feature": "Kempegowda International Airport",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
+          "status": "calculated"
+        },
+        "nearest_metro_station_km": {
+          "value": 24.598,
+          "unit": "km",
+          "nearest_feature": "Nagawara (Proposed)",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
+          "status": "calculated"
+        },
+        "nearest_rail_station_km": {
+          "value": 0.826,
+          "unit": "km",
+          "nearest_feature": "Devanahalli",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
+          "status": "calculated"
+        },
+        "nearest_highway_km": {
+          "value": 0.717,
+          "unit": "km",
+          "nearest_feature": "Ballari Road",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
+          "status": "calculated"
         }
       },
-      "method_version": "0.2.0",
+      "method_version": "0.3.0",
       "data_status": "computed_from_available_layers",
       "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
     }

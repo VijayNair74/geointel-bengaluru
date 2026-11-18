@@ -14,6 +14,7 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "points",
       "fetch_radius_m": 3500.0,
       "demo_locations": [
         "Whitefield",
@@ -22,7 +23,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:05:45.460589+00:00",
+      "retrieved_at_utc": "2026-11-18T20:20:22.107202+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 421,
@@ -42,6 +43,7 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "points",
       "fetch_radius_m": 5500.0,
       "demo_locations": [
         "Whitefield",
@@ -50,7 +52,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:05:48.140447+00:00",
+      "retrieved_at_utc": "2026-11-18T20:20:25.008235+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 789,
@@ -69,6 +71,7 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "points",
       "fetch_radius_m": 3500.0,
       "demo_locations": [
         "Whitefield",
@@ -77,7 +80,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:05:51.930195+00:00",
+      "retrieved_at_utc": "2026-11-18T20:20:28.954653+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 803,
@@ -102,6 +105,7 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "points",
       "fetch_radius_m": 8000.0,
       "demo_locations": [
         "Whitefield",
@@ -110,7 +114,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:05:57.839421+00:00",
+      "retrieved_at_utc": "2026-11-18T20:20:34.877396+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 2317,
@@ -130,6 +134,7 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "points",
       "fetch_radius_m": 2500.0,
       "demo_locations": [
         "Whitefield",
@@ -138,7 +143,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:05:59.546374+00:00",
+      "retrieved_at_utc": "2026-11-18T20:20:36.754832+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 139,
@@ -162,6 +167,7 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "points",
       "fetch_radius_m": 1500.0,
       "demo_locations": [
         "Whitefield",
@@ -170,7 +176,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:06:06.143048+00:00",
+      "retrieved_at_utc": "2026-11-18T20:20:43.517896+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 6544,
@@ -185,6 +191,7 @@
         "building": true
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "points",
       "fetch_radius_m": 1200.0,
       "demo_locations": [
         "Whitefield",
@@ -193,11 +200,117 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:06:16.881371+00:00",
+      "retrieved_at_utc": "2026-11-18T20:20:54.715745+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 27013,
       "output": "data/processed/buildings.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "metro_stations": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "station": [
+          "subway"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "aoi",
+      "fetch_radius_m": null,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:20:56.048834+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 97,
+      "output": "data/processed/metro_stations.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "rail_stations": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "railway": [
+          "station",
+          "halt"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "aoi",
+      "fetch_radius_m": null,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:20:57.411548+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 39,
+      "output": "data/processed/rail_stations.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "airports": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "aeroway": [
+          "aerodrome"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "aoi",
+      "fetch_radius_m": null,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:20:58.933078+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 4,
+      "output": "data/processed/airports.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "highways": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "highway": [
+          "motorway",
+          "trunk"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_scope": "aoi",
+      "fetch_radius_m": null,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:21:02.278895+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 1988,
+      "output": "data/processed/highways.geojson",
       "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record."
     }
   }

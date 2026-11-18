@@ -1,6 +1,16 @@
 {
-  "generated_at_utc": "2026-11-18T20:06:20.166705+00:00",
+  "generated_at_utc": "2026-11-18T20:21:05.680974+00:00",
   "layers": [
+    {
+      "layer": "airports",
+      "feature_count": 4,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "Polygon"
+      ]
+    },
     {
       "layer": "buildings",
       "feature_count": 27013,
@@ -25,6 +35,28 @@
       ]
     },
     {
+      "layer": "highways",
+      "feature_count": 1988,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "LineString"
+      ]
+    },
+    {
+      "layer": "metro_stations",
+      "feature_count": 97,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "LineString",
+        "Point",
+        "Polygon"
+      ]
+    },
+    {
       "layer": "parks",
       "feature_count": 803,
       "crs": "EPSG:4326",
@@ -33,6 +65,17 @@
       "geometry_types": [
         "LineString",
         "MultiPolygon",
+        "Point",
+        "Polygon"
+      ]
+    },
+    {
+      "layer": "rail_stations",
+      "feature_count": 39,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
         "Point",
         "Polygon"
       ]
