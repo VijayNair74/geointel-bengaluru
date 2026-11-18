@@ -1,0 +1,503 @@
+{
+  "project": "GeoIntel Bengaluru",
+  "generated_at_utc": "2026-11-18T20:06:19.319656+00:00",
+  "metric_crs": "EPSG:32643",
+  "source_manifest": "source_manifest.json",
+  "locations": [
+    {
+      "location": "Whitefield",
+      "latitude": 12.9698,
+      "longitude": 77.75,
+      "metrics": {
+        "schools_within_1km": {
+          "value": 29,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "schools_within_3km": {
+          "value": 70,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_1km": {
+          "value": 11,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_5km": {
+          "value": 108,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_1km": {
+          "value": 29,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_3km": {
+          "value": 152,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "retail_within_2km": {
+          "value": 19,
+          "unit": "mapped_features",
+          "radius_m": 2000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "nearest_mapped_water_km": {
+          "value": 0.671,
+          "unit": "km",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Minimum planar distance to mapped water feature geometry.",
+          "status": "calculated"
+        },
+        "road_density_within_1km": {
+          "value": 20.036,
+          "unit": "km_of_mapped_roads_per_sq_km",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Sum of mapped road-line lengths clipped to a 1 km radius circle, divided by circle area.",
+          "status": "calculated"
+        },
+        "building_footprint_coverage_within_1km": {
+          "value": 23.16,
+          "unit": "percent",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+          "status": "calculated"
+        }
+      },
+      "method_version": "0.2.0",
+      "data_status": "computed_from_available_layers",
+      "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
+    },
+    {
+      "location": "Hebbal",
+      "latitude": 13.0358,
+      "longitude": 77.597,
+      "metrics": {
+        "schools_within_1km": {
+          "value": 10,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "schools_within_3km": {
+          "value": 81,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_1km": {
+          "value": 5,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_5km": {
+          "value": 273,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_1km": {
+          "value": 12,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_3km": {
+          "value": 130,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "retail_within_2km": {
+          "value": 46,
+          "unit": "mapped_features",
+          "radius_m": 2000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "nearest_mapped_water_km": {
+          "value": 0.333,
+          "unit": "km",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Minimum planar distance to mapped water feature geometry.",
+          "status": "calculated"
+        },
+        "road_density_within_1km": {
+          "value": 29.153,
+          "unit": "km_of_mapped_roads_per_sq_km",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Sum of mapped road-line lengths clipped to a 1 km radius circle, divided by circle area.",
+          "status": "calculated"
+        },
+        "building_footprint_coverage_within_1km": {
+          "value": 30.92,
+          "unit": "percent",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+          "status": "calculated"
+        }
+      },
+      "method_version": "0.2.0",
+      "data_status": "computed_from_available_layers",
+      "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
+    },
+    {
+      "location": "Sarjapur",
+      "latitude": 12.9081,
+      "longitude": 77.695,
+      "metrics": {
+        "schools_within_1km": {
+          "value": 6,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "schools_within_3km": {
+          "value": 46,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_1km": {
+          "value": 3,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_5km": {
+          "value": 87,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_1km": {
+          "value": 29,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_3km": {
+          "value": 179,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "retail_within_2km": {
+          "value": 9,
+          "unit": "mapped_features",
+          "radius_m": 2000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "nearest_mapped_water_km": {
+          "value": 0.249,
+          "unit": "km",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Minimum planar distance to mapped water feature geometry.",
+          "status": "calculated"
+        },
+        "road_density_within_1km": {
+          "value": 18.462,
+          "unit": "km_of_mapped_roads_per_sq_km",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Sum of mapped road-line lengths clipped to a 1 km radius circle, divided by circle area.",
+          "status": "calculated"
+        },
+        "building_footprint_coverage_within_1km": {
+          "value": 14.83,
+          "unit": "percent",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+          "status": "calculated"
+        }
+      },
+      "method_version": "0.2.0",
+      "data_status": "computed_from_available_layers",
+      "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
+    },
+    {
+      "location": "Electronic City",
+      "latitude": 12.8399,
+      "longitude": 77.677,
+      "metrics": {
+        "schools_within_1km": {
+          "value": 9,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "schools_within_3km": {
+          "value": 41,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_1km": {
+          "value": 3,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_5km": {
+          "value": 47,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_1km": {
+          "value": 7,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_3km": {
+          "value": 45,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "retail_within_2km": {
+          "value": 17,
+          "unit": "mapped_features",
+          "radius_m": 2000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "nearest_mapped_water_km": {
+          "value": 0.05,
+          "unit": "km",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Minimum planar distance to mapped water feature geometry.",
+          "status": "calculated"
+        },
+        "road_density_within_1km": {
+          "value": 18.307,
+          "unit": "km_of_mapped_roads_per_sq_km",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Sum of mapped road-line lengths clipped to a 1 km radius circle, divided by circle area.",
+          "status": "calculated"
+        },
+        "building_footprint_coverage_within_1km": {
+          "value": 14.73,
+          "unit": "percent",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+          "status": "calculated"
+        }
+      },
+      "method_version": "0.2.0",
+      "data_status": "computed_from_available_layers",
+      "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
+    },
+    {
+      "location": "Devanahalli",
+      "latitude": 13.247,
+      "longitude": 77.713,
+      "metrics": {
+        "schools_within_1km": {
+          "value": 1,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "schools_within_3km": {
+          "value": 7,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_1km": {
+          "value": 1,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_5km": {
+          "value": 1,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_1km": {
+          "value": 0,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_3km": {
+          "value": 12,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "retail_within_2km": {
+          "value": 3,
+          "unit": "mapped_features",
+          "radius_m": 2000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "nearest_mapped_water_km": {
+          "value": 0.394,
+          "unit": "km",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Minimum planar distance to mapped water feature geometry.",
+          "status": "calculated"
+        },
+        "road_density_within_1km": {
+          "value": 15.996,
+          "unit": "km_of_mapped_roads_per_sq_km",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Sum of mapped road-line lengths clipped to a 1 km radius circle, divided by circle area.",
+          "status": "calculated"
+        },
+        "building_footprint_coverage_within_1km": {
+          "value": 1.09,
+          "unit": "percent",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+          "status": "calculated"
+        }
+      },
+      "method_version": "0.2.0",
+      "data_status": "computed_from_available_layers",
+      "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "project": "GeoIntel Bengaluru",
+  "manifest_version": "1.0",
+  "layers": {
+    "schools": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "amenity": [
+          "school",
+          "college",
+          "university",
+          "kindergarten"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_radius_m": 3500.0,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:05:45.460589+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 421,
+      "output": "data/processed/schools.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "healthcare": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "amenity": [
+          "hospital",
+          "clinic",
+          "doctors",
+          "health_centre"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_radius_m": 5500.0,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:05:48.140447+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 789,
+      "output": "data/processed/healthcare.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "parks": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "leisure": [
+          "park",
+          "garden",
+          "playground"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_radius_m": 3500.0,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:05:51.930195+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 803,
+      "output": "data/processed/parks.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "water": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "natural": [
+          "water"
+        ],
+        "water": [
+          "lake",
+          "pond",
+          "reservoir"
+        ],
+        "landuse": [
+          "reservoir"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_radius_m": 8000.0,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:05:57.839421+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 2317,
+      "output": "data/processed/water.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "retail": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "shop": [
+          "supermarket",
+          "mall",
+          "department_store",
+          "convenience"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_radius_m": 2500.0,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:05:59.546374+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 139,
+      "output": "data/processed/retail.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "roads": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "highway": [
+          "motorway",
+          "trunk",
+          "primary",
+          "secondary",
+          "tertiary",
+          "residential",
+          "unclassified",
+          "service"
+        ]
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_radius_m": 1500.0,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:06:06.143048+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 6544,
+      "output": "data/processed/roads.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
+      "source_extract": "southern-zone-latest.osm.pbf"
+    },
+    "buildings": {
+      "source": "OpenStreetMap contributors",
+      "source_url": "https://www.openstreetmap.org/",
+      "query_tags": {
+        "building": true
+      },
+      "fetch_strategy": "per_demo_location (local PBF extract)",
+      "fetch_radius_m": 1200.0,
+      "demo_locations": [
+        "Whitefield",
+        "Hebbal",
+        "Sarjapur",
+        "Electronic City",
+        "Devanahalli"
+      ],
+      "retrieved_at_utc": "2026-11-18T20:06:16.881371+00:00",
+      "license": "ODbL 1.0",
+      "attribution": "\u00a9 OpenStreetMap contributors",
+      "feature_count": 27013,
+      "output": "data/processed/buildings.geojson",
+      "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record."
+    }
+  }
+}

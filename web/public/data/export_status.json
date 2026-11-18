@@ -1,6 +1,5 @@
 {
-  "copied": [],
-  "missing": [
+  "copied": [
     "schools.geojson",
     "healthcare.geojson",
     "parks.geojson",
@@ -12,5 +11,6 @@
     "data_status.json",
     "source_manifest.json",
     "quality_report.json"
-  ]
+  ],
+  "missing": []
 }

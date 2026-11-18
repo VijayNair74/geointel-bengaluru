@@ -1,0 +1,87 @@
+{
+  "generated_at_utc": "2026-11-18T20:06:20.166705+00:00",
+  "layers": [
+    {
+      "layer": "buildings",
+      "feature_count": 27013,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "MultiPolygon",
+        "Point",
+        "Polygon"
+      ]
+    },
+    {
+      "layer": "healthcare",
+      "feature_count": 789,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "Point",
+        "Polygon"
+      ]
+    },
+    {
+      "layer": "parks",
+      "feature_count": 803,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "LineString",
+        "MultiPolygon",
+        "Point",
+        "Polygon"
+      ]
+    },
+    {
+      "layer": "retail",
+      "feature_count": 139,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "Point",
+        "Polygon"
+      ]
+    },
+    {
+      "layer": "roads",
+      "feature_count": 6544,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "LineString"
+      ]
+    },
+    {
+      "layer": "schools",
+      "feature_count": 421,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "LineString",
+        "MultiPolygon",
+        "Point",
+        "Polygon"
+      ]
+    },
+    {
+      "layer": "water",
+      "feature_count": 2317,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "LineString",
+        "MultiPolygon",
+        "Polygon"
+      ]
+    }
+  ]
+}
