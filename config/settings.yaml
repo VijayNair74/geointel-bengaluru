@@ -10,7 +10,7 @@ aoi:
   west: 77.35
   south: 12.75
   east: 77.85
-  north: 13.25
+  north: 13.35   # extended so Devanahalli (13.247) has its full 5 km radius inside coverage
 acquisition:
   overpass_url: https://overpass-api.de/api/interpreter
   # Tried in order if the primary refuses (overpass-api.de returns 403 to some cloud runners).

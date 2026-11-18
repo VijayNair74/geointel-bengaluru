@@ -4,168 +4,403 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './style.css';
 import { computeMetrics } from './geo.js';
+import { Icon } from './icons.jsx';
 
+/* ---------- static config ---------- */
 const places = [
-  { location:'Whitefield', latitude:12.9698, longitude:77.75 },
-  { location:'Hebbal', latitude:13.0358, longitude:77.597 },
-  { location:'Sarjapur', latitude:12.9081, longitude:77.695 },
-  { location:'Electronic City', latitude:12.8399, longitude:77.677 },
-  { location:'Devanahalli', latitude:13.247, longitude:77.713 }
+  { location: 'Whitefield', area: 'East Bengaluru', latitude: 12.9698, longitude: 77.75 },
+  { location: 'Hebbal', area: 'North Bengaluru', latitude: 13.0358, longitude: 77.597 },
+  { location: 'Sarjapur', area: 'South-east Bengaluru', latitude: 12.9081, longitude: 77.695 },
+  { location: 'Electronic City', area: 'South Bengaluru', latitude: 12.8399, longitude: 77.677 },
+  { location: 'Devanahalli', area: 'Airport corridor', latitude: 13.247, longitude: 77.713 },
 ];
-const metricGroups = [
- {title:'Connectivity', metrics:[
-  ['nearest_airport_km','Nearest airport'], ['nearest_metro_station_km','Nearest metro station'],
-  ['nearest_rail_station_km','Nearest railway station'], ['nearest_highway_km','Nearest highway']]},
- {title:'Amenities & land', metrics:[
-  ['schools_within_1km','Schools & colleges · 1 km'], ['schools_within_3km','Schools & colleges · 3 km'],
-  ['healthcare_within_1km','Healthcare · 1 km'],['healthcare_within_5km','Healthcare · 5 km'],
-  ['parks_within_1km','Parks & gardens · 1 km'],['parks_within_3km','Parks & gardens · 3 km'],
-  ['retail_within_2km','Retail · 2 km'], ['nearest_mapped_water_km','Nearest mapped water'],
-  ['road_density_within_1km','Road density · 1 km'],['building_footprint_coverage_within_1km','Building coverage · 1 km']]}
+
+// better: 'min' = smaller is better (distance), 'max' = more is better (count), null = no ranking
+const sections = [
+  { id: 'move', title: 'Getting around', rows: [
+    { key: 'nearest_airport_km', label: 'Airport', icon: 'plane', unit: 'km', better: 'min' },
+    { key: 'nearest_metro_station_km', label: 'Metro station', icon: 'metro', unit: 'km', better: 'min' },
+    { key: 'nearest_rail_station_km', label: 'Railway station', icon: 'train', unit: 'km', better: 'min' },
+    { key: 'nearest_highway_km', label: 'Highway', icon: 'road', unit: 'km', better: 'min' },
+  ] },
+  { id: 'near', title: 'Nearby', rows: [
+    { key: 'schools_within_1km', label: 'Schools & colleges', short: 'Schools · 1 km', icon: 'school', unit: 'within 1 km', alt: ['schools_within_3km', 'within 3 km'], better: 'max' },
+    { key: 'healthcare_within_1km', label: 'Healthcare', short: 'Healthcare · 1 km', icon: 'health', unit: 'within 1 km', alt: ['healthcare_within_5km', 'within 5 km'], better: 'max' },
+    { key: 'parks_within_1km', label: 'Parks & gardens', short: 'Parks · 1 km', icon: 'park', unit: 'within 1 km', alt: ['parks_within_3km', 'within 3 km'], better: 'max' },
+    { key: 'retail_within_2km', label: 'Retail', short: 'Retail · 2 km', icon: 'shop', unit: 'within 2 km', sub: 'Supermarkets, malls, convenience', better: 'max' },
+  ] },
+  { id: 'land', title: 'Land', rows: [
+    { key: 'nearest_mapped_water_km', label: 'Nearest water', icon: 'water', unit: 'km', better: null },
+    { key: 'road_density_within_1km', label: 'Road density', icon: 'road', unit: 'km/km²', sub: 'Mapped roads within 1 km', better: null },
+    { key: 'building_footprint_coverage_within_1km', label: 'Building coverage', icon: 'build', unit: '%', sub: 'Footprints within 1 km', better: null },
+  ] },
 ];
-const layers = [
- {id:'metro_stations',label:'Metro stations',color:'#e25dff',radius:5},
- {id:'rail_stations',label:'Rail stations',color:'#ff9a3c',radius:5},
- {id:'airports',label:'Airports',color:'#ffffff'},
- {id:'highways',label:'Highways',color:'#ffd84d',width:2.2},
- {id:'schools',label:'Education',color:'#f5bb58'}, {id:'healthcare',label:'Healthcare',color:'#ff7e88'},
- {id:'parks',label:'Parks',color:'#66c8a7'}, {id:'water',label:'Water',color:'#5db6ec'},
- {id:'retail',label:'Retail',color:'#c59dff'}, {id:'roads',label:'Roads',color:'#8796ae'},
- {id:'buildings',label:'Buildings',color:'#c4d0dd'}
+// Compare table shows the secondary radii as their own rows.
+const compareRows = sections.map((s) => ({ ...s, rows: s.rows.flatMap((r) => r.alt
+  ? [{ ...r, label: r.short }, { key: r.alt[0], label: r.short.replace(/· \d+ km/, '· ' + r.alt[1].replace('within ', '')), better: r.better }]
+  : [{ ...r, label: r.short || r.label }]) }));
+
+const layerDefs = [
+  { id: 'metro_stations', label: 'Metro', color: { light: '#7C4DDB', dark: '#B48CFF' }, radius: 5 },
+  { id: 'rail_stations', label: 'Rail', color: { light: '#D9661F', dark: '#F5A05A' }, radius: 5 },
+  { id: 'highways', label: 'Highways', color: { light: '#D49A12', dark: '#E2B04A' }, width: 2.4 },
+  { id: 'airports', label: 'Airports', color: { light: '#334155', dark: '#E2E8F0' } },
+  { id: 'schools', label: 'Education', color: { light: '#C98A12', dark: '#E9C46A' } },
+  { id: 'healthcare', label: 'Healthcare', color: { light: '#D23F6E', dark: '#F07AA0' } },
+  { id: 'parks', label: 'Parks', color: { light: '#24915E', dark: '#5FCB9A' } },
+  { id: 'water', label: 'Water', color: { light: '#2B87C8', dark: '#5DB6EC' } },
+  { id: 'retail', label: 'Retail', color: { light: '#9255D4', dark: '#C59DFF' } },
+  { id: 'roads', label: 'Roads', color: { light: '#7B8794', dark: '#8796AE' } },
+  { id: 'buildings', label: 'Buildings', color: { light: '#8B97A5', dark: '#C4D0DD' } },
 ];
-const empty = {type:'FeatureCollection',features:[]};
-const LAZY = ['roads','buildings']; // large; fetched only when toggled on
-const DEFAULT_AOI = [77.35,12.75,77.85,13.25]; // demo bbox, not an official boundary
+const LAZY = ['roads', 'buildings'];
+const DEFAULT_LAYERS = ['metro_stations', 'rail_stations', 'highways', 'airports', 'schools', 'healthcare'];
+const BASEMAP = { light: 'https://tiles.openfreemap.org/styles/positron', dark: 'https://tiles.openfreemap.org/styles/dark' };
+const PLAIN = (bg) => ({ version: 8, sources: {}, layers: [{ id: 'background', type: 'background', paint: { 'background-color': bg } }] });
+const PLAIN_BG = { light: '#EEF0EB', dark: '#0C1016' };
+const DEFAULT_AOI = [77.35, 12.75, 77.85, 13.35];
 const EDGE_KM = 5;
-const inAoi = ([lon,lat],a) => lon>=a[0]&&lon<=a[2]&&lat>=a[1]&&lat<=a[3];
-const nearEdge = ([lon,lat],a) => Math.min((lon-a[0])*108.6,(a[2]-lon)*108.6,(lat-a[1])*110.6,(a[3]-lat)*110.6) < EDGE_KM;
-const parseLatLon = (q) => { const m=q.trim().match(/^(-?\d+(?:\.\d+)?)\s*[, ]\s*(-?\d+(?:\.\d+)?)$/); if(!m) return null;
- let a=+m[1], b=+m[2]; if(a>60&&b<60) [a,b]=[b,a]; return [b,a]; }; // returns [lon,lat]; accepts "lat, lon" or "lon, lat" for Bengaluru
-const readUrl = () => { const u=new URLSearchParams(location.search); const lat=parseFloat(u.get('lat')), lon=parseFloat(u.get('lon'));
- if(Number.isFinite(lat)&&Number.isFinite(lon)) return {custom:{lon,lat,label:u.get('label')||''}};
- const p=u.get('place'); return {place: places.some(x=>x.location===p)?p:'Whitefield'}; };
-const writeUrl = (sel,custom) => { const u=new URLSearchParams();
- if(sel==='custom'&&custom){u.set('lat',custom.lat.toFixed(5));u.set('lon',custom.lon.toFixed(5));if(custom.label)u.set('label',custom.label);} else u.set('place',sel);
- history.replaceState(null,'',`${location.pathname}?${u}`); };
-const BASEMAP_STYLE = 'https://tiles.openfreemap.org/styles/dark';
-const PLAIN_STYLE = {version:8,sources:{},layers:[{id:'background',type:'background',paint:{'background-color':'#101c2b'}}]};
-const fetchJSON = async (path) => {const res=await fetch(path,{cache:'no-store'});if(!res.ok) throw new Error(`HTTP ${res.status}`);return res.json()};
-const metricDisplay = (key,m) => {
- if(m?.status==='loading') return 'Computing…';
- if(m?.status==='pilot_only') return 'Pilot areas only';
- if(!m || m.status!=='calculated' || m.value===null || m.value===undefined) return 'No data';
- if(key.endsWith('_km')) return `${Number(m.value).toFixed(m.value<10?2:1)} km`;
- if(key==='road_density_within_1km') return `${m.value} km/km²`;
- if(key==='building_footprint_coverage_within_1km') return `${m.value}%`;
- return String(m.value);
-};
-function App(){
- const mapEl=useRef(null), mapRef=useRef(null);
- const init=useRef(readUrl()).current;
- const [selected,setSelected]=useState(init.custom?'custom':init.place),[custom,setCustom]=useState(init.custom||null);
- const [metrics,setMetrics]=useState(null),[status,setStatus]=useState(null);
- const [available,setAvailable]=useState({}),[enabled,setEnabled]=useState(['metro_stations','rail_stations','airports','highways','schools','healthcare']);
- const [mapError,setMapError]=useState(''),[loaded,setLoaded]=useState(false),[basemap,setBasemap]=useState(true);
- const [query,setQuery]=useState(''),[results,setResults]=useState(null),[searching,setSearching]=useState(false),[searchMsg,setSearchMsg]=useState('');
- const requested=useRef(new Set());
- const aoi=metrics?.aoi_bbox_wsen||DEFAULT_AOI;
- const isCustom=selected==='custom'&&custom;
- const point=isCustom?{location:custom.label||'Selected point',latitude:custom.lat,longitude:custom.lon}:places.find(p=>p.location===selected);
- const customMetrics=useMemo(()=>isCustom?computeMetrics([custom.lon,custom.lat],available):null,[isCustom,custom,available]);
- const result=isCustom?{metrics:customMetrics}:metrics?.locations?.find(p=>p.location===selected);
- const loadLayer=(id)=>{if(requested.current.has(id))return;requested.current.add(id);
-  fetchJSON(`/data/${id}.geojson`).then(geo=>setAvailable(old=>({...old,[id]:geo}))).catch(()=>{/* layer not published */});};
- useEffect(()=>{
-  Promise.allSettled([fetchJSON('/data/demo_location_metrics.json'),fetchJSON('/data/data_status.json')]).then(([m,s])=>{
-   if(m.status==='fulfilled')setMetrics(m.value);
-   if(s.status==='fulfilled')setStatus(s.value);
-  });
-  layers.filter(l=>!LAZY.includes(l.id)).forEach(l=>loadLayer(l.id));
- },[]);
- useEffect(()=>{enabled.filter(id=>LAZY.includes(id)).forEach(loadLayer)},[enabled]);
- useEffect(()=>{writeUrl(selected,custom)},[selected,custom]);
- const pick=(lon,lat,label='')=>{
-  if(!inAoi([lon,lat],aoi)){setSearchMsg('That point is outside the covered Bengaluru area.');return;}
-  setSearchMsg('');setCustom({lon,lat,label});setSelected('custom');setResults(null);
- };
- const pickRef=useRef(pick);pickRef.current=pick;
- const search=async(e)=>{e.preventDefault();const q=query.trim();if(!q)return;
-  const ll=parseLatLon(q);if(ll){pick(ll[0],ll[1]);return;}
-  setSearching(true);setSearchMsg('');setResults(null);
-  try{const [w,s,e2,n]=aoi;
-   const url=`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&countrycodes=in&bounded=1&viewbox=${w},${n},${e2},${s}&q=${encodeURIComponent(q)}`;
-   const res=await fetchJSON(url);
-   if(!res.length)setSearchMsg('No match inside the covered area. Try a locality name, or click the map.');
-   setResults(res.map(r=>({lon:+r.lon,lat:+r.lat,name:r.display_name})));
-  }catch{setSearchMsg('Search is unavailable right now. You can click the map or enter "lat, lon".');}
-  finally{setSearching(false);}
- };
- useEffect(()=>{
-  if(!mapEl.current)return;
-  // Free, keyless OpenFreeMap vector basemap (OpenMapTiles schema). If it cannot
-  // load, fall back to a plain background so the data layers still render.
-  let map, styleReady=false, fellBack=false;
-  try{map=new maplibregl.Map({container:mapEl.current,style:BASEMAP_STYLE,center:[77.64,12.98],zoom:10.3,attributionControl:false});}
-  catch(err){setMapError(`Map unavailable: ${err?.message||'WebGL not supported'}`);return;}
-  map.once('styledata',()=>{styleReady=true});
-  map.on('error',e=>{
-   if(!styleReady&&!fellBack){fellBack=true;setBasemap(false);map.setStyle(PLAIN_STYLE);return;}
-   if(e.sourceId||e.tile)return; // a single missing tile is not worth alarming the user
-   setMapError(e.error?.message||'Map rendering error');
-  });
-  mapRef.current=map;
-  map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
-  map.on('load',()=>{setLoaded(true);
-   map.addSource('places',{type:'geojson',data:{type:'FeatureCollection',features:places.map(p=>({type:'Feature',geometry:{type:'Point',coordinates:[p.longitude,p.latitude]},properties:{location:p.location}}))}});
-   map.addSource('custom',{type:'geojson',data:empty});
-   map.addLayer({id:'place-halos',type:'circle',source:'places',paint:{'circle-radius':12,'circle-color':'#6fe1c1','circle-opacity':0.12}});
-   map.addLayer({id:'place-points',type:'circle',source:'places',paint:{'circle-radius':6,'circle-color':'#70e1c1','circle-stroke-color':'#0d1724','circle-stroke-width':2}});
-   map.addLayer({id:'custom-halo',type:'circle',source:'custom',paint:{'circle-radius':16,'circle-color':'#ffffff','circle-opacity':0.15}});
-   map.addLayer({id:'custom-point',type:'circle',source:'custom',paint:{'circle-radius':7,'circle-color':'#ffffff','circle-stroke-color':'#ff5d8f','circle-stroke-width':3}});
-   map.on('click',e=>{
-    const hit=map.queryRenderedFeatures(e.point,{layers:['place-points']});
-    if(hit.length){setSelected(hit[0].properties.location);return;}
-    pickRef.current(e.lngLat.lng,e.lngLat.lat);
-   });
-   map.on('mouseenter','place-points',()=>map.getCanvas().style.cursor='pointer');
-   map.on('mouseleave','place-points',()=>map.getCanvas().style.cursor='crosshair');
-   map.getCanvas().style.cursor='crosshair';
-  });
-  return()=>{map.remove();mapRef.current=null};
- },[]);
- useEffect(()=>{const map=mapRef.current;if(map&&loaded&&point)map.flyTo({center:[point.longitude,point.latitude],zoom:Math.max(map.getZoom(),12),essential:true,duration:800})},[selected,custom,loaded]);
- useEffect(()=>{const map=mapRef.current;if(!map||!loaded)return;
-  map.getSource('custom')?.setData(isCustom?{type:'FeatureCollection',features:[{type:'Feature',geometry:{type:'Point',coordinates:[custom.lon,custom.lat]},properties:{}}]}:empty);
- },[custom,selected,loaded]);
- useEffect(()=>{const map=mapRef.current;if(!map||!loaded)return;
-  for(const l of layers){const sourceId=`osm-${l.id}`;const layerId=`visual-${l.id}`;
-   const geo=available[l.id]||empty;
-   if(!map.getSource(sourceId))map.addSource(sourceId,{type:'geojson',data:geo});else map.getSource(sourceId).setData(geo);
-   const kinds=[
-    ['fill',['Polygon','MultiPolygon'],{'fill-color':l.color,'fill-opacity':0.24}],
-    ['outline',['Polygon','MultiPolygon'],{'line-color':l.color,'line-width':1.2,'line-opacity':0.8}],
-    ['line',['LineString','MultiLineString'],{'line-color':l.color,'line-width':l.width||1.1,'line-opacity':0.75}],
-    ['circle',['Point','MultiPoint'],{'circle-color':l.color,'circle-radius':l.radius||4,'circle-stroke-color':'#101c2b','circle-stroke-width':1}]];
-   for(const [kind,types,paint] of kinds){const id=`${layerId}-${kind}`;
-    if(!map.getLayer(id))map.addLayer({id,type:kind==='outline'?'line':kind,source:sourceId,filter:['match',['geometry-type'],types,true,false],paint},'place-halos');
-    map.setLayoutProperty(id,'visibility',enabled.includes(l.id)?'visible':'none');}
-  }
- },[available,enabled,loaded]);
- const hasData=!!metrics?.locations?.length;
- const edge=isCustom&&nearEdge([custom.lon,custom.lat],aoi);
- return <div className="app"><header><div className="brand"><div className="brand-mark">G<span>●</span></div><div><strong>GeoIntel</strong><small>BENGALURU EXPLORER</small></div></div><div className="header-right"><span className="pill">PUBLIC DATA · EXPERIMENTAL</span><span className="version">MVP 0.5</span></div></header>
- <div className="workspace"><aside className="sidebar"><div className="eyebrow">LOCATION INTELLIGENCE</div><h1>Explore Bengaluru<br/><em>through data.</em></h1><p className="intro">Search an address or locality, enter coordinates, or click anywhere on the map to see connectivity and amenities around it. Hover an indicator to see how it is calculated.</p>
- <form className="search" onSubmit={search}><label htmlFor="q">FIND A LOCATION</label><div className="search-row"><input id="q" value={query} onChange={e=>setQuery(e.target.value)} placeholder="e.g. Indiranagar, or 12.9716, 77.5946" autoComplete="off"/><button type="submit" disabled={searching}>{searching?'…':'Search'}</button></div>
- {results?.length>0&&<ul className="results">{results.map((r,i)=><li key={i}><button type="button" onClick={()=>pick(r.lon,r.lat,r.name.split(',').slice(0,2).join(','))}>{r.name}</button></li>)}</ul>}
- {searchMsg&&<p className="search-msg">{searchMsg}</p>}</form>
- <label htmlFor="place">OR A PILOT LOCATION</label><select id="place" value={selected} onChange={e=>setSelected(e.target.value)}>{isCustom&&<option value="custom">Selected point</option>}{places.map(p=><option key={p.location}>{p.location}</option>)}</select>
- {metricGroups.map(g=><React.Fragment key={g.title}><div className="section-head"><h2>{g.title}</h2><span>{isCustom?'Computed in browser':hasData?'OSM-derived':'Awaiting data'}</span></div>
- <div className="metrics">{g.metrics.map(([key,label])=>{const m=result?.metrics?.[key];return <div className="metric" key={key} title={m?.method||''}><span>{label}{m?.nearest_feature&&<small className="via">{m.nearest_feature}</small>}</span><strong className={m?.status==='calculated'?'':'muted'}>{metricDisplay(key,m)}</strong></div>})}</div></React.Fragment>)}
- {edge&&<p className="notice warn">This point is within {EDGE_KM} km of the edge of the covered area, so counts and nearest features may be incomplete.</p>}
- <p className="notice">{hasData?'Indicators describe mapped features, not verified real-world inventories. Distances are straight-line, not travel time.':'No live metrics have been published. Run the local data pipeline and export outputs to populate this dashboard.'}</p>
- </aside><main className="map-area"><div className="map" ref={mapEl}></div><div className="map-top"><div><strong>{point?.location}</strong><span>{point?.latitude.toFixed(4)}° N · {point?.longitude.toFixed(4)}° E</span></div></div>
- <div className="layer-panel"><div className="layer-title">MAP LAYERS <span>{Object.values(available).filter(g=>g.features?.length).length} loaded · click map to pick a point</span></div>{layers.map(l=><label className="layer" key={l.id}><input type="checkbox" checked={enabled.includes(l.id)} onChange={e=>setEnabled(old=>e.target.checked?[...old,l.id]:old.filter(v=>v!==l.id))}/><span className="swatch" style={{background:l.color}}/>{l.label}<span className="layer-count">{available[l.id]?.features?.length??(LAZY.includes(l.id)?'off':'—')}</span></label>)}</div>
- <div className="map-bottom">{mapError?<span className="error">{mapError}</span>:<span>{basemap?<>Basemap <a href="https://openfreemap.org" target="_blank" rel="noreferrer">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/" target="_blank" rel="noreferrer">OpenMapTiles</a></>:'Basemap unavailable · showing data layers only'} · Search <a href="https://nominatim.org" target="_blank" rel="noreferrer">Nominatim</a></span>}<span>Data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a> · ODbL</span></div></main></div>
- <footer><span>GeoIntel is a research prototype. Not for title, zoning, flood, or legal decisions.</span><span>{status?.generated_at_utc?`Data status generated ${new Date(status.generated_at_utc).toLocaleDateString()}`:'No published acquisition timestamp'}</span></footer></div>;
+const MAX_COMPARE = 4;
+const LETTERS = 'ABCD';
+const empty = { type: 'FeatureCollection', features: [] };
+
+/* ---------- helpers ---------- */
+const fetchJSON = async (path) => { const r = await fetch(path, { cache: 'no-store' }); if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); };
+const store = { get: (k) => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch { /* storage unavailable */ } } };
+const inAoi = ([lon, lat], a) => lon >= a[0] && lon <= a[2] && lat >= a[1] && lat <= a[3];
+const nearEdge = ([lon, lat], a) => Math.min((lon - a[0]) * 108.6, (a[2] - lon) * 108.6, (lat - a[1]) * 110.6, (a[3] - lat) * 110.6) < EDGE_KM;
+const parseLatLon = (q) => { const m = q.trim().match(/^(-?\d+(?:\.\d+)?)\s*[, ]\s*(-?\d+(?:\.\d+)?)$/); if (!m) return null; let a = +m[1], b = +m[2]; if (a > 60 && b < 60) [a, b] = [b, a]; return [b, a]; };
+const coords = (e) => `${e.lat.toFixed(4)}° N · ${e.lon.toFixed(4)}° E`;
+const pilotEntry = (p) => ({ kind: 'pilot', name: p.location, area: p.area, lon: p.longitude, lat: p.latitude });
+const pointEntry = (lon, lat, name = '') => ({ kind: 'point', name: name || 'Selected point', area: '', lon, lat });
+const entryKey = (e) => (e.kind === 'pilot' ? e.name : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`);
+
+function fmt(row, m) {
+  if (!m) return { v: '—', u: '' };
+  if (m.status === 'loading') return { v: '…', u: '' };
+  if (m.status === 'pilot_only') return { v: 'Pilot only', u: '', muted: true };
+  if (m.status !== 'calculated' || m.value == null) return { v: 'No data', u: '', muted: true };
+  if (row.unit === 'km') return { v: Number(m.value).toFixed(m.value < 10 ? 2 : 1), u: 'km' };
+  if (row.unit === 'km/km²') return { v: Number(m.value).toFixed(1), u: 'km/km²' };
+  if (row.unit === '%') return { v: Number(m.value).toFixed(1), u: '%' };
+  return { v: String(m.value), u: row.unit || '' };
 }
-createRoot(document.getElementById('root')).render(<App/>);
+
+function readUrl() {
+  const u = new URLSearchParams(location.search);
+  const parseEntry = (s) => {
+    const p = places.find((x) => x.location === s); if (p) return pilotEntry(p);
+    const ll = parseLatLon(s || ''); return ll ? pointEntry(ll[0], ll[1]) : null;
+  };
+  const compare = (u.get('c') || '').split('~').map(decodeURIComponent).map(parseEntry).filter(Boolean).slice(0, MAX_COMPARE);
+  const lat = parseFloat(u.get('lat')), lon = parseFloat(u.get('lon'));
+  const current = Number.isFinite(lat) && Number.isFinite(lon) ? pointEntry(lon, lat, u.get('label') || '')
+    : pilotEntry(places.find((x) => x.location === u.get('place')) || places[0]);
+  return { mode: u.get('mode') === 'compare' && compare.length ? 'compare' : 'explore', current, compare };
+}
+function writeUrl(mode, current, compare) {
+  const u = new URLSearchParams();
+  if (current.kind === 'pilot') u.set('place', current.name);
+  else { u.set('lat', current.lat.toFixed(5)); u.set('lon', current.lon.toFixed(5)); if (current.name !== 'Selected point') u.set('label', current.name); }
+  if (compare.length) u.set('c', compare.map((e) => encodeURIComponent(e.kind === 'pilot' ? e.name : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`)).join('~'));
+  if (mode === 'compare') u.set('mode', 'compare');
+  history.replaceState(null, '', `${location.pathname}?${u}`);
+}
+
+/* ---------- app ---------- */
+function App() {
+  const init = useRef(readUrl()).current;
+  const [theme, setTheme] = useState(() => (store.get('geointel-theme') === 'dark' ? 'dark' : 'light'));
+  const [mode, setMode] = useState(init.mode);
+  const [current, setCurrent] = useState(init.current);
+  const [compare, setCompare] = useState(init.compare);
+  const [tab, setTab] = useState('move');
+  const [pilotData, setPilotData] = useState(null), [status, setStatus] = useState(null);
+  const [available, setAvailable] = useState({}), [enabled, setEnabled] = useState(DEFAULT_LAYERS);
+  const [query, setQuery] = useState(''), [results, setResults] = useState(null), [searching, setSearching] = useState(false), [msg, setMsg] = useState('');
+  const [toast, setToast] = useState('');
+  const [mapError, setMapError] = useState(''), [styleRev, setStyleRev] = useState(0), [basemapOk, setBasemapOk] = useState(true);
+  const mapEl = useRef(null), mapRef = useRef(null), requested = useRef(new Set()), styleOk = useRef(false), fellBack = useRef(false);
+  const aoi = pilotData?.aoi_bbox_wsen || DEFAULT_AOI;
+
+  const metricsFor = (e) => (e.kind === 'pilot'
+    ? pilotData?.locations?.find((l) => l.location === e.name)?.metrics
+    : computeMetrics([e.lon, e.lat], available));
+  const currentMetrics = useMemo(() => metricsFor(current), [current, available, pilotData]);
+  const compareMetrics = useMemo(() => compare.map(metricsFor), [compare, available, pilotData]);
+
+  /* data */
+  const loadLayer = (id) => { if (requested.current.has(id)) return; requested.current.add(id);
+    fetchJSON(`/data/${id}.geojson`).then((g) => setAvailable((o) => ({ ...o, [id]: g }))).catch(() => { /* not published */ }); };
+  useEffect(() => {
+    fetchJSON('/data/demo_location_metrics.json').then(setPilotData).catch(() => {});
+    fetchJSON('/data/data_status.json').then(setStatus).catch(() => {});
+    layerDefs.filter((l) => !LAZY.includes(l.id)).forEach((l) => loadLayer(l.id));
+  }, []);
+  useEffect(() => { enabled.filter((id) => LAZY.includes(id)).forEach(loadLayer); }, [enabled]);
+  useEffect(() => { writeUrl(mode, current, compare); }, [mode, current, compare]);
+  useEffect(() => { document.documentElement.dataset.theme = theme; store.set('geointel-theme', theme); }, [theme]);
+  useEffect(() => { if (!toast) return undefined; const t = setTimeout(() => setToast(''), 2200); return () => clearTimeout(t); }, [toast]);
+
+  /* actions */
+  const addToCompare = (e) => setCompare((list) => {
+    if (list.some((x) => entryKey(x) === entryKey(e))) { setToast('Already in comparison'); return list; }
+    if (list.length >= MAX_COMPARE) { setToast(`Compare up to ${MAX_COMPARE} locations`); return list; }
+    return [...list, e];
+  });
+  const choose = (e) => {
+    if (!inAoi([e.lon, e.lat], aoi)) { setMsg('That point is outside the covered Bengaluru area.'); return; }
+    setMsg(''); setResults(null);
+    if (mode === 'compare') addToCompare(e); else setCurrent(e);
+  };
+  const chooseRef = useRef(choose); chooseRef.current = choose;
+  const search = async (ev) => {
+    ev.preventDefault(); const q = query.trim(); if (!q) return;
+    const ll = parseLatLon(q); if (ll) { choose(pointEntry(ll[0], ll[1])); return; }
+    const pilot = places.find((p) => p.location.toLowerCase() === q.toLowerCase()); if (pilot) { choose(pilotEntry(pilot)); return; }
+    setSearching(true); setMsg(''); setResults(null);
+    try {
+      const [w, s, e, n] = aoi;
+      const res = await fetchJSON(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&countrycodes=in&bounded=1&viewbox=${w},${n},${e},${s}&q=${encodeURIComponent(q)}`);
+      if (!res.length) setMsg('No match inside the covered area. Try a locality, or click the map.');
+      setResults(res.map((r) => ({ lon: +r.lon, lat: +r.lat, name: r.display_name })));
+    } catch { setMsg('Search is unavailable right now. Click the map or enter “lat, lon”.'); }
+    finally { setSearching(false); }
+  };
+  const share = async () => {
+    try { await navigator.clipboard.writeText(location.href); setToast('Link copied'); }
+    catch { setToast('Copy the address bar to share'); }
+  };
+  const exportCsv = () => {
+    const esc = (s) => `"${String(s ?? '').replace(/"/g, '""')}"`;
+    const lines = [['Metric', ...compare.map((e) => e.name)], ['Coordinates', ...compare.map((e) => `${e.lat.toFixed(5)}, ${e.lon.toFixed(5)}`)]];
+    compareRows.forEach((s) => s.rows.forEach((r) => lines.push([`${s.title}: ${r.label}${r.unit && !r.unit.startsWith('within') ? ` (${r.unit})` : ''}`,
+      ...compareMetrics.map((m) => { const x = m?.[r.key]; return x?.status === 'calculated' ? `${x.value}${x.nearest_feature ? ` (${x.nearest_feature})` : ''}` : ''; })])));
+    lines.push(['Source', 'OpenStreetMap contributors (ODbL); straight-line distances']);
+    const blob = new Blob([lines.map((l) => l.map(esc).join(',')).join('\n')], { type: 'text/csv' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'geointel-compare.csv'; a.click(); URL.revokeObjectURL(a.href);
+  };
+
+  /* map */
+  useEffect(() => {
+    if (!mapEl.current) return undefined;
+    let map;
+    try { map = new maplibregl.Map({ container: mapEl.current, style: BASEMAP[theme], center: [77.64, 12.98], zoom: 10.6, attributionControl: false }); }
+    catch (err) { setMapError(`Map unavailable: ${err?.message || 'WebGL not supported'}`); return undefined; }
+    mapRef.current = map;
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+    map.on('style.load', () => { styleOk.current = true; setStyleRev((r) => r + 1); });
+    map.on('error', (e) => {
+      if (!styleOk.current && !fellBack.current) { fellBack.current = true; setBasemapOk(false); map.setStyle(PLAIN(PLAIN_BG[document.documentElement.dataset.theme || 'light'])); return; }
+      if (e.sourceId || e.tile) return;
+      setMapError(e.error?.message || 'Map rendering error');
+    });
+    map.on('click', (e) => {
+      const hit = map.getLayer('place-points') ? map.queryRenderedFeatures(e.point, { layers: ['place-points'] }) : [];
+      if (hit.length) { const p = places.find((x) => x.location === hit[0].properties.location); if (p) { chooseRef.current(pilotEntry(p)); return; } }
+      chooseRef.current(pointEntry(e.lngLat.lng, e.lngLat.lat));
+    });
+    map.getCanvas().style.cursor = 'crosshair';
+    return () => { map.remove(); mapRef.current = null; };
+  }, []);
+  // Theme switch: swap basemap; style.load re-adds our layers via styleRev.
+  const firstTheme = useRef(true);
+  useEffect(() => {
+    if (firstTheme.current) { firstTheme.current = false; return; }
+    const map = mapRef.current; if (!map) return;
+    styleOk.current = false;
+    map.setStyle(basemapOk ? BASEMAP[theme] : PLAIN(PLAIN_BG[theme]), { diff: false });
+  }, [theme]);
+  // Data layers + pins (re-run after every style load).
+  useEffect(() => {
+    const map = mapRef.current; if (!map || !styleRev || !map.isStyleLoaded()) return;
+    const pinColor = theme === 'dark' ? '#7EE0C3' : '#1F7A63', ink = theme === 'dark' ? '#0C1016' : '#FFFFFF';
+    for (const l of layerDefs) {
+      const src = `osm-${l.id}`, base = `visual-${l.id}`, col = l.color[theme], geo = available[l.id] || empty;
+      if (!map.getSource(src)) map.addSource(src, { type: 'geojson', data: geo }); else map.getSource(src).setData(geo);
+      const kinds = [
+        ['fill', 'fill', ['Polygon', 'MultiPolygon'], { 'fill-color': col, 'fill-opacity': theme === 'dark' ? 0.24 : 0.2 }],
+        ['outline', 'line', ['Polygon', 'MultiPolygon'], { 'line-color': col, 'line-width': 1.1, 'line-opacity': 0.8 }],
+        ['line', 'line', ['LineString', 'MultiLineString'], { 'line-color': col, 'line-width': l.width || 1.1, 'line-opacity': 0.8 }],
+        ['circle', 'circle', ['Point', 'MultiPoint'], { 'circle-color': col, 'circle-radius': l.radius || 3.6, 'circle-stroke-color': ink, 'circle-stroke-width': 1 }],
+      ];
+      for (const [k, type, geomTypes, paint] of kinds) {
+        const id = `${base}-${k}`;
+        if (!map.getLayer(id)) map.addLayer({ id, type, source: src, filter: ['match', ['geometry-type'], geomTypes, true, false], paint });
+        map.setLayoutProperty(id, 'visibility', enabled.includes(l.id) ? 'visible' : 'none');
+      }
+    }
+    const pilots = { type: 'FeatureCollection', features: places.map((p) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [p.longitude, p.latitude] }, properties: { location: p.location } })) };
+    if (!map.getSource('places')) {
+      map.addSource('places', { type: 'geojson', data: pilots });
+      map.addLayer({ id: 'place-points', type: 'circle', source: 'places', paint: { 'circle-radius': 6, 'circle-color': pinColor, 'circle-opacity': 0.55, 'circle-stroke-color': ink, 'circle-stroke-width': 2 } });
+      map.on('mouseenter', 'place-points', () => { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'place-points', () => { map.getCanvas().style.cursor = 'crosshair'; });
+    }
+    if (!map.getSource('sel')) {
+      map.addSource('sel', { type: 'geojson', data: empty });
+      map.addLayer({ id: 'sel-halo', type: 'circle', source: 'sel', paint: { 'circle-radius': 20, 'circle-color': pinColor, 'circle-opacity': 0.16 } });
+      map.addLayer({ id: 'sel-pin', type: 'circle', source: 'sel', paint: { 'circle-radius': ['case', ['has', 'letter'], 12, 8], 'circle-color': pinColor, 'circle-stroke-color': ink, 'circle-stroke-width': 3 } });
+      if (map.getStyle().glyphs) map.addLayer({ id: 'sel-letter', type: 'symbol', source: 'sel', filter: ['has', 'letter'],
+        layout: { 'text-field': ['get', 'letter'], 'text-size': 12, 'text-font': ['Noto Sans Bold'], 'text-allow-overlap': true },
+        paint: { 'text-color': ink } });
+    }
+  }, [styleRev, available, enabled, theme]);
+  useEffect(() => {
+    const map = mapRef.current; if (!map || !styleRev || !map.getSource('sel')) return;
+    const pts = mode === 'compare'
+      ? compare.map((e, i) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [e.lon, e.lat] }, properties: { letter: LETTERS[i] } }))
+      : [{ type: 'Feature', geometry: { type: 'Point', coordinates: [current.lon, current.lat] }, properties: {} }];
+    map.getSource('sel').setData({ type: 'FeatureCollection', features: pts });
+  }, [styleRev, mode, current, compare]);
+  useEffect(() => {
+    const map = mapRef.current; if (!map) return;
+    if (mode === 'explore') map.flyTo({ center: [current.lon, current.lat], zoom: Math.max(map.getZoom(), 12.5), padding: { left: window.innerWidth > 760 ? 420 : 0, bottom: window.innerWidth > 760 ? 0 : 360 }, duration: 800 });
+    else if (compare.length) {
+      const b = new maplibregl.LngLatBounds(); compare.forEach((e) => b.extend([e.lon, e.lat]));
+      map.fitBounds(b, { padding: { top: 110, left: 60, right: 60, bottom: Math.round(window.innerHeight * 0.52) }, maxZoom: 13, duration: 800 });
+    }
+  }, [mode, current, compare.length]);
+
+  /* render */
+  const edge = current.kind === 'point' && nearEdge([current.lon, current.lat], aoi);
+  const section = sections.find((s) => s.id === tab);
+  const best = (row) => {
+    if (!row.better) return -1;
+    const vals = compareMetrics.map((m) => (m?.[row.key]?.status === 'calculated' ? Number(m[row.key].value) : null));
+    const valid = vals.filter((v) => v != null); if (valid.length < 2) return -1;
+    const target = row.better === 'min' ? Math.min(...valid) : Math.max(...valid);
+    return vals.filter((v) => v === target).length === 1 ? vals.indexOf(target) : -1;
+  };
+
+  return (
+    <div className="app">
+      <div className="map" ref={mapEl} role="region" aria-label="Map. Click to choose a location." />
+
+      <header className="topbar">
+        <div className="brand"><span className="brand-mark">G</span><span className="brand-name">GeoIntel</span><span className="brand-city">Bengaluru</span></div>
+        <form className="search glass" onSubmit={search} role="search">
+          <Icon name="search" className="muted" />
+          <label className="sr" htmlFor="q">{mode === 'compare' ? 'Add a location to compare' : 'Search a location'}</label>
+          <input id="q" value={query} onChange={(e) => setQuery(e.target.value)} autoComplete="off"
+            placeholder={mode === 'compare' ? 'Add a location: address, locality or lat, lon' : 'Search an address, locality or lat, lon'} />
+          <button type="submit" className="btn-ghost" disabled={searching}>{searching ? 'Searching…' : 'Go'}</button>
+          {(results?.length > 0 || msg) && (
+            <div className="results glass">
+              {results?.map((r, i) => (
+                <button type="button" key={i} onClick={() => choose(pointEntry(r.lon, r.lat, r.name.split(',').slice(0, 2).join(',')))}>
+                  <Icon name="pin" size={16} className="muted" /><span>{r.name}</span>
+                </button>))}
+              {msg && <p className="results-msg">{msg}</p>}
+            </div>)}
+        </form>
+        <div className="top-actions">
+          <div className="segmented glass" role="tablist" aria-label="View">
+            <button type="button" role="tab" aria-selected={mode === 'explore'} onClick={() => setMode('explore')}>Explore</button>
+            <button type="button" role="tab" aria-selected={mode === 'compare'} onClick={() => setMode('compare')}>Compare{compare.length ? <span className="count">{compare.length}</span> : null}</button>
+          </div>
+          <label className="sr" htmlFor="pilot">Pilot areas</label>
+          <select id="pilot" className="glass select" value={current.kind === 'pilot' && mode === 'explore' ? current.name : ''}
+            onChange={(e) => { const p = places.find((x) => x.location === e.target.value); if (p) choose(pilotEntry(p)); }}>
+            <option value="" disabled>Pilot areas</option>
+            {places.map((p) => <option key={p.location} value={p.location}>{p.location}</option>)}
+          </select>
+          <button type="button" className="icon-btn glass" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'} title={theme === 'light' ? 'Dark theme' : 'Light theme'}>
+            <Icon name={theme === 'light' ? 'moon' : 'sun'} />
+          </button>
+          <button type="button" className="icon-btn glass" onClick={share} aria-label="Copy link to this view" title="Copy link"><Icon name="share" /></button>
+        </div>
+      </header>
+
+      {mode === 'explore' && (
+        <section className="card glass" aria-label="Location summary">
+          <div className="eyebrow">{current.kind === 'pilot' ? `PILOT AREA · ${current.area.toUpperCase()}` : 'SELECTED POINT'}</div>
+          <h1>{current.name}</h1>
+          <div className="coords">{coords(current)}</div>
+          <div className="tabs" role="tablist" aria-label="Indicator group">
+            {sections.map((s) => <button type="button" role="tab" key={s.id} aria-selected={tab === s.id} onClick={() => setTab(s.id)}>{s.title}</button>)}
+          </div>
+          <div className="rows" role="tabpanel">
+            {section.rows.map((r) => {
+              const m = currentMetrics?.[r.key]; const f = fmt(r, m);
+              const altM = r.alt ? currentMetrics?.[r.alt[0]] : null;
+              const sub = m?.nearest_feature || (altM?.status === 'calculated' ? `${altM.value} ${r.alt[1]}` : r.sub) || '';
+              return (
+                <div className="row" key={r.key} title={m?.method || ''}>
+                  <span className="row-icon"><Icon name={r.icon} /></span>
+                  <div className="row-text"><div className="row-label">{r.label}</div>{sub && <div className="row-sub">{sub}</div>}</div>
+                  <div className={`row-val${f.muted ? ' is-muted' : ''}`}><div className="num">{f.v}</div><div className="unit">{f.u === 'km' || f.u === '%' || f.u === 'km/km²' ? f.u : r.unit.startsWith('within') && !f.muted ? r.unit : ''}</div></div>
+                </div>);
+            })}
+          </div>
+          {edge && <p className="note warn">Near the edge of the covered area, so counts and nearest features may be incomplete.</p>}
+          <div className="card-foot">
+            <details>
+              <summary><Icon name="info" size={15} />How it’s calculated</summary>
+              <p>Straight-line distances and counts of features mapped in OpenStreetMap. Only operational metro and rail stations are counted. Missing features in OSM don’t mean they don’t exist. Not a title, zoning or flood assessment.</p>
+            </details>
+            <button type="button" className="btn" onClick={() => { addToCompare(current); setToast(`Added ${current.name} to compare`); }}><Icon name="compare" size={16} />Add to compare</button>
+          </div>
+        </section>
+      )}
+
+      {mode === 'compare' && (
+        <section className="compare glass" aria-label="Compare locations">
+          <div className="compare-head">
+            <div><h2>Compare</h2><span className="muted small">{compare.length ? `${compare.length} of ${MAX_COMPARE} locations · search or click the map to add` : 'Search or click the map to add up to 4 locations'}</span></div>
+            <div className="compare-actions">
+              {compare.length > 0 && <button type="button" className="btn-ghost" onClick={() => setCompare([])}>Clear</button>}
+              <button type="button" className="btn" disabled={!compare.length} onClick={exportCsv}><Icon name="download" size={16} />Export CSV</button>
+            </div>
+          </div>
+          {compare.length === 0 ? (
+            <div className="compare-empty">
+              <p>Pick locations to see them side by side. Try the pilot areas:</p>
+              <div className="chips">{places.map((p) => <button type="button" className="chip" key={p.location} onClick={() => addToCompare(pilotEntry(p))}><Icon name="plus" size={14} />{p.location}</button>)}</div>
+            </div>
+          ) : (
+            <div className="table-wrap">
+              <table>
+                <thead><tr><th scope="col" className="th-metric">Metric</th>{compare.map((e, i) => (
+                  <th scope="col" key={entryKey(e)}>
+                    <div className="col-head"><span className="letter">{LETTERS[i]}</span><span className="col-name">{e.name}</span>
+                      <button type="button" className="icon-btn sm" aria-label={`Remove ${e.name}`} onClick={() => setCompare((l) => l.filter((x) => entryKey(x) !== entryKey(e)))}><Icon name="close" size={14} /></button></div>
+                    <div className="muted small">{e.kind === 'pilot' ? 'Pilot area' : coords(e)}</div>
+                  </th>))}</tr></thead>
+                {compareRows.map((s) => (
+                  <tbody key={s.id}>
+                    <tr className="group"><th scope="rowgroup" colSpan={compare.length + 1}>{s.title}</th></tr>
+                    {s.rows.map((r) => { const b = best(r); return (
+                      <tr key={r.key}><th scope="row">{r.label}</th>{compareMetrics.map((m, i) => { const x = m?.[r.key]; const f = fmt(r, x); return (
+                        <td key={i} className={i === b ? 'is-best' : ''} title={x?.method || ''}>
+                          <span className={`num${f.muted ? ' is-muted' : ''}`}>{f.v}</span>{['km', '%', 'km/km²'].includes(f.u) && <span className="unit"> {f.u}</span>}
+                          {i === b && <span className="best">Best</span>}
+                          {x?.nearest_feature && <div className="cell-sub">{x.nearest_feature}</div>}
+                        </td>); })}</tr>); })}
+                  </tbody>))}
+              </table>
+            </div>
+          )}
+        </section>
+      )}
+
+      <nav className="layers glass" aria-label="Map layers">
+        {layerDefs.map((l) => { const on = enabled.includes(l.id); return (
+          <button type="button" key={l.id} className="chip" aria-pressed={on} onClick={() => setEnabled((o) => (on ? o.filter((v) => v !== l.id) : [...o, l.id]))}>
+            <span className="dot" style={{ background: l.color[theme] }} />{l.label}
+          </button>); })}
+      </nav>
+
+      <div className="attribution">
+        {mapError ? <span className="err">{mapError}</span> : null}
+        {basemapOk ? <>Basemap <a href="https://openfreemap.org" target="_blank" rel="noreferrer">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/" target="_blank" rel="noreferrer">OpenMapTiles</a> · </> : 'Basemap unavailable · '}
+        Data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> · Search <a href="https://nominatim.org" target="_blank" rel="noreferrer">Nominatim</a>
+        {status?.generated_at_utc ? ` · Updated ${new Date(status.generated_at_utc).toLocaleDateString()}` : ''}
+      </div>
+      {toast && <div className="toast glass" role="status">{toast}</div>}
+    </div>
+  );
+}
+
+createRoot(document.getElementById('root')).render(<App />);
