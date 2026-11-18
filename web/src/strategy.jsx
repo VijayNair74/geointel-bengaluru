@@ -30,6 +30,7 @@ export function factorValue(p, key) {
   const m = p.metrics?.[key];
   return m?.status === 'calculated' && m.value != null ? Number(m.value) : null;
 }
+const COMP_LABEL = { nearest_metro_station_km: 'Metro', nearest_tech_park_km: 'Tech park', schools_within_3km: 'Schools 3 km', healthcare_within_5km: 'Hospitals 5 km' };
 const fmtVal = (f, v) => (v == null ? '—' : f.unit === 'km' ? fmtDist(v) : String(v));
 const nearestName = (p, key) => (key === '_upcoming_metro_km' ? p.evidence?.upcoming_metro_within_5km?.[0]?.name : p.metrics?.[key]?.nearest_feature);
 
@@ -114,6 +115,11 @@ export function Strategy({ project: p, projects, onClose, onShare, onOpenReport 
         </div>
       </div>
       <article className="report-page">
+        <div className="r-brand" aria-hidden="true">
+          <span className="r-mark">G</span><span className="r-brand-name">GeoIntel</span>
+          <span className="r-brand-sub">Location intelligence · Bengaluru</span>
+          <span className="r-brand-date">{new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+        </div>
         <header className="r-head">
           <div className="eyebrow">MARKET STRATEGY BRIEF</div>
           <h1>{p.name}</h1>
@@ -159,7 +165,7 @@ export function Strategy({ project: p, projects, onClose, onShare, onOpenReport 
 
         <section>
           <h2>Scorecard</h2>
-          <table className="r-table s-table"><thead><tr><th>Factor</th><th>Value</th><th>City-wide</th><th>Within 5 km</th></tr></thead><tbody>
+          <table className="r-table s-table s-scoretbl"><colgroup><col style={{ width: '30%' }} /><col style={{ width: '36%' }} /><col style={{ width: '17%' }} /><col style={{ width: '17%' }} /></colgroup><thead><tr><th>Factor</th><th>Value</th><th>City-wide</th><th>Within 5 km</th></tr></thead><tbody>
             {data.scored.filter((s) => s.v != null).map((s) => (
               <tr key={s.f.key}><td>{s.f.label}</td><td><span className="r-val">{fmtVal(s.f, s.v)}</span>{nearestName(p, s.f.key) && <span className="r-sub">{nearestName(p, s.f.key)}</span>}</td>
                 <td><span className={`s-pill ${s.pct >= 70 ? 'good' : s.pct <= 35 ? 'weak' : ''}`}>{topLabel(s.pct)}</span></td>
@@ -168,9 +174,9 @@ export function Strategy({ project: p, projects, onClose, onShare, onOpenReport 
         </section>
 
         {data.comps.length > 0 && (
-          <section>
+          <section className="s-compsec">
             <h2>Competitive set</h2>
-            <div className="s-wrap"><table className="r-table s-table"><thead><tr><th>Project</th><th>Away</th>{compCols.map((f) => <th key={f.key}>{f.label.replace(' within', ' ·')}</th>)}</tr></thead><tbody>
+            <div className="s-wrap"><table className="r-table s-table s-comp"><colgroup><col style={{ width: '31%' }} /><col style={{ width: '10%' }} />{compCols.map((f) => <col key={f.key} style={{ width: '14.75%' }} />)}</colgroup><thead><tr><th>Project</th><th>Away</th>{compCols.map((f) => <th key={f.key}>{COMP_LABEL[f.key]}</th>)}</tr></thead><tbody>
               {rows.map((r) => (
                 <tr key={r.x.id} className={r.self ? 'is-self' : ''}>
                   <td><span className="r-val">{r.x.name}</span><span className="r-sub">{r.x.builder}{r.x.status ? ` · ${r.x.status.replace(' (per OpenStreetMap)', '')}` : ''}</span></td>

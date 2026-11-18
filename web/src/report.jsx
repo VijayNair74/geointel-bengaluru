@@ -76,6 +76,11 @@ export function Report({ project: p, metroFc, onClose, onShare }) {
         </div>
       </div>
       <article className="report-page">
+        <div className="r-brand" aria-hidden="true">
+          <span className="r-mark">G</span><span className="r-brand-name">GeoIntel</span>
+          <span className="r-brand-sub">Location intelligence · Bengaluru</span>
+          <span className="r-brand-date">{new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+        </div>
         <header className="r-head">
           <div className="eyebrow">LOCATION REPORT</div>
           <h1>{p.name}</h1>

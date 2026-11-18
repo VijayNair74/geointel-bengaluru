@@ -207,15 +207,6 @@ td.is-best .num { color: var(--best); }
 .r-foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid rgba(17, 24, 39, .1); font-size: 12px; color: #5A6470; line-height: 1.6; }
 .r-foot p { margin: 0 0 6px; }
 @media (max-width: 760px) { .report-page { margin: 0; border-radius: 0; padding: 26px 18px; } .r-head h1 { font-size: 30px; } .report-bar { padding: 10px; } }
-@media print {
-  body { overflow: visible; }
-  .app > *:not(.report) { display: none !important; }
-  .app { height: auto; overflow: visible; }
-  .report { position: static; overflow: visible; background: #fff; }
-  .report-bar { display: none; }
-  .report-page { margin: 0; padding: 0; box-shadow: none; max-width: none; }
-  .r-hl, .report section { break-inside: avoid; }
-}
 
 /* project card actions */
 .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
@@ -247,4 +238,48 @@ td.is-best .num { color: var(--best); }
 .s-pill.weak { background: #FBE9E2; color: #8A3416; }
 .s-wrap { overflow-x: auto; }
 .s-wrap table { min-width: 640px; }
-@media print { .s-card, .s-persona { break-inside: avoid; } }
+
+/* report brand header (screen + print) */
+.r-brand { display: flex; align-items: center; gap: 10px; padding-bottom: 14px; margin-bottom: 26px; border-bottom: 1px solid rgba(17, 24, 39, .1); font-size: 12.5px; color: #5A6470; }
+.r-mark { width: 26px; height: 26px; border-radius: 8px; background: #1F7A63; color: #fff; display: grid; place-items: center; font: 700 14px 'Space Grotesk', sans-serif; }
+.r-brand-name { font: 600 15px 'Space Grotesk', sans-serif; color: #14171A; }
+.r-brand-sub { padding-left: 10px; border-left: 1px solid rgba(17, 24, 39, .15); }
+.r-brand-date { margin-left: auto; }
+.s-table { table-layout: fixed; }
+.s-table td, .s-table th { overflow-wrap: anywhere; }
+.s-persona-head { align-items: baseline; gap: 10px; }
+
+/* ---------- print: A4, our own footer, colours kept ---------- */
+@page {
+  size: A4;
+  margin: 14mm 14mm 16mm;
+  @bottom-left { content: "GeoIntel · blr.geointel.workers.dev"; font: 8.5pt Inter, sans-serif; color: #6B7480; }
+  @bottom-right { content: "Page " counter(page) " of " counter(pages); font: 8.5pt Inter, sans-serif; color: #6B7480; }
+  /* Non-empty top boxes stop Chrome adding its own date/title header. */
+  @top-left { content: "\00a0"; } @top-right { content: "\00a0"; }
+  @bottom-center { content: none; }
+}
+@media print {
+  html, body, #root { height: auto; overflow: visible; background: #fff; }
+  .app { height: auto !important; overflow: visible; }
+  .app > *:not(.report) { display: none !important; }
+  .report { position: static; overflow: visible; background: #fff; }
+  .report, .report * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .report-bar { display: none; }
+  .report-page { margin: 0; padding: 0; max-width: none; width: auto; border-radius: 0; box-shadow: none; font-size: 13px; }
+  .r-head h1 { font-size: 32px; }
+  .r-brand { margin-bottom: 20px; }
+  .report section { margin-top: 22px; break-inside: auto; }
+  .report h2 { break-after: avoid; page-break-after: avoid; }
+  .r-highlights { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .s-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .s-personas { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 18px; }
+  .r-hl, .s-card, .s-persona, .s-personas, .s-lede, .s-list li, .r-table tr, .r-note { break-inside: avoid; page-break-inside: avoid; }
+  .s-wrap { overflow: visible; }
+  .s-wrap table { min-width: 0; }
+  .r-table th, .r-table td { padding-top: 8px; padding-bottom: 8px; }
+  .r-foot { break-inside: avoid; }
+  .s-compsec { break-before: page; page-break-before: always; }
+}
+
+.r-table tbody th[scope='row'] { padding: 10px 12px 10px 0; white-space: normal; }
