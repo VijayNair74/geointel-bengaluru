@@ -89,13 +89,13 @@ def test_project_evidence_lakes_drains_upcoming_and_dem(tmp_path, monkeypatch):
     from geointel.pipeline import _project_evidence
     crs = "EPSG:32643"
     site = gpd.GeoSeries([Point(77.64, 12.886)], crs="EPSG:4326").to_crs(crs).iloc[0]
-    lake = box(site.x + 200, site.y - 100, site.x + 500, site.y + 100)
+    lake = box(site.x + 200, site.y - 100, site.x + 500, site.y + 100)  # 300x200 m = 14.8 acres
     layers = {
         "water": gpd.GeoDataFrame({"name": ["Test Lake"]}, geometry=[lake], crs=crs),
         "drains": gpd.GeoDataFrame({"name": [None], "waterway": ["drain"]}, geometry=[LineString([(site.x - 80, site.y - 500), (site.x - 80, site.y + 500)])], crs=crs),
         "metro_upcoming": gpd.GeoDataFrame({"name": ["Future Stn"], "status": ["under construction"]}, geometry=[Point(site.x, site.y + 1500)], crs=crs),
     }
-    # synthetic DEM: 900 m everywhere, 890 m east of the site (the lake side)
+    # synthetic DEM: 900 m everywhere, 890 m east of the site (the lake side); lake must be >= 5 acres
     lake_wgs = gpd.GeoSeries([lake], crs=crs).to_crs("EPSG:4326").iloc[0]
     arr = np.full((400, 400), 900, dtype="float32")
     tr = from_origin(77.62, 12.90, 0.0001, 0.0001)

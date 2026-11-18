@@ -54,7 +54,10 @@ function Row({ label, value, sub }) {
 export function Report({ project: p, metroFc, onClose, onShare }) {
   const m = p.metrics || {}, ev = p.evidence || {};
   const hl = useMemo(() => highlights(p, metroFc), [p, metroFc]);
-  const nearStations = useMemo(() => stationsNear(metroFc, p.lon, p.lat, 2000), [metroFc, p]);
+  // Same number as the headline for the nearest station (pipeline value), browser distances for the rest.
+  const nearStations = useMemo(() => stationsNear(metroFc, p.lon, p.lat, 2000).map((s) => (
+    s.name === p.metrics?.nearest_metro_station_km?.nearest_feature && p.metrics.nearest_metro_station_km.value != null
+      ? { ...s, m: p.metrics.nearest_metro_station_km.value * 1000 } : s)), [metroFc, p]);
   const lake = ev.nearest_lake, elev = ev.elevation || {};
   const updated = p._generated ? new Date(p._generated).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : null;
   const n = (k) => val(m[k]);

@@ -205,7 +205,10 @@ function App() {
       const [w, s, e, n] = aoi;
       const res = await fetchJSON(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&countrycodes=in&bounded=1&viewbox=${w},${n},${e},${s}&q=${encodeURIComponent(q)}`);
       if (!res.length && !projHits.length) setMsg('No match inside the covered area. Try a locality, or click the map.');
-      setResults([...projHits, ...res.map((r) => ({ lon: +r.lon, lat: +r.lat, name: r.display_name }))]);
+      // Drop geocoder hits that are the same complex as a listed project.
+      const projNames = projHits.map((h) => norm(h.project.name));
+      const geo = res.filter((r) => !projNames.some((n) => norm(r.display_name.split(',')[0]) === n));
+      setResults([...projHits, ...geo.map((r) => ({ lon: +r.lon, lat: +r.lat, name: r.display_name }))]);
     } catch { if (!projHits.length) setMsg('Search is unavailable right now. Click the map or enter “lat, lon”.'); }
     finally { setSearching(false); }
   };

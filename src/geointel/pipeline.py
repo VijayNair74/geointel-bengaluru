@@ -592,8 +592,11 @@ def _dem_files() -> list[Path]:
     return sorted(d.glob("*.tif")) if d.exists() else []
 
 
-def _dem_median(geom_wgs84) -> float | None:
-    """Median Copernicus GLO-30 surface elevation (m) over a WGS84 geometry, or None."""
+def _dem_median(geom_wgs84, pct: float = 50) -> float | None:
+    """Percentile of Copernicus GLO-30 surface elevation (m) over a WGS84 geometry, or None.
+
+    GLO-30 is a surface model (rooftops, trees), so callers use low percentiles to
+    approximate the ground near a site and the water surface of a lake."""
     files = _dem_files()
     if not files:
         return None
@@ -612,7 +615,7 @@ def _dem_median(geom_wgs84) -> float | None:
                 continue
             arr, _ = rio_mask(src, [geom_wgs84.__geo_interface__], crop=True, all_touched=True, filled=False)
             vals.extend(v for v in arr.compressed().tolist() if v > -100)
-    return round(float(np.median(vals)), 1) if vals else None
+    return round(float(np.percentile(vals, pct)), 1) if vals else None
 
 
 def _project_evidence(point: Point, layers: dict[str, gpd.GeoDataFrame], metric_crs: str) -> dict[str, Any]:
@@ -650,12 +653,13 @@ def _project_evidence(point: Point, layers: dict[str, gpd.GeoDataFrame], metric_
             ev["upcoming_metro_within_5km"].append({"name": _feature_label(up.loc[idx]), "status": up.loc[idx].get("status"),
                                                     "distance_km": round(float(d[idx]) / 1000, 2)})
 
-    site = gpd.GeoSeries([point.buffer(40)], crs=metric_crs).to_crs("EPSG:4326").iloc[0]
-    site_m = _dem_median(site)
+    site = gpd.GeoSeries([point.buffer(60)], crs=metric_crs).to_crs("EPSG:4326").iloc[0]
+    site_m = _dem_median(site, pct=20)   # ground between buildings, not rooftops
     lake_m = None
-    if nearest is not None:
+    # Only lakes >= 5 acres: small landscaped ponds are dominated by surrounding rooftops in a 30 m model.
+    if nearest is not None and nearest["area_acres"] >= 5:
         lake_geom = gpd.GeoSeries([nearest["_geom"].buffer(-15) or nearest["_geom"]], crs=metric_crs).to_crs("EPSG:4326").iloc[0]
-        lake_m = _dem_median(lake_geom if not lake_geom.is_empty else gpd.GeoSeries([nearest["_geom"]], crs=metric_crs).to_crs("EPSG:4326").iloc[0])
+        lake_m = _dem_median(lake_geom if not lake_geom.is_empty else gpd.GeoSeries([nearest["_geom"]], crs=metric_crs).to_crs("EPSG:4326").iloc[0], pct=10)
     ev["elevation"] = {
         "site_m": site_m, "nearest_lake_surface_m": lake_m,
         "height_above_lake_m": round(site_m - lake_m, 1) if site_m is not None and lake_m is not None else None,
