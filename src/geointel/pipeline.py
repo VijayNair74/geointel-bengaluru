@@ -48,7 +48,8 @@ def discover_projects(processed_dir: Path) -> list[dict[str, Any]]:
                          if isinstance(r.get(k), str) and r.get(k).strip())
         osm_type, osm_id = r.get("osm_type"), r.get("osm_id")
         out.append({"id": _slug(str(r["name"])), "name": str(r["name"]), "builder": r.get("builder"), "address": addr or None,
-                    "lat": round(pt.y, 6), "lon": round(pt.x, 6), "status": None, "facts": None,
+                    "lat": round(pt.y, 6), "lon": round(pt.x, 6),
+                    "status": "Under construction (per OpenStreetMap)" if r.get("landuse") == "construction" else None, "facts": None,
                     "source_url": f"https://www.openstreetmap.org/{osm_type}/{int(osm_id)}" if osm_type and osm_id == osm_id else None,
                     "source": "osm", "search_terms": [str(r.get("builder") or "")]})
     return out

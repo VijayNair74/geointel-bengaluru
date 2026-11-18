@@ -76,7 +76,7 @@ export function Report({ project: p, metroFc, onClose, onShare }) {
         <header className="r-head">
           <div className="eyebrow">LOCATION REPORT</div>
           <h1>{p.name}</h1>
-          <p className="r-addr">{p.builder} · {p.address}</p>
+          <p className="r-addr">{[p.builder, p.address || `${p.lat.toFixed(5)}° N, ${p.lon.toFixed(5)}° E`].filter(Boolean).join(' · ')}</p>
           <div className="r-facts">
             {p.status && <span>{p.status}</span>}
             {p.facts?.total_units && <span>{p.facts.total_units} units</span>}
@@ -137,16 +137,18 @@ export function Report({ project: p, metroFc, onClose, onShare }) {
           <p className="r-note">Flood history is not included yet; it needs official flood-location records.</p>
         </section>
 
-        <section>
+        {(n('road_density_within_1km') != null || n('building_footprint_coverage_within_1km') != null) && <section>
           <h2>Neighbourhood form</h2>
           <table className="r-table"><tbody>
             <Row label="Road density within 1 km" value={n('road_density_within_1km') != null ? `${n('road_density_within_1km').toFixed(1)} km/km²` : '—'} />
             <Row label="Building footprint coverage within 1 km" value={n('building_footprint_coverage_within_1km') != null ? `${n('building_footprint_coverage_within_1km').toFixed(1)}%` : '—'} />
           </tbody></table>
-        </section>
+        </section>}
 
         <footer className="r-foot">
-          <p><strong>Sources.</strong> Map data © OpenStreetMap contributors (ODbL){p._osm ? `, retrieved ${p._osm}` : ''}. Elevation: Copernicus DEM GLO-30. Project facts: the builder’s public listing{p.source_url ? <> (<a href={p.source_url} target="_blank" rel="noreferrer">source</a>)</> : null}.</p>
+          <p><strong>Sources.</strong> Map data © OpenStreetMap contributors (ODbL){p._osm ? `, retrieved ${p._osm}` : ''}. Elevation: Copernicus DEM GLO-30. {p.source === 'osm'
+            ? <>Project name and location: OpenStreetMap{p.source_url ? <> (<a href={p.source_url} target="_blank" rel="noreferrer">map feature</a>)</> : null}; the site point is inside the mapped complex.</>
+            : <>Project facts: the builder’s public listing{p.source_url ? <> (<a href={p.source_url} target="_blank" rel="noreferrer">source</a>)</> : null}.</>}</p>
           <p><strong>Method.</strong> Straight-line distances from the site point. Counts are mapped features. Only operational stations are used for distances.</p>
           <p>Prepared by GeoIntel{updated ? ` · ${updated}` : ''} · blr.geointel.workers.dev · Not affiliated with {p.builder}.</p>
         </footer>

@@ -80,18 +80,29 @@ const projectEntry = (p) => ({ kind: 'project', id: p.id, name: p.name, area: p.
 const pendingProject = (id) => ({ kind: 'project', id, name: 'Loading…', area: '', lon: 77.64, lat: 12.98, pending: true });
 const entryKey = (e) => (e.kind === 'pilot' ? e.name : e.kind === 'project' ? `p:${e.id}` : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`);
 const norm = (t) => (t || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+// Rank: exact/prefix name > name contains > builder or address > curated search terms. Max 6.
 function matchProjects(projects, q) {
   const nq = norm(q); if (nq.length < 3) return [];
-  return projects.filter((p) => {
-    const hay = norm([p.name, p.builder, p.address, ...(p.search_terms || [])].join(' '));
-    return hay.includes(nq) || (p.search_terms || []).some((t) => nq.includes(norm(t))) || nq.includes(norm(p.name));
-  });
+  const scored = projects.map((p) => {
+    const name = norm(p.name), builder = norm(p.builder), addr = norm(p.address);
+    const terms = (p.search_terms || []).map(norm).filter((t) => t.length >= 3);
+    let sc = 0;
+    if (name === nq || nq.includes(name)) sc = 100;
+    else if (name.startsWith(nq)) sc = 80;
+    else if (name.includes(nq)) sc = 60;
+    else if (builder && (builder.includes(nq) || nq.startsWith(builder))) sc = 40;
+    else if (addr && addr.includes(nq)) sc = 30;
+    else if (terms.some((t) => nq.includes(t) || t.includes(nq))) sc = 20;
+    return { p, sc: sc + (p.source === 'curated' && sc ? 5 : 0) };
+  }).filter((x) => x.sc > 0);
+  return scored.sort((a, b) => b.sc - a.sc || a.p.name.localeCompare(b.p.name)).slice(0, 6).map((x) => x.p);
 }
 
 function fmt(row, m) {
   if (!m) return { v: '—', u: '' };
   if (m.status === 'loading') return { v: '…', u: '' };
   if (m.status === 'pilot_only') return { v: 'Pilot only', u: '', muted: true };
+  if (m.status === 'not_computed') return { v: 'Not computed', u: '', muted: true };
   if (m.status !== 'calculated' || m.value == null) return { v: 'No data', u: '', muted: true };
   if (row.unit === 'km') return { v: Number(m.value).toFixed(m.value < 10 ? 2 : 1), u: 'km' };
   if (row.unit === 'km/km²') return { v: Number(m.value).toFixed(1), u: 'km/km²' };
@@ -188,7 +199,7 @@ function App() {
     ev.preventDefault(); const q = query.trim(); if (!q) return;
     const ll = parseLatLon(q); if (ll) { choose(pointEntry(ll[0], ll[1])); return; }
     const pilot = places.find((p) => p.location.toLowerCase() === q.toLowerCase()); if (pilot) { choose(pilotEntry(pilot)); return; }
-    const projHits = matchProjects(projects, q).map((p) => ({ project: p, name: `${p.name} · ${p.builder}`, sub: p.address }));
+    const projHits = matchProjects(projects, q).map((p) => ({ project: p, name: `${p.name} · ${p.builder}`, sub: p.address || coords(p) }));
     setSearching(true); setMsg(''); setResults(projHits.length ? projHits : null);
     try {
       const [w, s, e, n] = aoi;
@@ -273,8 +284,8 @@ function App() {
     const projFc = { type: 'FeatureCollection', features: projects.map((p) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [p.lon, p.lat] }, properties: { id: p.id, name: p.name } })) };
     if (!map.getSource('projects')) {
       map.addSource('projects', { type: 'geojson', data: projFc });
-      map.addLayer({ id: 'project-points', type: 'circle', source: 'projects', paint: { 'circle-radius': 7, 'circle-color': ink, 'circle-stroke-color': pinColor, 'circle-stroke-width': 3 } });
-      if (map.getStyle().glyphs) map.addLayer({ id: 'project-labels', type: 'symbol', source: 'projects', minzoom: 11,
+      map.addLayer({ id: 'project-points', type: 'circle', source: 'projects', paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 3.5, 14, 7], 'circle-color': ink, 'circle-stroke-color': pinColor, 'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 10, 2, 14, 3] } });
+      if (map.getStyle().glyphs) map.addLayer({ id: 'project-labels', type: 'symbol', source: 'projects', minzoom: 13.5,
         layout: { 'text-field': ['get', 'name'], 'text-size': 12, 'text-font': ['Noto Sans Bold'], 'text-offset': [0, 1.3], 'text-anchor': 'top' },
         paint: { 'text-color': theme === 'dark' ? '#EEF2F6' : '#14171A', 'text-halo-color': ink, 'text-halo-width': 1.5 } });
       map.on('mouseenter', 'project-points', () => { map.getCanvas().style.cursor = 'pointer'; });
@@ -361,7 +372,7 @@ function App() {
         <section className="card glass" aria-label="Location summary">
           <div className="eyebrow">{current.kind === 'pilot' ? `PILOT AREA · ${current.area.toUpperCase()}` : current.kind === 'project' ? `PROJECT · ${(current.area || '').toUpperCase()}` : 'SELECTED POINT'}</div>
           <h1>{current.name}</h1>
-          <div className="coords">{currentProject ? currentProject.address : coords(current)}</div>
+          <div className="coords">{currentProject?.address || coords(current)}</div>
           {currentProject && (
             <button type="button" className="btn btn-wide" onClick={() => setReportOpen(true)}><Icon name="info" size={16} />Open location report</button>)}
           <div className="tabs" role="tablist" aria-label="Indicator group">

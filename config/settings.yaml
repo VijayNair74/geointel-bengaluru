@@ -85,7 +85,7 @@ osm_layers:
   # Named residential complexes by known developers (see `developers` below);
   # each becomes a project with its own location report.
   developer_projects:
-    tags: {landuse: [residential], building: [apartments, residential]}
+    tags: {landuse: [residential, construction], building: [apartments, residential]}
     developer_match: true
     fetch_scope: aoi
   # Proposed / under-construction metro stations, shown separately and never
