@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geointel-bengaluru"
+version = "0.3.0"
+description = "Zero-cost Bengaluru geospatial data foundation MVP"
+requires-python = ">=3.11"
+dependencies = [
+  "geopandas>=1.0",
+  "osmnx>=2.0",
+  "pandas>=2.2",
+  "pyyaml>=6.0",
+  "shapely>=2.0",
+]
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+[project.scripts]
+geointel = "geointel.cli:main"
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

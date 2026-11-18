@@ -1,0 +1,74 @@
+sources:
+  - id: osm_geofabrik_or_overpass
+    name: OpenStreetMap features (initial prototype via OSMnx/Overpass)
+    url: https://www.openstreetmap.org/
+    download_url: https://download.geofabrik.de/asia/india.html
+    owner: OpenStreetMap contributors
+    format: Overpass JSON / OSM PBF
+    license: ODbL 1.0
+    attribution: © OpenStreetMap contributors
+    access: Public; Overpass is shared and rate-limited. Geofabrik offers free regional extracts.
+    intended_layers: [schools, healthcare, parks, water, retail, roads, buildings]
+    refresh_target: Monthly for prototype; verify extract timestamp
+    commercial_use_review: Required; comply with ODbL attribution and share-alike where applicable
+    status: prototype-source
+  - id: bda_rmp_2031_opencity
+    name: BDA Revised Master Plan 2031 resources via OpenCity
+    url: https://data.opencity.in/dataset/bda-revised-master-plan-2031
+    owner: Bangalore Development Authority / resource publishers
+    format: PDF/maps; GIS-ready format to be confirmed
+    license: Not confirmed at dataset level
+    attribution: Credit original authority and dataset publisher after verification
+    access: Publicly viewable/downloadable resources; confirm reuse and redistribution rights
+    intended_layers: [existing_land_use, proposed_land_use, planning_districts]
+    refresh_target: On official plan or notification update
+    commercial_use_review: Mandatory before publishing digitized derivatives
+    status: research-needed
+  - id: kgis
+    name: Karnataka GIS / KSRSAC
+    url: https://kgis.ksrsac.in/kgis
+    owner: Government of Karnataka / KSRSAC
+    format: GIS web services / datasets (specific services to be inventoried)
+    license: Service-specific terms to be confirmed
+    attribution: As specified by provider
+    access: Investigate public services and formal access process
+    intended_layers: [administrative_boundaries, thematic_layers, infrastructure]
+    refresh_target: Provider-dependent
+    commercial_use_review: Mandatory
+    status: research-needed
+  - id: bbmp_geptis
+    name: BBMP GEPTIS
+    url: https://site.bbmp.gov.in/departmentwebsites/BBMPIT/geptis.html
+    owner: BBMP / relevant successor municipal authority
+    format: Web GIS / property mapping; export/API access unconfirmed
+    license: Not confirmed
+    attribution: As specified by authority
+    access: Public-facing information does not imply bulk export or reuse permission
+    intended_layers: [property_reference, municipal_property_mapping]
+    refresh_target: Provider-dependent
+    commercial_use_review: Formal written permission required before reuse
+    status: research-needed
+  - id: bhuvan
+    name: ISRO NRSC Bhuvan
+    url: https://bhuvan.nrsc.gov.in/
+    owner: NRSC / ISRO
+    format: WMS/WFS/downloads depending on layer
+    license: Service-specific terms to be confirmed
+    attribution: As specified by NRSC
+    access: Public portal and services; inspect each layer's terms
+    intended_layers: [satellite, land_cover, thematic_layers]
+    refresh_target: Layer-dependent
+    commercial_use_review: Mandatory
+    status: research-needed
+  - id: copernicus_sentinel2
+    name: Copernicus Sentinel-2
+    url: https://dataspace.copernicus.eu/
+    owner: European Union / Copernicus programme
+    format: Satellite imagery and derived products
+    license: Copernicus data terms; retain required attribution
+    attribution: Copernicus Sentinel data; exact product attribution to be recorded
+    access: Free data access subject to terms and account/service requirements
+    intended_layers: [vegetation, built_up_change, land_cover]
+    refresh_target: Seasonal or annual composite
+    commercial_use_review: Review current data terms and product-specific conditions
+    status: phase-2

@@ -1,0 +1,43 @@
+project:
+  name: GeoIntel
+  city: Bengaluru
+  country: India
+  default_crs: EPSG:4326
+  metric_crs: EPSG:32643
+  version: 0.3.0
+# Approximate demo bounding box only; NOT an official Bengaluru metropolitan boundary.
+aoi:
+  west: 77.35
+  south: 12.75
+  east: 77.85
+  north: 13.25
+acquisition:
+  overpass_url: https://overpass-api.de/api/interpreter
+  request_timeout_seconds: 240
+  pause_between_requests_seconds: 10
+  user_agent: GeoIntelBengaluruMVP/0.3 (local research/demo; configure a contact address before public release)
+outputs:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  manifest: data/processed/source_manifest.json
+demo_locations:
+  - [Whitefield, 12.9698, 77.7500]
+  - [Hebbal, 13.0358, 77.5970]
+  - [Sarjapur, 12.9081, 77.6950]
+  - [Electronic City, 12.8399, 77.6770]
+  - [Devanahalli, 13.2470, 77.7130]
+osm_layers:
+  schools:
+    tags: {amenity: [school, college, university, kindergarten]}
+  healthcare:
+    tags: {amenity: [hospital, clinic, doctors, health_centre]}
+  parks:
+    tags: {leisure: [park, garden, playground]}
+  water:
+    tags: {natural: [water], water: [lake, pond, reservoir], landuse: [reservoir]}
+  retail:
+    tags: {shop: [supermarket, mall, department_store, convenience]}
+  roads:
+    tags: {highway: [motorway, trunk, primary, secondary, tertiary, residential, unclassified, service]}
+  buildings:
+    tags: {building: true}
