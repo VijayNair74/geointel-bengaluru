@@ -6,6 +6,7 @@ import './style.css';
 import { computeMetrics } from './geo.js';
 import { Icon } from './icons.jsx';
 import { Report } from './report.jsx';
+import { Strategy } from './strategy.jsx';
 
 /* ---------- static config ---------- */
 const places = [
@@ -23,6 +24,7 @@ const sections = [
     { key: 'nearest_metro_station_km', label: 'Metro station', icon: 'metro', unit: 'km', better: 'min' },
     { key: 'nearest_rail_station_km', label: 'Railway station', icon: 'train', unit: 'km', better: 'min' },
     { key: 'nearest_highway_km', label: 'Highway', icon: 'road', unit: 'km', better: 'min' },
+    { key: 'nearest_tech_park_km', label: 'Tech park', icon: 'build', unit: 'km', better: 'min' },
   ] },
   { id: 'near', title: 'Nearby', rows: [
     { key: 'schools_within_1km', label: 'Schools & colleges', short: 'Schools · 1 km', icon: 'school', unit: 'within 1 km', alt: ['schools_within_3km', 'within 3 km'], better: 'max' },
@@ -47,6 +49,7 @@ const layerDefs = [
   { id: 'metro_upcoming', label: 'Upcoming metro', color: { light: '#B79AF0', dark: '#7D63B8' }, radius: 4.5 },
   { id: 'highways', label: 'Highways', color: { light: '#D49A12', dark: '#E2B04A' }, width: 2.4 },
   { id: 'airports', label: 'Airports', color: { light: '#334155', dark: '#E2E8F0' } },
+  { id: 'employment_hubs', label: 'Tech parks', color: { light: '#0F766E', dark: '#5EEAD4' } },
   { id: 'schools', label: 'Education', color: { light: '#C98A12', dark: '#E9C46A' } },
   { id: 'healthcare', label: 'Healthcare', color: { light: '#D23F6E', dark: '#F07AA0' } },
   { id: 'parks', label: 'Parks', color: { light: '#24915E', dark: '#5FCB9A' } },
@@ -122,11 +125,12 @@ function readUrl() {
   const current = u.get('project') ? pendingProject(u.get('project'))
     : Number.isFinite(lat) && Number.isFinite(lon) ? pointEntry(lon, lat, u.get('label') || '')
     : pilotEntry(places.find((x) => x.location === u.get('place')) || places[0]);
-  return { mode: u.get('mode') === 'compare' && compare.length ? 'compare' : 'explore', current, compare, report: u.get('report') === '1' };
+  const view = u.get('view') === 'strategy' ? 'strategy' : (u.get('view') === 'report' || u.get('report') === '1') ? 'report' : null;
+  return { mode: u.get('mode') === 'compare' && compare.length ? 'compare' : 'explore', current, compare, view };
 }
-function writeUrl(mode, current, compare, report) {
+function writeUrl(mode, current, compare, view) {
   const u = new URLSearchParams();
-  if (current.kind === 'project') { u.set('project', current.id); if (report) u.set('report', '1'); }
+  if (current.kind === 'project') { u.set('project', current.id); if (view) u.set('view', view); }
   else if (current.kind === 'pilot') u.set('place', current.name);
   else { u.set('lat', current.lat.toFixed(5)); u.set('lon', current.lon.toFixed(5)); if (current.name !== 'Selected point') u.set('label', current.name); }
   if (compare.length) u.set('c', compare.map((e) => (e.kind === 'pilot' ? e.name : e.kind === 'project' ? `p:${e.id}` : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`)).join('|'));
@@ -143,7 +147,7 @@ function App() {
   const [compare, setCompare] = useState(init.compare);
   const [tab, setTab] = useState('move');
   const [projects, setProjects] = useState([]), [projMeta, setProjMeta] = useState({});
-  const [reportOpen, setReportOpen] = useState(init.report);
+  const [overlay, setOverlay] = useState(init.view); // 'report' | 'strategy' | null
   const [pilotData, setPilotData] = useState(null), [status, setStatus] = useState(null);
   const [available, setAvailable] = useState({}), [enabled, setEnabled] = useState(DEFAULT_LAYERS);
   const [query, setQuery] = useState(''), [results, setResults] = useState(null), [searching, setSearching] = useState(false), [msg, setMsg] = useState('');
@@ -177,7 +181,7 @@ function App() {
     layerDefs.filter((l) => !LAZY.includes(l.id)).forEach((l) => loadLayer(l.id));
   }, []);
   useEffect(() => { enabled.filter((id) => LAZY.includes(id)).forEach(loadLayer); }, [enabled]);
-  useEffect(() => { if (!current.pending) writeUrl(mode, current, compare, reportOpen); }, [mode, current, compare, reportOpen]);
+  useEffect(() => { if (!current.pending) writeUrl(mode, current, compare, overlay); }, [mode, current, compare, overlay]);
   useEffect(() => { document.documentElement.dataset.theme = theme; store.set('geointel-theme', theme); }, [theme]);
   useEffect(() => { if (!toast) return undefined; const t = setTimeout(() => setToast(''), 2200); return () => clearTimeout(t); }, [toast]);
 
@@ -192,7 +196,7 @@ function App() {
     if (e0.projectPick) { const p = projects.find((x) => x.id === e0.id); if (!p) return; e = projectEntry(p); }
     if (!inAoi([e.lon, e.lat], aoi)) { setMsg('That point is outside the covered Bengaluru area.'); return; }
     setMsg(''); setResults(null);
-    if (mode === 'compare') addToCompare(e); else { setCurrent(e); setReportOpen(false); }
+    if (mode === 'compare') addToCompare(e); else { setCurrent(e); setOverlay(null); }
   };
   const chooseRef = useRef(choose); chooseRef.current = choose;
   const search = async (ev) => {
@@ -377,7 +381,10 @@ function App() {
           <h1>{current.name}</h1>
           <div className="coords">{currentProject?.address || coords(current)}</div>
           {currentProject && (
-            <button type="button" className="btn btn-wide" onClick={() => setReportOpen(true)}><Icon name="info" size={16} />Open location report</button>)}
+            <div className="card-actions">
+              <button type="button" className="btn" onClick={() => setOverlay('strategy')}><Icon name="compare" size={16} />Market strategy</button>
+              <button type="button" className="btn-ghost" onClick={() => setOverlay('report')}><Icon name="info" size={16} />Location report</button>
+            </div>)}
           <div className="tabs" role="tablist" aria-label="Indicator group">
             {sections.map((s) => <button type="button" role="tab" key={s.id} aria-selected={tab === s.id} onClick={() => setTab(s.id)}>{s.title}</button>)}
           </div>
@@ -459,9 +466,12 @@ function App() {
         {status?.generated_at_utc ? ` · Updated ${new Date(status.generated_at_utc).toLocaleDateString()}` : ''}
       </div>
       {toast && <div className="toast glass" role="status">{toast}</div>}
-      {reportOpen && currentProject && (
+      {overlay === 'report' && currentProject && (
         <Report project={{ ...currentProject, _generated: projMeta.generated, _osm: projMeta.osm }} metroFc={available.metro_stations}
-          onClose={() => setReportOpen(false)} onShare={share} />)}
+          onClose={() => setOverlay(null)} onShare={share} />)}
+      {overlay === 'strategy' && currentProject && (
+        <Strategy project={currentProject} projects={projects} onClose={() => setOverlay(null)} onShare={share}
+          onOpenReport={() => setOverlay('report')} />)}
     </div>
   );
 }

@@ -216,3 +216,35 @@ td.is-best .num { color: var(--best); }
   .report-page { margin: 0; padding: 0; box-shadow: none; max-width: none; }
   .r-hl, .report section { break-inside: avoid; }
 }
+
+/* project card actions */
+.card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+.card-actions .btn, .card-actions .btn-ghost { height: 42px; justify-content: center; display: inline-flex; align-items: center; gap: 7px; }
+
+/* market strategy brief */
+.s-lede { margin: 22px 0 0; padding: 16px 18px; border-radius: 14px; background: #EAF5F1; color: #12382F; font-size: 15.5px; line-height: 1.55; }
+.s-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.s-card { padding: 16px; border-radius: 16px; border: 1px solid rgba(17, 24, 39, .09); }
+.s-card.good { border-color: rgba(31, 122, 99, .35); background: #F6FBF9; }
+.s-card-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.s-card-title { font: 600 16px 'Space Grotesk', sans-serif; margin-top: 10px; }
+.s-card p { margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: #2B333C; }
+.s-badge { padding: 3px 8px; border-radius: 999px; background: #1F7A63; color: #fff; font-size: 11.5px; font-weight: 700; }
+.s-local { font-size: 12px; color: #5A6470; }
+.s-list { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; }
+.s-list li { margin-bottom: 8px; }
+.s-personas { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px 22px; }
+.s-persona-head { display: flex; justify-content: space-between; font-weight: 600; font-size: 14px; }
+.s-score { font: 600 16px 'Space Grotesk', sans-serif; color: #1F7A63; }
+.s-bar { height: 8px; border-radius: 4px; background: #ECEEEA; margin: 6px 0 4px; overflow: hidden; }
+.s-bar > div { height: 100%; border-radius: 4px; background: #1F7A63; }
+.s-table thead th { position: static; background: none; font-size: 12px; color: #5A6470; font-weight: 600; padding: 8px 12px 8px 0; border-bottom: 1px solid rgba(17, 24, 39, .12); border-top: 0; width: auto; }
+.s-table td { padding: 10px 12px 10px 0; font-size: 13.5px; }
+.s-table tr.is-self td { background: #F2F8F5; font-weight: 600; }
+.s-table td.s-best { color: #1F7A63; font-weight: 700; }
+.s-pill { display: inline-block; padding: 2px 8px; border-radius: 999px; background: #F0F1EE; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.s-pill.good { background: #DDF1E9; color: #155A48; }
+.s-pill.weak { background: #FBE9E2; color: #8A3416; }
+.s-wrap { overflow-x: auto; }
+.s-wrap table { min-width: 640px; }
+@media print { .s-card, .s-persona { break-inside: avoid; } }
