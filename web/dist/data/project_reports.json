@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-18T22:19:42.319560+00:00",
+  "generated_at_utc": "2026-11-18T22:26:14.779726+00:00",
   "osm_retrieved": "2026-11-18",
   "projects": [
     {
@@ -2824,8 +2824,8 @@
       }
     },
     {
-      "id": "embassy-origins-u-c",
-      "name": "Embassy Origins (u/c)",
+      "id": "embassy-origins",
+      "name": "Embassy Origins",
       "builder": "Embassy Group",
       "address": null,
       "lat": 13.185596,
@@ -3151,8 +3151,8 @@
       }
     },
     {
-      "id": "godrej-msr-city-u-c",
-      "name": "Godrej MSR City (u/c)",
+      "id": "godrej-msr-city",
+      "name": "Godrej MSR City",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 13.19884,
@@ -3309,8 +3309,8 @@
       }
     },
     {
-      "id": "tata-varnam-u-c",
-      "name": "Tata Varnam (u/c)",
+      "id": "tata-varnam",
+      "name": "Tata Varnam",
       "builder": "Tata Housing",
       "address": null,
       "lat": 13.190065,
@@ -3467,8 +3467,8 @@
       }
     },
     {
-      "id": "brigade-kiadb-u-c",
-      "name": "Brigade KIADB (u/c)",
+      "id": "brigade-kiadb",
+      "name": "Brigade KIADB",
       "builder": "Brigade Group",
       "address": null,
       "lat": 13.22051,
@@ -3783,8 +3783,8 @@
       }
     },
     {
-      "id": "embassy-east-business-park-u-c",
-      "name": "Embassy East Business Park (u/c)",
+      "id": "embassy-east-business-park",
+      "name": "Embassy East Business Park",
       "builder": "Embassy Group",
       "address": null,
       "lat": 12.991792,
@@ -3967,8 +3967,8 @@
       }
     },
     {
-      "id": "prestige-park-grove-u-c",
-      "name": "Prestige Park Grove (u/c)",
+      "id": "prestige-park-grove",
+      "name": "Prestige Park Grove",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.016041,
@@ -4463,8 +4463,8 @@
       }
     },
     {
-      "id": "prestige-raintree-park-u-c",
-      "name": "Prestige Raintree Park (u/c)",
+      "id": "prestige-raintree-park",
+      "name": "Prestige Raintree Park",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.95429,
@@ -6504,8 +6504,8 @@
       }
     },
     {
-      "id": "prestige-gardenia-estate-u-c",
-      "name": "Prestige Gardenia Estate (u/c)",
+      "id": "prestige-gardenia-estate",
+      "name": "Prestige Gardenia Estate",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.281532,
@@ -6836,187 +6836,8 @@
       }
     },
     {
-      "id": "sobha-u-c",
-      "name": "Sobha (u/c)",
-      "builder": "Sobha",
-      "address": null,
-      "lat": 13.084787,
-      "lon": 77.663608,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1315642995",
-      "search_terms": [
-        "Sobha"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 8,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 38,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 22,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 5,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 54,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.195,
-          "unit": "km",
-          "nearest_feature": "Chikka Gubbi Kere",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 13.476,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 9.52,
-          "unit": "km",
-          "nearest_feature": "Krishnarajapura",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 8.074,
-          "unit": "km",
-          "nearest_feature": "Channasandra",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 6.502,
-          "unit": "km",
-          "nearest_feature": "Nagawara Flyover",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Chikka Gubbi Kere",
-            "distance_m": 195,
-            "area_acres": 6.5
-          },
-          {
-            "name": "Dodda Gubbi Kere",
-            "distance_m": 851,
-            "area_acres": 95.2
-          },
-          {
-            "name": "Kannuru Lake",
-            "distance_m": 1883,
-            "area_acres": 47.2
-          },
-          {
-            "name": "Yerappanahalli Lake",
-            "distance_m": 1956,
-            "area_acres": 10.2
-          }
-        ],
-        "water_bodies_within_2km": 9,
-        "nearest_lake": {
-          "name": "Chikka Gubbi Kere",
-          "distance_m": 195,
-          "area_acres": 6.5
-        },
-        "nearest_drain": {
-          "name": "BD417",
-          "type": "stream",
-          "distance_m": 269
-        },
-        "drains_within_500m": 7,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 889.6,
-          "nearest_lake_surface_m": 884.6,
-          "height_above_lake_m": 5.0,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "sattva-city-u-c",
-      "name": "Sattva City (u/c)",
+      "id": "sattva-city",
+      "name": "Sattva City",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.18478,
@@ -8898,8 +8719,8 @@
       }
     },
     {
-      "id": "tata-raagam-u-c",
-      "name": "Tata Raagam (u/c)",
+      "id": "tata-raagam",
+      "name": "Tata Raagam",
       "builder": "Tata Housing",
       "address": null,
       "lat": 13.196101,
@@ -9056,8 +8877,8 @@
       }
     },
     {
-      "id": "brigade-granada-u-c",
-      "name": "Brigade Granada (u/c)",
+      "id": "brigade-granada",
+      "name": "Brigade Granada",
       "builder": "Brigade Group",
       "address": null,
       "lat": 13.04662,
@@ -9245,8 +9066,8 @@
       }
     },
     {
-      "id": "mana-skanda-the-right-life-u-c",
-      "name": "Mana Skanda The Right Life (u/c)",
+      "id": "mana-skanda-the-right-life",
+      "name": "Mana Skanda The Right Life",
       "builder": "Mana Projects",
       "address": null,
       "lat": 12.897156,
@@ -10013,8 +9834,8 @@
       }
     },
     {
-      "id": "sattva-taj-resort-u-c",
-      "name": "Sattva Taj Resort (u/c)",
+      "id": "sattva-taj-resort",
+      "name": "Sattva Taj Resort",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.178405,
@@ -10529,180 +10350,6 @@
       }
     },
     {
-      "id": "adarsh-u-c",
-      "name": "Adarsh (u/c)",
-      "builder": "Adarsh Developers",
-      "address": null,
-      "lat": 12.875535,
-      "lon": 77.702445,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1312131989",
-      "search_terms": [
-        "Adarsh Developers"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 26,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 46,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 7,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 58,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.737,
-          "unit": "km",
-          "nearest_feature": "Gattahalli Lake",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 35.799,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 4.68,
-          "unit": "km",
-          "nearest_feature": "Infosys Foundation Konappana Agrahara",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 1.939,
-          "unit": "km",
-          "nearest_feature": "Huskuru",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 4.58,
-          "unit": "km",
-          "nearest_feature": "Hosur Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Gattahalli Lake",
-            "distance_m": 737,
-            "area_acres": 63.4
-          },
-          {
-            "name": "Huskur Lake",
-            "distance_m": 1257,
-            "area_acres": 92.6
-          },
-          {
-            "name": "Hadosiddapura Lake",
-            "distance_m": 1524,
-            "area_acres": 15.0
-          }
-        ],
-        "water_bodies_within_2km": 9,
-        "nearest_lake": {
-          "name": "Gattahalli Lake",
-          "distance_m": 737,
-          "area_acres": 63.4
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "stream",
-          "distance_m": 743
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 895.4,
-          "nearest_lake_surface_m": 892.5,
-          "height_above_lake_m": 2.9,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
       "id": "prestige-oasis",
       "name": "Prestige Oasis",
       "builder": "Prestige Group",
@@ -10877,8 +10524,8 @@
       }
     },
     {
-      "id": "prestige-southern-star-u-c",
-      "name": "Prestige Southern Star (u/c)",
+      "id": "prestige-southern-star",
+      "name": "Prestige Southern Star",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.875231,
@@ -11593,206 +11240,6 @@
       }
     },
     {
-      "id": "snn-u-c",
-      "name": "SNN (u/c)",
-      "builder": "SNN Raj Corp",
-      "address": null,
-      "lat": 12.88842,
-      "lon": 77.664874,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1069600850",
-      "search_terms": [
-        "SNN Raj Corp"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 5,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 51,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 149,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 16,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 115,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 10,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.176,
-          "unit": "km",
-          "nearest_feature": "Hosakere",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 34.67,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 2.332,
-          "unit": "km",
-          "nearest_feature": "Singasandra",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 4.919,
-          "unit": "km",
-          "nearest_feature": "Carmelaram",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 2.259,
-          "unit": "km",
-          "nearest_feature": "Hosur Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Hosakere",
-            "distance_m": 176,
-            "area_acres": 31.8
-          },
-          {
-            "name": "Haralur Lake",
-            "distance_m": 711,
-            "area_acres": 19.7
-          },
-          {
-            "name": "Parappana Agrahara Lake",
-            "distance_m": 991,
-            "area_acres": 10.6
-          },
-          {
-            "name": "Kudlu Lake/Kere",
-            "distance_m": 998,
-            "area_acres": 7.9
-          },
-          {
-            "name": "Choodasandra Lake",
-            "distance_m": 1333,
-            "area_acres": 17.2
-          },
-          {
-            "name": "Kasavanahalli Lake",
-            "distance_m": 1551,
-            "area_acres": 31.4
-          }
-        ],
-        "water_bodies_within_2km": 12,
-        "nearest_lake": {
-          "name": "Hosakere",
-          "distance_m": 176,
-          "area_acres": 31.8
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "stream",
-          "distance_m": 81
-        },
-        "drains_within_500m": 7,
-        "upcoming_metro_within_5km": [
-          {
-            "name": "Agara Lake",
-            "status": "proposed",
-            "distance_km": 4.21
-          },
-          {
-            "name": "HSR Layout",
-            "status": "under construction",
-            "distance_km": 4.58
-          }
-        ],
-        "elevation": {
-          "site_m": 891.8,
-          "nearest_lake_surface_m": 895.5,
-          "height_above_lake_m": -3.7,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
       "id": "salarpuria-sattva-serene-life",
       "name": "Salarpuria Sattva Serene Life",
       "builder": "Salarpuria Sattva",
@@ -12468,8 +11915,8 @@
       }
     },
     {
-      "id": "godrej-woodscapes-u-c",
-      "name": "Godrej Woodscapes (u/c)",
+      "id": "godrej-woodscapes",
+      "name": "Godrej Woodscapes",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 13.049384,
@@ -13071,8 +12518,8 @@
       }
     },
     {
-      "id": "sobha-neopolis-u-c",
-      "name": "Sobha Neopolis (u/c)",
+      "id": "sobha-neopolis",
+      "name": "Sobha Neopolis",
       "builder": "Sobha",
       "address": null,
       "lat": 12.932434,
@@ -13454,164 +12901,6 @@
           "site_m": 883.2,
           "nearest_lake_surface_m": 876.5,
           "height_above_lake_m": 6.7,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "purva-u-c",
-      "name": "Purva (u/c)",
-      "builder": "Puravankara",
-      "address": null,
-      "lat": 12.75622,
-      "lon": 77.77312,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1537458398",
-      "search_terms": [
-        "Puravankara"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 13,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.973,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 49.53,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 11.565,
-          "unit": "km",
-          "nearest_feature": "Delta Electronics Bommasandra",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 9.239,
-          "unit": "km",
-          "nearest_feature": "Heelalige",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 2.135,
-          "unit": "km",
-          "nearest_feature": "Hosur Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [],
-        "water_bodies_within_2km": 3,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 973,
-          "area_acres": 8.2
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 3213
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 893.1,
-          "nearest_lake_surface_m": 881.5,
-          "height_above_lake_m": 11.6,
           "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
           "status": "calculated"
         }
@@ -14171,8 +13460,8 @@
       }
     },
     {
-      "id": "sobha-crystal-meadows-u-c",
-      "name": "Sobha Crystal Meadows (u/c)",
+      "id": "sobha-crystal-meadows",
+      "name": "Sobha Crystal Meadows",
       "builder": "Sobha",
       "address": null,
       "lat": 12.906485,
@@ -14524,8 +13813,8 @@
       }
     },
     {
-      "id": "provident-sunworth-phase-3-u-c",
-      "name": "Provident Sunworth Phase 3 (u/c)",
+      "id": "provident-sunworth-phase-3",
+      "name": "Provident Sunworth Phase 3",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.885684,
@@ -15271,8 +14560,8 @@
       }
     },
     {
-      "id": "tata-intellion-u-c",
-      "name": "Tata Intellion (u/c)",
+      "id": "tata-intellion",
+      "name": "Tata Intellion",
       "builder": "Tata Housing",
       "address": "Whitefield Road, Karthik Nagar, Bengaluru, 560048",
       "lat": 12.976687,
@@ -15475,211 +14764,6 @@
           "site_m": 909.8,
           "nearest_lake_surface_m": 890.8,
           "height_above_lake_m": 19.0,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "assetz-u-c",
-      "name": "Assetz (u/c)",
-      "builder": "Assetz",
-      "address": null,
-      "lat": 12.885264,
-      "lon": 77.662007,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1309995228",
-      "search_terms": [
-        "Assetz"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 5,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 65,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 151,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 12,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 95,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 9,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.169,
-          "unit": "km",
-          "nearest_feature": "Hosakere",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 35.059,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 1.913,
-          "unit": "km",
-          "nearest_feature": "Hosa Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 5.353,
-          "unit": "km",
-          "nearest_feature": "Carmelaram",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 1.794,
-          "unit": "km",
-          "nearest_feature": "Hosur Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Hosakere",
-            "distance_m": 169,
-            "area_acres": 31.8
-          },
-          {
-            "name": "Parappana Agrahara Lake",
-            "distance_m": 544,
-            "area_acres": 10.6
-          },
-          {
-            "name": "Kudlu Lake/Kere",
-            "distance_m": 888,
-            "area_acres": 7.9
-          },
-          {
-            "name": "Haralur Lake",
-            "distance_m": 1037,
-            "area_acres": 19.7
-          },
-          {
-            "name": "Choodasandra Lake",
-            "distance_m": 1637,
-            "area_acres": 17.2
-          },
-          {
-            "name": "Singasandra Lake",
-            "distance_m": 1762,
-            "area_acres": 5.0
-          },
-          {
-            "name": "Kasavanahalli Lake",
-            "distance_m": 1973,
-            "area_acres": 31.4
-          }
-        ],
-        "water_bodies_within_2km": 14,
-        "nearest_lake": {
-          "name": "Hosakere",
-          "distance_m": 169,
-          "area_acres": 31.8
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "stream",
-          "distance_m": 263
-        },
-        "drains_within_500m": 5,
-        "upcoming_metro_within_5km": [
-          {
-            "name": "Agara Lake",
-            "status": "proposed",
-            "distance_km": 4.36
-          },
-          {
-            "name": "HSR Layout",
-            "status": "under construction",
-            "distance_km": 4.61
-          }
-        ],
-        "elevation": {
-          "site_m": 900.7,
-          "nearest_lake_surface_m": 895.5,
-          "height_above_lake_m": 5.2,
           "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
           "status": "calculated"
         }
@@ -16065,8 +15149,8 @@
       }
     },
     {
-      "id": "prestige-lakeshore-drive-phase-2-u-c",
-      "name": "Prestige Lakeshore Drive Phase 2 (u/c)",
+      "id": "prestige-lakeshore-drive-phase-2",
+      "name": "Prestige Lakeshore Drive Phase 2",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.936369,
@@ -16792,8 +15876,8 @@
       }
     },
     {
-      "id": "adarsh-greens-u-c",
-      "name": "Adarsh Greens (u/c)",
+      "id": "adarsh-greens",
+      "name": "Adarsh Greens",
       "builder": "Adarsh Developers",
       "address": null,
       "lat": 13.096103,
@@ -17134,8 +16218,8 @@
       }
     },
     {
-      "id": "brigade-aero-park-u-c",
-      "name": "Brigade Aero Park (u/c)",
+      "id": "brigade-aero-park",
+      "name": "Brigade Aero Park",
       "builder": "Brigade Group",
       "address": "Bengaluru",
       "lat": 13.168425,
@@ -18013,8 +17097,8 @@
       }
     },
     {
-      "id": "brigade-valencia-u-c",
-      "name": "Brigade Valencia (u/c)",
+      "id": "brigade-valencia",
+      "name": "Brigade Valencia",
       "builder": "Brigade Group",
       "address": null,
       "lat": 12.803042,
@@ -18182,8 +17266,8 @@
       }
     },
     {
-      "id": "provident-botanico-u-c",
-      "name": "Provident Botanico (u/c)",
+      "id": "provident-botanico",
+      "name": "Provident Botanico",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.990603,
@@ -19096,8 +18180,8 @@
       }
     },
     {
-      "id": "adarsh-urbanite-u-c",
-      "name": "Adarsh Urbanite (u/c)",
+      "id": "adarsh-urbanite",
+      "name": "Adarsh Urbanite",
       "builder": "Adarsh Developers",
       "address": null,
       "lat": 12.940443,
@@ -19624,195 +18708,6 @@
       }
     },
     {
-      "id": "total-environment-u-c",
-      "name": "Total Environment (u/c)",
-      "builder": "Total Environment",
-      "address": null,
-      "lat": 12.882798,
-      "lon": 77.746623,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1312777200",
-      "search_terms": [
-        "Total Environment"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 6,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 25,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 3,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 14,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 8,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 5,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.662,
-          "unit": "km",
-          "nearest_feature": "Dommasandra Lake",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 35.257,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 8.94,
-          "unit": "km",
-          "nearest_feature": "Huskur Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 4.676,
-          "unit": "km",
-          "nearest_feature": "Huskuru",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 5.761,
-          "unit": "km",
-          "nearest_feature": "Dabaspete - Hosur Highway",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Dommasandra Lake",
-            "distance_m": 662,
-            "area_acres": 29.3
-          },
-          {
-            "name": "Yamare Lake",
-            "distance_m": 1304,
-            "area_acres": 18.8
-          },
-          {
-            "name": "Sulikunte Chikka Kere",
-            "distance_m": 1445,
-            "area_acres": 1.1
-          },
-          {
-            "name": "Thiagalara Chowdenahalli Lake",
-            "distance_m": 1574,
-            "area_acres": 21.7
-          },
-          {
-            "name": "Sulakunte Lake",
-            "distance_m": 1653,
-            "area_acres": 17.0
-          },
-          {
-            "name": "Hagondahalli Lake",
-            "distance_m": 1826,
-            "area_acres": 5.3
-          }
-        ],
-        "water_bodies_within_2km": 10,
-        "nearest_lake": {
-          "name": "Dommasandra Lake",
-          "distance_m": 662,
-          "area_acres": 29.3
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 414
-        },
-        "drains_within_500m": 1,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 905.0,
-          "nearest_lake_surface_m": 892.0,
-          "height_above_lake_m": 13.0,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
       "id": "assetz-marq",
       "name": "Assetz Marq",
       "builder": "Assetz",
@@ -20325,8 +19220,8 @@
       }
     },
     {
-      "id": "prestige-tech-zone-u-c",
-      "name": "Prestige Tech Zone (u/c)",
+      "id": "prestige-tech-zone",
+      "name": "Prestige Tech Zone",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.970763,
@@ -20524,8 +19419,8 @@
       }
     },
     {
-      "id": "assetz-codename-twin-lake-city-u-c",
-      "name": "Assetz Codename Twin Lake City (u/c)",
+      "id": "assetz-codename-twin-lake-city",
+      "name": "Assetz Codename Twin Lake City",
       "builder": "Assetz",
       "address": null,
       "lat": 13.047584,
@@ -20693,8 +19588,8 @@
       }
     },
     {
-      "id": "sumadhura-edition-u-c",
-      "name": "Sumadhura Edition (u/c)",
+      "id": "sumadhura-edition",
+      "name": "Sumadhura Edition",
       "builder": "Sumadhura",
       "address": null,
       "lat": 12.961837,
@@ -21066,164 +19961,6 @@
           "site_m": 889.2,
           "nearest_lake_surface_m": 889.4,
           "height_above_lake_m": -0.2,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "godrej-u-c",
-      "name": "Godrej (u/c)",
-      "builder": "Godrej Properties",
-      "address": null,
-      "lat": 12.97096,
-      "lon": 77.797856,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1557320721",
-      "search_terms": [
-        "Godrej Properties"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 5,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 3,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.179,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 27.094,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 5.105,
-          "unit": "km",
-          "nearest_feature": "Hopefarm Channasandra",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 3.956,
-          "unit": "km",
-          "nearest_feature": "Devangonthi",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 0.971,
-          "unit": "km",
-          "nearest_feature": "Dabaspete - Hosur Highway",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [],
-        "water_bodies_within_2km": 34,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 179,
-          "area_acres": 0.0
-        },
-        "nearest_drain": {
-          "name": "Dakshina Pinakini",
-          "type": "river",
-          "distance_m": 1193
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 874.0,
-          "nearest_lake_surface_m": 871.4,
-          "height_above_lake_m": 2.6,
           "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
           "status": "calculated"
         }
@@ -21727,8 +20464,8 @@
       }
     },
     {
-      "id": "prestige-holland-battersea-u-c",
-      "name": "Prestige Holland & Battersea (u/c)",
+      "id": "prestige-holland-battersea",
+      "name": "Prestige Holland & Battersea",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.211275,
@@ -22037,185 +20774,6 @@
           "site_m": 894.7,
           "nearest_lake_surface_m": 894.5,
           "height_above_lake_m": 0.2,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "century-u-c",
-      "name": "Century (u/c)",
-      "builder": "Century Real Estate",
-      "address": null,
-      "lat": 13.128258,
-      "lon": 77.601783,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1182392500",
-      "search_terms": [
-        "Century Real Estate"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 45,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 109,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 10,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 43,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.674,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 13.828,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 12.849,
-          "unit": "km",
-          "nearest_feature": "Goraguntepalya",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 2.788,
-          "unit": "km",
-          "nearest_feature": "Yelahanka Junction",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 1.176,
-          "unit": "km",
-          "nearest_feature": "Bellary Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Yelahanka Lake",
-            "distance_m": 1489,
-            "area_acres": 237.6
-          },
-          {
-            "name": "Gantiganahalli Kere",
-            "distance_m": 1627,
-            "area_acres": 49.0
-          },
-          {
-            "name": "Palanahalli Lake",
-            "distance_m": 1929,
-            "area_acres": 18.1
-          },
-          {
-            "name": "Hunasemaranahalli Lake",
-            "distance_m": 1946,
-            "area_acres": 21.0
-          }
-        ],
-        "water_bodies_within_2km": 15,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 674,
-          "area_acres": 0.3
-        },
-        "nearest_drain": {
-          "name": "BP141",
-          "type": "stream",
-          "distance_m": 680
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 912.6,
-          "nearest_lake_surface_m": 905.4,
-          "height_above_lake_m": 7.2,
           "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
           "status": "calculated"
         }
@@ -22595,231 +21153,6 @@
           "site_m": 896.9,
           "nearest_lake_surface_m": 890.8,
           "height_above_lake_m": 6.1,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "sattva-u-c",
-      "name": "Sattva (u/c)",
-      "builder": "Salarpuria Sattva",
-      "address": null,
-      "lat": 12.919322,
-      "lon": 77.497186,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/736950243",
-      "search_terms": [
-        "Salarpuria Sattva"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 16,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 58,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 53,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 18,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 81,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 4,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.147,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 38.415,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 0.564,
-          "unit": "km",
-          "nearest_feature": "Pattanagere",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 1.47,
-          "unit": "km",
-          "nearest_feature": "Kengeri",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 0.392,
-          "unit": "km",
-          "nearest_feature": "Mysore Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Vrishabhavati",
-            "distance_m": 148,
-            "area_acres": 84.8
-          },
-          {
-            "name": "Kengeri Lake",
-            "distance_m": 763,
-            "area_acres": 22.3
-          },
-          {
-            "name": "Dubasi Palya Kere",
-            "distance_m": 1108,
-            "area_acres": 10.1
-          },
-          {
-            "name": "Mylasandra Tank",
-            "distance_m": 1194,
-            "area_acres": 7.8
-          },
-          {
-            "name": "Sunkalpalya Lake",
-            "distance_m": 1294,
-            "area_acres": 12.7
-          },
-          {
-            "name": "Kenchanahalli Lake",
-            "distance_m": 1364,
-            "area_acres": 3.8
-          },
-          {
-            "name": "Hosakere",
-            "distance_m": 1806,
-            "area_acres": 29.5
-          },
-          {
-            "name": "Halagevader Halli Lake",
-            "distance_m": 1921,
-            "area_acres": 7.0
-          },
-          {
-            "name": "Idle Lake",
-            "distance_m": 1998,
-            "area_acres": 0.3
-          }
-        ],
-        "water_bodies_within_2km": 33,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 147,
-          "area_acres": 4.2
-        },
-        "nearest_drain": {
-          "name": "Vrishabhavati",
-          "type": "river",
-          "distance_m": 173
-        },
-        "drains_within_500m": 1,
-        "upcoming_metro_within_5km": [
-          {
-            "name": "Kengeri",
-            "status": "under construction",
-            "distance_km": 2.57
-          },
-          {
-            "name": "Kengeri",
-            "status": "under construction",
-            "distance_km": 2.57
-          },
-          {
-            "name": "Challaghatta",
-            "status": "under construction",
-            "distance_km": 4.6
-          },
-          {
-            "name": "Challaghatta",
-            "status": "under construction",
-            "distance_km": 4.6
-          }
-        ],
-        "elevation": {
-          "site_m": 790.6,
-          "nearest_lake_surface_m": 791.7,
-          "height_above_lake_m": -1.1,
           "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
           "status": "calculated"
         }
@@ -23388,8 +21721,8 @@
       }
     },
     {
-      "id": "embassy-millenium-u-c",
-      "name": "Embassy Millenium (u/c)",
+      "id": "embassy-millenium",
+      "name": "Embassy Millenium",
       "builder": "Embassy Group",
       "address": null,
       "lat": 12.980808,
@@ -23546,8 +21879,8 @@
       }
     },
     {
-      "id": "provident-capella-u-c",
-      "name": "Provident Capella (u/c)",
+      "id": "provident-capella",
+      "name": "Provident Capella",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.990621,
@@ -23704,8 +22037,8 @@
       }
     },
     {
-      "id": "godrej-splendour-u-c",
-      "name": "Godrej Splendour (u/c)",
+      "id": "godrej-splendour",
+      "name": "Godrej Splendour",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 13.010613,
@@ -23873,8 +22206,8 @@
       }
     },
     {
-      "id": "total-environment-down-by-the-water-u-c",
-      "name": "Total Environment Down by the Water (u/c)",
+      "id": "total-environment-down-by-the-water",
+      "name": "Total Environment Down by the Water",
       "builder": "Total Environment",
       "address": null,
       "lat": 13.090371,
@@ -24057,8 +22390,8 @@
       }
     },
     {
-      "id": "embassy-verde-u-c",
-      "name": "Embassy Verde (u/c)",
+      "id": "embassy-verde",
+      "name": "Embassy Verde",
       "builder": "Embassy Group",
       "address": null,
       "lat": 13.207425,
@@ -24563,195 +22896,6 @@
       }
     },
     {
-      "id": "mana-u-c",
-      "name": "Mana (u/c)",
-      "builder": "Mana Projects",
-      "address": null,
-      "lat": 12.893617,
-      "lon": 77.747147,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1441657138",
-      "search_terms": [
-        "Mana Projects"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 8,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 25,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 22,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 11,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.624,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 34.075,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 9.504,
-          "unit": "km",
-          "nearest_feature": "Nallurahalli",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 4.738,
-          "unit": "km",
-          "nearest_feature": "Carmelaram",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 6.337,
-          "unit": "km",
-          "nearest_feature": "Dabaspete - Hosur Highway",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Hagondahalli Lake",
-            "distance_m": 645,
-            "area_acres": 5.3
-          },
-          {
-            "name": "Sulikunte Chikka Kere",
-            "distance_m": 1421,
-            "area_acres": 1.1
-          },
-          {
-            "name": "Hegondanahalli Lake",
-            "distance_m": 1547,
-            "area_acres": 11.9
-          },
-          {
-            "name": "Thiagalara Chowdenahalli Lake",
-            "distance_m": 1639,
-            "area_acres": 21.7
-          },
-          {
-            "name": "Dommasandra Lake",
-            "distance_m": 1847,
-            "area_acres": 29.3
-          },
-          {
-            "name": "Devara Kere",
-            "distance_m": 1884,
-            "area_acres": 8.4
-          }
-        ],
-        "water_bodies_within_2km": 10,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 624,
-          "area_acres": 0.4
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 554
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 907.2,
-          "nearest_lake_surface_m": 891.3,
-          "height_above_lake_m": 15.9,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
       "id": "assetz-canvas-cove",
       "name": "Assetz Canvas & Cove",
       "builder": "Assetz",
@@ -24961,172 +23105,8 @@
       }
     },
     {
-      "id": "embassy-u-c",
-      "name": "Embassy (u/c)",
-      "builder": "Embassy Group",
-      "address": null,
-      "lat": 13.204365,
-      "lon": 77.625033,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1356104626",
-      "search_terms": [
-        "Embassy Group"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 6,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 17,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 40,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.427,
-          "unit": "km",
-          "nearest_feature": "Navrathna Agrahara Lake",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 8.903,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 21.425,
-          "unit": "km",
-          "nearest_feature": "Peenya",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 3.138,
-          "unit": "km",
-          "nearest_feature": "Doddajala",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 2.727,
-          "unit": "km",
-          "nearest_feature": "Ballari Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Navrathna Agrahara Lake",
-            "distance_m": 427,
-            "area_acres": 14.7
-          }
-        ],
-        "water_bodies_within_2km": 61,
-        "nearest_lake": {
-          "name": "Navrathna Agrahara Lake",
-          "distance_m": 427,
-          "area_acres": 14.7
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "stream",
-          "distance_m": 1483
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 922.2,
-          "nearest_lake_surface_m": 906.2,
-          "height_above_lake_m": 16.0,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "prestige-century-landmark-u-c",
-      "name": "Prestige Century Landmark (u/c)",
+      "id": "prestige-century-landmark",
+      "name": "Prestige Century Landmark",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.044604,
@@ -25827,8 +23807,8 @@
       }
     },
     {
-      "id": "sattva-knowledge-center-u-c",
-      "name": "Sattva Knowledge Center (u/c)",
+      "id": "sattva-knowledge-center",
+      "name": "Sattva Knowledge Center",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.117711,
@@ -26006,8 +23986,8 @@
       }
     },
     {
-      "id": "sattva-songbird-u-c",
-      "name": "Sattva Songbird (u/c)",
+      "id": "sattva-songbird",
+      "name": "Sattva Songbird",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.049315,
@@ -26189,170 +24169,6 @@
           "site_m": 890.1,
           "nearest_lake_surface_m": 873.3,
           "height_above_lake_m": 16.8,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "mahindra-u-c",
-      "name": "Mahindra (u/c)",
-      "builder": "Mahindra Lifespaces",
-      "address": null,
-      "lat": 13.200496,
-      "lon": 77.6378,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1337719567",
-      "search_terms": [
-        "Mahindra Lifespaces"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 6,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 7,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 41,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.351,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 7.5,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 21.731,
-          "unit": "km",
-          "nearest_feature": "Goraguntepalya",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 2.221,
-          "unit": "km",
-          "nearest_feature": "Doddajala",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 1.394,
-          "unit": "km",
-          "nearest_feature": "Ballari Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Navrathna Agrahara Lake",
-            "distance_m": 952,
-            "area_acres": 14.7
-          }
-        ],
-        "water_bodies_within_2km": 32,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 351,
-          "area_acres": 0.0
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 1385
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 922.6,
-          "nearest_lake_surface_m": 909.0,
-          "height_above_lake_m": 13.6,
           "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
           "status": "calculated"
         }
@@ -26543,8 +24359,8 @@
       }
     },
     {
-      "id": "sobha-queens-towers-u-c",
-      "name": "Sobha Queens Towers (u/c)",
+      "id": "sobha-queens-towers",
+      "name": "Sobha Queens Towers",
       "builder": "Sobha",
       "address": null,
       "lat": 12.793114,
@@ -27111,8 +24927,8 @@
       }
     },
     {
-      "id": "sattva-vasanta-skye-u-c",
-      "name": "Sattva Vasanta Skye (u/c)",
+      "id": "sattva-vasanta-skye",
+      "name": "Sattva Vasanta Skye",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.207476,
@@ -27269,8 +25085,8 @@
       }
     },
     {
-      "id": "century-tisora-u-c",
-      "name": "Century Tisora (u/c)",
+      "id": "century-tisora",
+      "name": "Century Tisora",
       "builder": "Century Real Estate",
       "address": null,
       "lat": 13.110415,
@@ -28359,8 +26175,8 @@
       }
     },
     {
-      "id": "century-mirai-u-c",
-      "name": "Century Mirai (u/c)",
+      "id": "century-mirai",
+      "name": "Century Mirai",
       "builder": "Century Real Estate",
       "address": null,
       "lat": 12.953861,
@@ -28911,8 +26727,8 @@
       }
     },
     {
-      "id": "adarsh-forest-glen-u-c",
-      "name": "Adarsh Forest Glen (u/c)",
+      "id": "adarsh-forest-glen",
+      "name": "Adarsh Forest Glen",
       "builder": "Adarsh Developers",
       "address": null,
       "lat": 12.869615,
@@ -29602,8 +27418,8 @@
       }
     },
     {
-      "id": "godrej-parkshire-u-c",
-      "name": "Godrej Parkshire (u/c)",
+      "id": "godrej-parkshire",
+      "name": "Godrej Parkshire",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 13.04686,
@@ -29940,8 +27756,8 @@
       }
     },
     {
-      "id": "brigade-sanctuary-u-c",
-      "name": "Brigade Sanctuary (u/c)",
+      "id": "brigade-sanctuary",
+      "name": "Brigade Sanctuary",
       "builder": "Brigade Group",
       "address": null,
       "lat": 12.894516,
@@ -30471,8 +28287,8 @@
       }
     },
     {
-      "id": "prestige-rosewood-u-c",
-      "name": "Prestige Rosewood (u/c)",
+      "id": "prestige-rosewood",
+      "name": "Prestige Rosewood",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.955194,
@@ -30640,8 +28456,8 @@
       }
     },
     {
-      "id": "sumadhura-elysium-u-c",
-      "name": "Sumadhura Elysium (u/c)",
+      "id": "sumadhura-elysium",
+      "name": "Sumadhura Elysium",
       "builder": "Sumadhura",
       "address": null,
       "lat": 12.92752,
@@ -31003,8 +28819,8 @@
       }
     },
     {
-      "id": "embassy-paradiso-u-c",
-      "name": "Embassy Paradiso (u/c)",
+      "id": "embassy-paradiso",
+      "name": "Embassy Paradiso",
       "builder": "Embassy Group",
       "address": null,
       "lat": 13.207365,
@@ -32700,8 +30516,8 @@
       }
     },
     {
-      "id": "sattva-texonic-u-c",
-      "name": "Sattva Texonic (u/c)",
+      "id": "sattva-texonic",
+      "name": "Sattva Texonic",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 12.819216,
@@ -33068,8 +30884,8 @@
       }
     },
     {
-      "id": "brigade-eternia-u-c",
-      "name": "Brigade Eternia (u/c)",
+      "id": "brigade-eternia",
+      "name": "Brigade Eternia",
       "builder": "Brigade Group",
       "address": null,
       "lat": 13.094413,
@@ -34526,8 +32342,8 @@
       }
     },
     {
-      "id": "salarpuria-sattva-u-c",
-      "name": "Salarpuria Sattva (u/c)",
+      "id": "salarpuria-sattva",
+      "name": "Salarpuria Sattva",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.165599,
@@ -34900,8 +32716,8 @@
       }
     },
     {
-      "id": "godrej-lakeside-orchard-u-c",
-      "name": "Godrej Lakeside Orchard (u/c)",
+      "id": "godrej-lakeside-orchard",
+      "name": "Godrej Lakeside Orchard",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 12.889725,
@@ -35253,8 +33069,8 @@
       }
     },
     {
-      "id": "brigade-eco-edge-u-c",
-      "name": "Brigade Eco Edge (u/c)",
+      "id": "brigade-eco-edge",
+      "name": "Brigade Eco Edge",
       "builder": "Brigade Group",
       "address": null,
       "lat": 12.985607,
@@ -36173,8 +33989,8 @@
       }
     },
     {
-      "id": "prestige-falcon-city-luxe-u-c",
-      "name": "Prestige Falcon City Luxe (u/c)",
+      "id": "prestige-falcon-city-luxe",
+      "name": "Prestige Falcon City Luxe",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.884542,
@@ -36382,8 +34198,8 @@
       }
     },
     {
-      "id": "sumadhura-solace-u-c",
-      "name": "Sumadhura Solace (u/c)",
+      "id": "sumadhura-solace",
+      "name": "Sumadhura Solace",
       "builder": "Sumadhura",
       "address": null,
       "lat": 12.952959,
@@ -36561,8 +34377,8 @@
       }
     },
     {
-      "id": "salarpuria-sattva-aeropolis-u-c",
-      "name": "Salarpuria Sattva Aeropolis (u/c)",
+      "id": "salarpuria-sattva-aeropolis",
+      "name": "Salarpuria Sattva Aeropolis",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.210329,
@@ -36725,8 +34541,8 @@
       }
     },
     {
-      "id": "prestige-parklane-u-c",
-      "name": "Prestige Parklane (u/c)",
+      "id": "prestige-parklane",
+      "name": "Prestige Parklane",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.211744,
@@ -37281,8 +35097,8 @@
       }
     },
     {
-      "id": "sattva-hill-view-u-c",
-      "name": "Sattva Hill View (u/c)",
+      "id": "sattva-hill-view",
+      "name": "Sattva Hill View",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 12.808498,
@@ -37439,8 +35255,8 @@
       }
     },
     {
-      "id": "assetz-code-name-sublime-u-c",
-      "name": "Assetz Code Name Sublime (u/c)",
+      "id": "assetz-code-name-sublime",
+      "name": "Assetz Code Name Sublime",
       "builder": "Assetz",
       "address": null,
       "lat": 13.078269,
@@ -37776,8 +35592,8 @@
       }
     },
     {
-      "id": "assetz-sora-saki-u-c",
-      "name": "Assetz Sora & Saki (u/c)",
+      "id": "assetz-sora-saki",
+      "name": "Assetz Sora & Saki",
       "builder": "Assetz",
       "address": null,
       "lat": 13.148757,
@@ -39576,8 +37392,8 @@
       }
     },
     {
-      "id": "sattva-aangane-u-c",
-      "name": "Sattva Aangane (u/c)",
+      "id": "sattva-aangane",
+      "name": "Sattva Aangane",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.039038,
@@ -39760,8 +37576,8 @@
       }
     },
     {
-      "id": "prestige-tech-cloud-u-c",
-      "name": "Prestige Tech Cloud (u/c)",
+      "id": "prestige-tech-cloud",
+      "name": "Prestige Tech Cloud",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.192847,
@@ -40328,177 +38144,8 @@
       }
     },
     {
-      "id": "mantri-u-c",
-      "name": "Mantri (u/c)",
-      "builder": "Mantri Developers",
-      "address": null,
-      "lat": 13.149356,
-      "lon": 77.686248,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1441655442",
-      "search_terms": [
-        "Mantri Developers"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 8,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 11,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 20,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.269,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 5.924,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 16.571,
-          "unit": "km",
-          "nearest_feature": "Krishnarajapura",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 6.017,
-          "unit": "km",
-          "nearest_feature": "Doddajala",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 6.194,
-          "unit": "km",
-          "nearest_feature": "Bellary Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Huvinayakanahalli Lake",
-            "distance_m": 609,
-            "area_acres": 20.0
-          },
-          {
-            "name": "Gummanahalli Lake",
-            "distance_m": 753,
-            "area_acres": 140.6
-          }
-        ],
-        "water_bodies_within_2km": 22,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 269,
-          "area_acres": 0.1
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 486
-        },
-        "drains_within_500m": 1,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 895.2,
-          "nearest_lake_surface_m": 891.9,
-          "height_above_lake_m": 3.3,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "godrej-ananda-phase-2-u-c",
-      "name": "Godrej Ananda Phase 2 (u/c)",
+      "id": "godrej-ananda-phase-2",
+      "name": "Godrej Ananda Phase 2",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 13.148595,
@@ -41035,192 +38682,8 @@
       }
     },
     {
-      "id": "brigade-u-c",
-      "name": "Brigade (u/c)",
-      "builder": "Brigade Group",
-      "address": null,
-      "lat": 12.989422,
-      "lon": 77.73747,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/179321521",
-      "search_terms": [
-        "Brigade Group"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 84,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 7,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 146,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 31,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 190,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 9,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.745,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 23.424,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 0.2,
-          "unit": "km",
-          "nearest_feature": "Pattandur Agrahara",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 2.102,
-          "unit": "km",
-          "nearest_feature": "Hoodi",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 4.45,
-          "unit": "km",
-          "nearest_feature": "Old Madras Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Pattandur Agrahara Kunte",
-            "distance_m": 928,
-            "area_acres": 8.8
-          },
-          {
-            "name": "Kodigehalli Lake",
-            "distance_m": 1300,
-            "area_acres": 38.0
-          },
-          {
-            "name": "Hoodi Lake",
-            "distance_m": 1392,
-            "area_acres": 19.1
-          },
-          {
-            "name": "Nallurahalli Lake",
-            "distance_m": 1512,
-            "area_acres": 21.9
-          },
-          {
-            "name": "Pattandur Agrahara Lake",
-            "distance_m": 1559,
-            "area_acres": 11.2
-          }
-        ],
-        "water_bodies_within_2km": 17,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 745,
-          "area_acres": 0.3
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 829
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 901.9,
-          "nearest_lake_surface_m": 888.4,
-          "height_above_lake_m": 13.5,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "brigade-belvedere-u-c",
-      "name": "Brigade Belvedere (u/c)",
+      "id": "brigade-belvedere",
+      "name": "Brigade Belvedere",
       "builder": "Brigade Group",
       "address": null,
       "lat": 13.047062,
@@ -42134,8 +39597,8 @@
       }
     },
     {
-      "id": "provident-ecopolitan-u-c",
-      "name": "Provident Ecopolitan (u/c)",
+      "id": "provident-ecopolitan",
+      "name": "Provident Ecopolitan",
       "builder": "Puravankara",
       "address": null,
       "lat": 13.146623,
@@ -42308,8 +39771,8 @@
       }
     },
     {
-      "id": "prestige-pine-forest-u-c",
-      "name": "Prestige Pine Forest (u/c)",
+      "id": "prestige-pine-forest",
+      "name": "Prestige Pine Forest",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.974504,
@@ -43025,8 +40488,8 @@
       }
     },
     {
-      "id": "purva-zenium-u-c",
-      "name": "Purva Zenium (u/c)",
+      "id": "purva-zenium",
+      "name": "Purva Zenium",
       "builder": "Puravankara",
       "address": null,
       "lat": 13.145384,
@@ -43189,8 +40652,8 @@
       }
     },
     {
-      "id": "brigade-hrc-atrium-u-c",
-      "name": "Brigade HRC Atrium (u/c)",
+      "id": "brigade-hrc-atrium",
+      "name": "Brigade HRC Atrium",
       "builder": "Brigade Group",
       "address": null,
       "lat": 13.197639,
@@ -43347,8 +40810,8 @@
       }
     },
     {
-      "id": "prestige-garden-breeze-u-c",
-      "name": "Prestige Garden Breeze (u/c)",
+      "id": "prestige-garden-breeze",
+      "name": "Prestige Garden Breeze",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.880774,
@@ -44048,8 +41511,8 @@
       }
     },
     {
-      "id": "vaswani-starlight-u-c",
-      "name": "Vaswani Starlight (u/c)",
+      "id": "vaswani-starlight",
+      "name": "Vaswani Starlight",
       "builder": "Vaswani Group",
       "address": null,
       "lat": 12.978789,
@@ -44237,8 +41700,8 @@
       }
     },
     {
-      "id": "embassy-spectrum-u-c",
-      "name": "Embassy Spectrum (u/c)",
+      "id": "embassy-spectrum",
+      "name": "Embassy Spectrum",
       "builder": "Embassy Group",
       "address": null,
       "lat": 12.934309,
@@ -44431,8 +41894,8 @@
       }
     },
     {
-      "id": "embassy-astra-u-c",
-      "name": "Embassy Astra (u/c)",
+      "id": "embassy-astra",
+      "name": "Embassy Astra",
       "builder": "Embassy Group",
       "address": null,
       "lat": 13.050708,
@@ -44985,8 +42448,8 @@
       }
     },
     {
-      "id": "mahindra-blossom-u-c",
-      "name": "Mahindra Blossom (u/c)",
+      "id": "mahindra-blossom",
+      "name": "Mahindra Blossom",
       "builder": "Mahindra Lifespaces",
       "address": null,
       "lat": 12.986658,
@@ -45333,8 +42796,8 @@
       }
     },
     {
-      "id": "adarsh-lumina-u-c",
-      "name": "Adarsh Lumina (u/c)",
+      "id": "adarsh-lumina",
+      "name": "Adarsh Lumina",
       "builder": "Adarsh Developers",
       "address": null,
       "lat": 12.895674,
@@ -46597,8 +44060,8 @@
       }
     },
     {
-      "id": "sobha-madison-heights-u-c",
-      "name": "Sobha Madison Heights (u/c)",
+      "id": "sobha-madison-heights",
+      "name": "Sobha Madison Heights",
       "builder": "Sobha",
       "address": null,
       "lat": 12.793318,
@@ -46776,8 +44239,8 @@
       }
     },
     {
-      "id": "sobha-hamptons-u-c",
-      "name": "Sobha Hamptons (u/c)",
+      "id": "sobha-hamptons",
+      "name": "Sobha Hamptons",
       "builder": "Sobha",
       "address": null,
       "lat": 12.794074,
@@ -46950,8 +44413,8 @@
       }
     },
     {
-      "id": "snn-raj-high-gardens-u-c",
-      "name": "SNN Raj High Gardens (u/c)",
+      "id": "snn-raj-high-gardens",
+      "name": "SNN Raj High Gardens",
       "builder": "SNN Raj Corp",
       "address": null,
       "lat": 12.79165,
@@ -47129,8 +44592,8 @@
       }
     },
     {
-      "id": "century-regalia-u-c",
-      "name": "Century Regalia (u/c)",
+      "id": "century-regalia",
+      "name": "Century Regalia",
       "builder": "Century Real Estate",
       "address": null,
       "lat": 12.956917,
@@ -47314,8 +44777,8 @@
       }
     },
     {
-      "id": "mana-verdant-terraces-u-c",
-      "name": "Mana Verdant Terraces (u/c)",
+      "id": "mana-verdant-terraces",
+      "name": "Mana Verdant Terraces",
       "builder": "Mana Projects",
       "address": null,
       "lat": 12.907901,
@@ -47513,8 +44976,8 @@
       }
     },
     {
-      "id": "sattva-east-crest-phase-2-u-c",
-      "name": "Sattva East Crest Phase 2 (u/c)",
+      "id": "sattva-east-crest-phase-2",
+      "name": "Sattva East Crest Phase 2",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.041389,
@@ -48991,8 +46454,8 @@
       }
     },
     {
-      "id": "prestige-lakeshore-drive-phase-3-u-c",
-      "name": "Prestige Lakeshore Drive Phase 3 (u/c)",
+      "id": "prestige-lakeshore-drive-phase-3",
+      "name": "Prestige Lakeshore Drive Phase 3",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.932981,
@@ -50637,166 +48100,8 @@
       }
     },
     {
-      "id": "prestige-u-c",
-      "name": "Prestige (u/c)",
-      "builder": "Prestige Group",
-      "address": null,
-      "lat": 13.202517,
-      "lon": 77.670385,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1510891335",
-      "search_terms": [
-        "Prestige Group"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 4,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 15,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.35,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 3.984,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 22.444,
-          "unit": "km",
-          "nearest_feature": "Krishnarajapura",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 1.097,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport Halt",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 0.492,
-          "unit": "km",
-          "nearest_feature": "Ballari Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [],
-        "water_bodies_within_2km": 33,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 350,
-          "area_acres": 0.5
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 740
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 914.5,
-          "nearest_lake_surface_m": 914.4,
-          "height_above_lake_m": 0.1,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "sobha-victoria-park-u-c",
-      "name": "Sobha Victoria Park (u/c)",
+      "id": "sobha-victoria-park",
+      "name": "Sobha Victoria Park",
       "builder": "Sobha",
       "address": null,
       "lat": 13.05479,
@@ -52235,8 +49540,8 @@
       }
     },
     {
-      "id": "purva-silversky-u-c",
-      "name": "Purva Silversky (u/c)",
+      "id": "purva-silversky",
+      "name": "Purva Silversky",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.840609,
@@ -52609,8 +49914,8 @@
       }
     },
     {
-      "id": "mantri-cornerstone-u-c",
-      "name": "Mantri Cornerstone (u/c)",
+      "id": "mantri-cornerstone",
+      "name": "Mantri Cornerstone",
       "builder": "Mantri Developers",
       "address": null,
       "lat": 12.983469,
@@ -53905,8 +51210,8 @@
       }
     },
     {
-      "id": "mana-dale-u-c",
-      "name": "Mana Dale (u/c)",
+      "id": "mana-dale",
+      "name": "Mana Dale",
       "builder": "Mana Projects",
       "address": null,
       "lat": 12.887207,
@@ -54258,8 +51563,8 @@
       }
     },
     {
-      "id": "prestige-dew-drops-u-c",
-      "name": "Prestige Dew Drops (u/c)",
+      "id": "prestige-dew-drops",
+      "name": "Prestige Dew Drops",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.183388,
@@ -55348,8 +52653,8 @@
       }
     },
     {
-      "id": "mana-vista-u-c",
-      "name": "Mana Vista (u/c)",
+      "id": "mana-vista",
+      "name": "Mana Vista",
       "builder": "Mana Projects",
       "address": null,
       "lat": 12.876709,
@@ -55711,8 +53016,8 @@
       }
     },
     {
-      "id": "prestige-somerville-u-c",
-      "name": "Prestige Somerville (u/c)",
+      "id": "prestige-somerville",
+      "name": "Prestige Somerville",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.954472,
@@ -56818,8 +54123,8 @@
       }
     },
     {
-      "id": "godrej-woods-u-c",
-      "name": "Godrej Woods (u/c)",
+      "id": "godrej-woods",
+      "name": "Godrej Woods",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 13.107569,
@@ -57177,13 +54482,13 @@
       }
     },
     {
-      "id": "assetz-zen-and-sato-u-c",
-      "name": "Assetz Zen and Sato (u/c)",
+      "id": "assetz-zen-and-sato",
+      "name": "Assetz Zen and Sato",
       "builder": "Assetz",
       "address": null,
       "lat": 13.121935,
       "lon": 77.634157,
-      "status": null,
+      "status": "Under construction (per OpenStreetMap)",
       "facts": null,
       "source_url": "https://www.openstreetmap.org/way/1338323737",
       "search_terms": [
@@ -57908,8 +55213,8 @@
       }
     },
     {
-      "id": "sattva-trinity-u-c",
-      "name": "Sattva Trinity (u/c)",
+      "id": "sattva-trinity",
+      "name": "Sattva Trinity",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 12.933749,
@@ -58507,8 +55812,8 @@
       }
     },
     {
-      "id": "sobha-brooklyn-towers-u-c",
-      "name": "Sobha Brooklyn Towers (u/c)",
+      "id": "sobha-brooklyn-towers",
+      "name": "Sobha Brooklyn Towers",
       "builder": "Sobha",
       "address": null,
       "lat": 12.790376,
@@ -58681,8 +55986,8 @@
       }
     },
     {
-      "id": "sobha-magnum-opus-u-c",
-      "name": "Sobha Magnum Opus (u/c)",
+      "id": "sobha-magnum-opus",
+      "name": "Sobha Magnum Opus",
       "builder": "Sobha",
       "address": null,
       "lat": 12.87675,
@@ -59054,8 +56359,8 @@
       }
     },
     {
-      "id": "snn-felicity-u-c",
-      "name": "SNN Felicity (u/c)",
+      "id": "snn-felicity",
+      "name": "SNN Felicity",
       "builder": "SNN Raj Corp",
       "address": null,
       "lat": 13.067247,
@@ -59791,8 +57096,8 @@
       }
     },
     {
-      "id": "godrej-athena-u-c",
-      "name": "Godrej Athena (u/c)",
+      "id": "godrej-athena",
+      "name": "Godrej Athena",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 12.967496,
@@ -60334,8 +57639,8 @@
       }
     },
     {
-      "id": "brigade-insignia-u-c",
-      "name": "Brigade Insignia (u/c)",
+      "id": "brigade-insignia",
+      "name": "Brigade Insignia",
       "builder": "Brigade Group",
       "address": null,
       "lat": 13.109933,
@@ -60912,8 +58217,8 @@
       }
     },
     {
-      "id": "sobha-royal-crest-u-c",
-      "name": "Sobha Royal Crest (u/c)",
+      "id": "sobha-royal-crest",
+      "name": "Sobha Royal Crest",
       "builder": "Sobha",
       "address": null,
       "lat": 12.932216,
@@ -62202,8 +59507,8 @@
       }
     },
     {
-      "id": "sattva-jodhani-u-c",
-      "name": "Sattva Jodhani (u/c)",
+      "id": "sattva-jodhani",
+      "name": "Sattva Jodhani",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.144525,
@@ -62371,8 +59676,8 @@
       }
     },
     {
-      "id": "embassy-east-avenue-u-c",
-      "name": "Embassy East Avenue (u/c)",
+      "id": "embassy-east-avenue",
+      "name": "Embassy East Avenue",
       "builder": "Embassy Group",
       "address": null,
       "lat": 12.987319,
@@ -62754,8 +60059,8 @@
       }
     },
     {
-      "id": "century-fortune-pai-u-c",
-      "name": "Century Fortune Pai (u/c)",
+      "id": "century-fortune-pai",
+      "name": "Century Fortune Pai",
       "builder": "Century Real Estate",
       "address": null,
       "lat": 12.845854,
@@ -63705,8 +61010,8 @@
       }
     },
     {
-      "id": "prestige-fernvale-u-c",
-      "name": "Prestige Fernvale (u/c)",
+      "id": "prestige-fernvale",
+      "name": "Prestige Fernvale",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.879061,
@@ -63889,8 +61194,8 @@
       }
     },
     {
-      "id": "prestige-sun-crest-u-c",
-      "name": "Prestige Sun Crest (u/c)",
+      "id": "prestige-sun-crest",
+      "name": "Prestige Sun Crest",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.817562,
@@ -64457,8 +61762,8 @@
       }
     },
     {
-      "id": "prestige-signature-towers-u-c",
-      "name": "Prestige Signature Towers (u/c)",
+      "id": "prestige-signature-towers",
+      "name": "Prestige Signature Towers",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.929423,
@@ -65256,8 +62561,8 @@
       }
     },
     {
-      "id": "purva-song-of-the-lake-u-c",
-      "name": "Purva Song Of The Lake (u/c)",
+      "id": "purva-song-of-the-lake",
+      "name": "Purva Song Of The Lake",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.862239,
@@ -65440,8 +62745,8 @@
       }
     },
     {
-      "id": "shriram-royal-court-u-c",
-      "name": "Shriram Royal Court (u/c)",
+      "id": "shriram-royal-court",
+      "name": "Shriram Royal Court",
       "builder": "Shriram Properties",
       "address": null,
       "lat": 12.823334,
@@ -65618,164 +62923,6 @@
           "site_m": 891.1,
           "nearest_lake_surface_m": 888.5,
           "height_above_lake_m": 2.6,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "provident-capella",
-      "name": "Provident Capella",
-      "builder": "Puravankara",
-      "address": null,
-      "lat": 12.992174,
-      "lon": 77.804991,
-      "status": null,
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1228056789",
-      "search_terms": [
-        "Puravankara"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 5,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 3,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 3,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.399,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 25.238,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 5.122,
-          "unit": "km",
-          "nearest_feature": "Whitefield (Kadugodi)",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 2.96,
-          "unit": "km",
-          "nearest_feature": "Devangonthi",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 1.347,
-          "unit": "km",
-          "nearest_feature": "Dabaspete - Hosur Highway",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [],
-        "water_bodies_within_2km": 74,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 399,
-          "area_acres": 0.0
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 1924
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 884.8,
-          "nearest_lake_surface_m": 878.4,
-          "height_above_lake_m": 6.4,
           "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
           "status": "calculated"
         }
@@ -67060,8 +64207,8 @@
       }
     },
     {
-      "id": "assetz-codename-altitude-u-c",
-      "name": "Assetz Codename Altitude (u/c)",
+      "id": "assetz-codename-altitude",
+      "name": "Assetz Codename Altitude",
       "builder": "Assetz",
       "address": null,
       "lat": 12.886859,
@@ -67889,8 +65036,8 @@
       }
     },
     {
-      "id": "godrej-tiara-u-c",
-      "name": "Godrej Tiara (u/c)",
+      "id": "godrej-tiara",
+      "name": "Godrej Tiara",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 13.029454,
@@ -68053,8 +65200,8 @@
       }
     },
     {
-      "id": "provident-sunworth-phase-2-u-c",
-      "name": "Provident Sunworth Phase 2 (u/c)",
+      "id": "provident-sunworth-phase-2",
+      "name": "Provident Sunworth Phase 2",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.882773,
@@ -68247,181 +65394,6 @@
           "site_m": 777.7,
           "nearest_lake_surface_m": 762.0,
           "height_above_lake_m": 15.7,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "mantri-webcity-u-c",
-      "name": "Mantri Webcity (u/c)",
-      "builder": "Mantri Developers",
-      "address": null,
-      "lat": 13.071704,
-      "lon": 77.645896,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/730431931",
-      "search_terms": [
-        "Mantri Developers"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 11,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 73,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 4,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 52,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 16,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 82,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 11,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.087,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 15.558,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 8.664,
-          "unit": "km",
-          "nearest_feature": "Krishnarajapura",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 6.875,
-          "unit": "km",
-          "nearest_feature": "Channasandra",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 4.169,
-          "unit": "km",
-          "nearest_feature": "Nagawara Flyover",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Nagaraesh Nagenahalli Lake",
-            "distance_m": 447,
-            "area_acres": 5.0
-          },
-          {
-            "name": "Chokkanahalli Lake",
-            "distance_m": 1484,
-            "area_acres": 0.7
-          }
-        ],
-        "water_bodies_within_2km": 19,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 87,
-          "area_acres": 1.3
-        },
-        "nearest_drain": {
-          "name": "BP191",
-          "type": "drain",
-          "distance_m": 92
-        },
-        "drains_within_500m": 8,
-        "upcoming_metro_within_5km": [
-          {
-            "name": "Nagawara",
-            "status": "proposed",
-            "distance_km": 3.98
-          }
-        ],
-        "elevation": {
-          "site_m": 890.0,
-          "nearest_lake_surface_m": 893.4,
-          "height_above_lake_m": -3.4,
           "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
           "status": "calculated"
         }
@@ -68837,166 +65809,8 @@
       }
     },
     {
-      "id": "sumadhura-u-c",
-      "name": "Sumadhura (u/c)",
-      "builder": "Sumadhura",
-      "address": null,
-      "lat": 12.994185,
-      "lon": 77.804417,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1465141009",
-      "search_terms": [
-        "Sumadhura"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 5,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 4,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 3,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.231,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 25.01,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 5.048,
-          "unit": "km",
-          "nearest_feature": "Whitefield (Kadugodi)",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 3.085,
-          "unit": "km",
-          "nearest_feature": "Devangonthi",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 1.547,
-          "unit": "km",
-          "nearest_feature": "Dabaspete - Hosur Highway",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [],
-        "water_bodies_within_2km": 80,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 231,
-          "area_acres": 0.0
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 1828
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 885.1,
-          "nearest_lake_surface_m": 878.4,
-          "height_above_lake_m": 6.7,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "prestige-wind-gate-u-c",
-      "name": "Prestige Wind Gate (u/c)",
+      "id": "prestige-wind-gate",
+      "name": "Prestige Wind Gate",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.930046,
@@ -69553,8 +66367,8 @@
       }
     },
     {
-      "id": "sattva-endeavor-u-c",
-      "name": "Sattva Endeavor (u/c)",
+      "id": "sattva-endeavor",
+      "name": "Sattva Endeavor",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 12.851412,
@@ -71236,8 +68050,8 @@
       }
     },
     {
-      "id": "prestige-glenbrook-u-c",
-      "name": "Prestige Glenbrook (u/c)",
+      "id": "prestige-glenbrook",
+      "name": "Prestige Glenbrook",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.970876,
@@ -72990,8 +69804,8 @@
       }
     },
     {
-      "id": "sumadhura-sarang-u-c",
-      "name": "Sumadhura Sarang (u/c)",
+      "id": "sumadhura-sarang",
+      "name": "Sumadhura Sarang",
       "builder": "Sumadhura",
       "address": null,
       "lat": 13.030269,
@@ -73164,8 +69978,8 @@
       }
     },
     {
-      "id": "assetz-soho-sky-u-c",
-      "name": "Assetz Soho & Sky (u/c)",
+      "id": "assetz-soho-sky",
+      "name": "Assetz Soho & Sky",
       "builder": "Assetz",
       "address": null,
       "lat": 13.070539,
@@ -73564,8 +70378,8 @@
       }
     },
     {
-      "id": "godrej-hoodi-u-c",
-      "name": "Godrej Hoodi (u/c)",
+      "id": "godrej-hoodi",
+      "name": "Godrej Hoodi",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 12.986654,
@@ -73774,8 +70588,8 @@
       }
     },
     {
-      "id": "sumadhura-platinum-square-u-c",
-      "name": "Sumadhura Platinum Square (u/c)",
+      "id": "sumadhura-platinum-square",
+      "name": "Sumadhura Platinum Square",
       "builder": "Sumadhura",
       "address": null,
       "lat": 12.946449,
@@ -73953,8 +70767,8 @@
       }
     },
     {
-      "id": "brigade-citrine-u-c",
-      "name": "Brigade Citrine (u/c)",
+      "id": "brigade-citrine",
+      "name": "Brigade Citrine",
       "builder": "Brigade Group",
       "address": null,
       "lat": 13.053817,
@@ -74341,8 +71155,8 @@
       }
     },
     {
-      "id": "snn-raj-bay-vista-u-c",
-      "name": "SNN Raj Bay Vista (u/c)",
+      "id": "snn-raj-bay-vista",
+      "name": "SNN Raj Bay Vista",
       "builder": "SNN Raj Corp",
       "address": null,
       "lat": 12.899268,
@@ -76175,8 +72989,8 @@
       }
     },
     {
-      "id": "provident-northern-destiny-u-c",
-      "name": "Provident Northern Destiny (u/c)",
+      "id": "provident-northern-destiny",
+      "name": "Provident Northern Destiny",
       "builder": "Puravankara",
       "address": null,
       "lat": 13.094311,
@@ -76887,8 +73701,8 @@
       }
     },
     {
-      "id": "sattva-forest-ridge-u-c",
-      "name": "Sattva Forest Ridge (u/c)",
+      "id": "sattva-forest-ridge",
+      "name": "Sattva Forest Ridge",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 12.863137,
@@ -77644,8 +74458,8 @@
       }
     },
     {
-      "id": "sumadhura-capitol-residences-u-c",
-      "name": "Sumadhura Capitol Residences (u/c)",
+      "id": "sumadhura-capitol-residences",
+      "name": "Sumadhura Capitol Residences",
       "builder": "Sumadhura",
       "address": null,
       "lat": 12.985402,
@@ -78739,8 +75553,8 @@
       }
     },
     {
-      "id": "sattva-simplicity-u-c",
-      "name": "Sattva SimpliCity (u/c)",
+      "id": "sattva-simplicity",
+      "name": "Sattva SimpliCity",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 12.92413,
@@ -79487,8 +76301,8 @@
       }
     },
     {
-      "id": "purva-blubelle-u-c",
-      "name": "Purva Blubelle (u/c)",
+      "id": "purva-blubelle",
+      "name": "Purva Blubelle",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.974597,
@@ -80003,8 +76817,8 @@
       }
     },
     {
-      "id": "purva-weaves-u-c",
-      "name": "Purva Weaves (u/c)",
+      "id": "purva-weaves",
+      "name": "Purva Weaves",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.942092,
@@ -80532,8 +77346,8 @@
       }
     },
     {
-      "id": "prestige-university-medical-college-and-hospital-u-c",
-      "name": "Prestige University Medical College and Hospital (u/c)",
+      "id": "prestige-university-medical-college-and-hospital",
+      "name": "Prestige University Medical College and Hospital",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.170537,
@@ -82051,8 +78865,8 @@
       }
     },
     {
-      "id": "purva-sky-u-c",
-      "name": "Purva Sky (u/c)",
+      "id": "purva-sky",
+      "name": "Purva Sky",
       "builder": "Puravankara",
       "address": null,
       "lat": 13.047161,
@@ -83389,8 +80203,8 @@
       }
     },
     {
-      "id": "brigade-lumina-u-c",
-      "name": "Brigade Lumina (u/c)",
+      "id": "brigade-lumina",
+      "name": "Brigade Lumina",
       "builder": "Brigade Group",
       "address": null,
       "lat": 13.049444,
@@ -83757,8 +80571,8 @@
       }
     },
     {
-      "id": "sattva-ashraya-u-c",
-      "name": "Sattva Ashraya (u/c)",
+      "id": "sattva-ashraya",
+      "name": "Sattva Ashraya",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 12.823474,
@@ -84089,8 +80903,8 @@
       }
     },
     {
-      "id": "snn-green-bay-u-c",
-      "name": "SNN Green Bay (u/c)",
+      "id": "snn-green-bay",
+      "name": "SNN Green Bay",
       "builder": "SNN Raj Corp",
       "address": null,
       "lat": 12.85382,
@@ -84283,8 +81097,8 @@
       }
     },
     {
-      "id": "prestige-greenmoor-u-c",
-      "name": "Prestige Greenmoor (u/c)",
+      "id": "prestige-greenmoor",
+      "name": "Prestige Greenmoor",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.940961,
@@ -84477,8 +81291,8 @@
       }
     },
     {
-      "id": "prestige-oakville-u-c",
-      "name": "Prestige Oakville (u/c)",
+      "id": "prestige-oakville",
+      "name": "Prestige Oakville",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.931663,
@@ -84672,8 +81486,8 @@
       }
     },
     {
-      "id": "prestige-elm-park-u-c",
-      "name": "Prestige Elm Park (u/c)",
+      "id": "prestige-elm-park",
+      "name": "Prestige Elm Park",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.980055,
@@ -85952,8 +82766,8 @@
       }
     },
     {
-      "id": "sumadhura-pramoda-u-c",
-      "name": "Sumadhura Pramoda (u/c)",
+      "id": "sumadhura-pramoda",
+      "name": "Sumadhura Pramoda",
       "builder": "Sumadhura",
       "address": null,
       "lat": 12.928978,
@@ -87423,182 +84237,8 @@
       }
     },
     {
-      "id": "sobha-manhattan-towers-u-c",
-      "name": "Sobha Manhattan Towers (u/c)",
-      "builder": "Sobha",
-      "address": null,
-      "lat": 12.787336,
-      "lon": 77.744433,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1510355230",
-      "search_terms": [
-        "Sobha"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 4,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 3,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 21,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 1,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 7,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.524,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 45.742,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 7.052,
-          "unit": "km",
-          "nearest_feature": "Delta Electronics Bommasandra",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 4.625,
-          "unit": "km",
-          "nearest_feature": "Heelalige",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 0.106,
-          "unit": "km",
-          "nearest_feature": "Hosur Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Gudahatti Lake",
-            "distance_m": 1112,
-            "area_acres": 18.9
-          },
-          {
-            "name": "Icchanguru Lake",
-            "distance_m": 1180,
-            "area_acres": 22.7
-          },
-          {
-            "name": "Gudahatti Lake",
-            "distance_m": 1237,
-            "area_acres": 7.0
-          }
-        ],
-        "water_bodies_within_2km": 7,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 524,
-          "area_acres": 0.3
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 335
-        },
-        "drains_within_500m": 1,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 909.5,
-          "nearest_lake_surface_m": 890.8,
-          "height_above_lake_m": 18.7,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "sumadhura-epitome-u-c",
-      "name": "Sumadhura Epitome (u/c)",
+      "id": "sumadhura-epitome",
+      "name": "Sumadhura Epitome",
       "builder": "Sumadhura",
       "address": null,
       "lat": 13.065016,
@@ -88684,8 +85324,8 @@
       }
     },
     {
-      "id": "century-liva-u-c",
-      "name": "Century Liva (u/c)",
+      "id": "century-liva",
+      "name": "Century Liva",
       "builder": "Century Real Estate",
       "address": null,
       "lat": 13.14066,
@@ -89642,8 +86282,8 @@
       }
     },
     {
-      "id": "assetz-inspira-melodies-of-life-u-c",
-      "name": "Assetz Inspira Melodies of Life (u/c)",
+      "id": "assetz-inspira-melodies-of-life",
+      "name": "Assetz Inspira Melodies of Life",
       "builder": "Assetz",
       "address": null,
       "lat": 12.887047,
@@ -93520,8 +90160,8 @@
       }
     },
     {
-      "id": "sattva-la-vita-u-c",
-      "name": "Sattva La Vita (u/c)",
+      "id": "sattva-la-vita",
+      "name": "Sattva La Vita",
       "builder": "Salarpuria Sattva",
       "address": null,
       "lat": 13.080455,
@@ -96310,177 +92950,8 @@
       }
     },
     {
-      "id": "prestige-lavender-fields-u-c",
-      "name": "Prestige Lavender Fields (u/c)",
-      "builder": "Prestige Group",
-      "address": null,
-      "lat": 12.931942,
-      "lon": 77.73998,
-      "status": null,
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1414003396",
-      "search_terms": [
-        "Prestige Group"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 9,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 35,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 7,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 110,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 44,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 86,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 16,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.525,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 29.769,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 5.213,
-          "unit": "km",
-          "nearest_feature": "Nallurahalli",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 3.641,
-          "unit": "km",
-          "nearest_feature": "Belandur Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 4.766,
-          "unit": "km",
-          "nearest_feature": "Outer Ring Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Varthur Lake",
-            "distance_m": 1217,
-            "area_acres": 381.0
-          },
-          {
-            "name": "Gunjuru Lake",
-            "distance_m": 1373,
-            "area_acres": 51.1
-          }
-        ],
-        "water_bodies_within_2km": 39,
-        "nearest_lake": {
-          "name": null,
-          "distance_m": 525,
-          "area_acres": 0.5
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "stream",
-          "distance_m": 352
-        },
-        "drains_within_500m": 3,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 882.6,
-          "nearest_lake_surface_m": 876.9,
-          "height_above_lake_m": 5.7,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "adarsh-primrose-u-c",
-      "name": "Adarsh Primrose (u/c)",
+      "id": "adarsh-primrose",
+      "name": "Adarsh Primrose",
       "builder": "Adarsh Developers",
       "address": null,
       "lat": 12.91893,
@@ -100914,8 +97385,8 @@
       }
     },
     {
-      "id": "purva-meraki-u-c",
-      "name": "Purva Meraki (u/c)",
+      "id": "purva-meraki",
+      "name": "Purva Meraki",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.900105,
@@ -102637,175 +99108,6 @@
       }
     },
     {
-      "id": "vaswani-u-c",
-      "name": "Vaswani (u/c)",
-      "builder": "Vaswani Group",
-      "address": null,
-      "lat": 13.154834,
-      "lon": 77.696913,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1556488094",
-      "search_terms": [
-        "Vaswani Group"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 6,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 2,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 5,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 23,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 0,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.42,
-          "unit": "km",
-          "nearest_feature": "Huvinayakanahalli Lake",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 4.996,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 17.278,
-          "unit": "km",
-          "nearest_feature": "Krishnarajapura",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 6.577,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport Halt",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 6.375,
-          "unit": "km",
-          "nearest_feature": null,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Huvinayakanahalli Lake",
-            "distance_m": 420,
-            "area_acres": 20.0
-          },
-          {
-            "name": "Gummanahalli Lake",
-            "distance_m": 1299,
-            "area_acres": 140.6
-          }
-        ],
-        "water_bodies_within_2km": 16,
-        "nearest_lake": {
-          "name": "Huvinayakanahalli Lake",
-          "distance_m": 420,
-          "area_acres": 20.0
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 929
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 898.9,
-          "nearest_lake_surface_m": 885.3,
-          "height_above_lake_m": 13.6,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
       "id": "purva-atria-apartments",
       "name": "Purva Atria Apartments",
       "builder": "Puravankara",
@@ -104326,8 +100628,8 @@
       }
     },
     {
-      "id": "prestige-turning-point-u-c",
-      "name": "Prestige Turning Point (u/c)",
+      "id": "prestige-turning-point",
+      "name": "Prestige Turning Point",
       "builder": "Prestige Group",
       "address": null,
       "lat": 12.964654,
@@ -104515,8 +100817,8 @@
       }
     },
     {
-      "id": "embassy-crescent-u-c",
-      "name": "Embassy Crescent (u/c)",
+      "id": "embassy-crescent",
+      "name": "Embassy Crescent",
       "builder": "Embassy Group",
       "address": null,
       "lat": 13.053939,
@@ -105636,8 +101938,8 @@
       }
     },
     {
-      "id": "nitesh-soho-u-c",
-      "name": "Nitesh Soho (u/c)",
+      "id": "nitesh-soho",
+      "name": "Nitesh Soho",
       "builder": "Nitesh Estates",
       "address": null,
       "lat": 12.972002,
@@ -106030,8 +102332,8 @@
       }
     },
     {
-      "id": "shriram-hebbal-one-u-c",
-      "name": "Shriram Hebbal One (u/c)",
+      "id": "shriram-hebbal-one",
+      "name": "Shriram Hebbal One",
       "builder": "Shriram Properties",
       "address": null,
       "lat": 13.044554,
@@ -107695,8 +103997,8 @@
       }
     },
     {
-      "id": "prestige-camden-gardens-u-c",
-      "name": "Prestige Camden Gardens (u/c)",
+      "id": "prestige-camden-gardens",
+      "name": "Prestige Camden Gardens",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.093857,
@@ -110143,8 +106445,8 @@
       }
     },
     {
-      "id": "adarsh-rosewood-u-c",
-      "name": "Adarsh Rosewood (u/c)",
+      "id": "adarsh-rosewood",
+      "name": "Adarsh Rosewood",
       "builder": "Adarsh Developers",
       "address": null,
       "lat": 12.916819,
@@ -110926,8 +107228,8 @@
       }
     },
     {
-      "id": "assetz-shibui-u-c",
-      "name": "Assetz Shibui (u/c)",
+      "id": "assetz-shibui",
+      "name": "Assetz Shibui",
       "builder": "Assetz",
       "address": null,
       "lat": 12.97287,
@@ -111105,8 +107407,8 @@
       }
     },
     {
-      "id": "mantri-centrium-u-c",
-      "name": "Mantri Centrium (u/c)",
+      "id": "mantri-centrium",
+      "name": "Mantri Centrium",
       "builder": "Mantri Developers",
       "address": null,
       "lat": 12.990455,
@@ -111269,8 +107571,8 @@
       }
     },
     {
-      "id": "brigade-united-u-c",
-      "name": "Brigade United (u/c)",
+      "id": "brigade-united",
+      "name": "Brigade United",
       "builder": "Brigade Group",
       "address": null,
       "lat": 12.993841,
@@ -112789,8 +109091,8 @@
       }
     },
     {
-      "id": "godrej-hudson-u-c",
-      "name": "Godrej Hudson (u/c)",
+      "id": "godrej-hudson",
+      "name": "Godrej Hudson",
       "builder": "Godrej Properties",
       "address": null,
       "lat": 12.966345,
@@ -115112,8 +111414,8 @@
       }
     },
     {
-      "id": "prestige-mrg-waterfront-u-c",
-      "name": "Prestige MRG Waterfront (u/c)",
+      "id": "prestige-mrg-waterfront",
+      "name": "Prestige MRG Waterfront",
       "builder": "Prestige Group",
       "address": null,
       "lat": 13.042244,
@@ -115287,8 +111589,8 @@
       }
     },
     {
-      "id": "purva-orient-grand-u-c",
-      "name": "Purva Orient Grand (u/c)",
+      "id": "purva-orient-grand",
+      "name": "Purva Orient Grand",
       "builder": "Puravankara",
       "address": null,
       "lat": 12.961618,
@@ -115490,215 +111792,6 @@
           "site_m": 901.4,
           "nearest_lake_surface_m": 892.4,
           "height_above_lake_m": 9.0,
-          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
-          "status": "calculated"
-        }
-      }
-    },
-    {
-      "id": "sattva-misty-charm-u-c",
-      "name": "Sattva Misty Charm (u/c)",
-      "builder": "Salarpuria Sattva",
-      "address": null,
-      "lat": 12.893352,
-      "lon": 77.568643,
-      "status": "Under construction (per OpenStreetMap)",
-      "facts": null,
-      "source_url": "https://www.openstreetmap.org/way/1176579535",
-      "search_terms": [
-        "Salarpuria Sattva"
-      ],
-      "source": "osm",
-      "metrics": {
-        "schools_within_1km": {
-          "value": 14,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "schools_within_3km": {
-          "value": 123,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_1km": {
-          "value": 5,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "healthcare_within_5km": {
-          "value": 297,
-          "unit": "mapped_features",
-          "radius_m": 5000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_1km": {
-          "value": 10,
-          "unit": "mapped_features",
-          "radius_m": 1000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "parks_within_3km": {
-          "value": 156,
-          "unit": "mapped_features",
-          "radius_m": 3000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "retail_within_2km": {
-          "value": 41,
-          "unit": "mapped_features",
-          "radius_m": 2000,
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
-          "status": "calculated"
-        },
-        "nearest_mapped_water_km": {
-          "value": 0.104,
-          "unit": "km",
-          "nearest_feature": "Konanakunte Lake",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Minimum planar distance to mapped water feature geometry.",
-          "status": "calculated"
-        },
-        "road_density_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "building_footprint_coverage_within_1km": {
-          "value": null,
-          "status": "not_computed",
-          "method": "Road and building layers are fetched only around pilot areas and curated projects."
-        },
-        "nearest_airport_km": {
-          "value": 37.002,
-          "unit": "km",
-          "nearest_feature": "Kempegowda International Airport",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
-          "status": "calculated"
-        },
-        "nearest_metro_station_km": {
-          "value": 0.339,
-          "unit": "km",
-          "nearest_feature": "Yelachenahalli",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
-          "status": "calculated"
-        },
-        "nearest_rail_station_km": {
-          "value": 7.397,
-          "unit": "km",
-          "nearest_feature": "Nayandahalli",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
-          "status": "calculated"
-        },
-        "nearest_highway_km": {
-          "value": 0.077,
-          "unit": "km",
-          "nearest_feature": "Kanakapura Road",
-          "source": "OpenStreetMap contributors",
-          "license": "ODbL-1.0",
-          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
-          "status": "calculated"
-        }
-      },
-      "evidence": {
-        "lakes_within_2km": [
-          {
-            "name": "Konanakunte Lake",
-            "distance_m": 104,
-            "area_acres": 5.0
-          },
-          {
-            "name": "Yelachenahalli Kere",
-            "distance_m": 672,
-            "area_acres": 3.8
-          },
-          {
-            "name": "Sarakki Kere",
-            "distance_m": 680,
-            "area_acres": 53.0
-          },
-          {
-            "name": "Chunchagatta Lake",
-            "distance_m": 763,
-            "area_acres": 16.0
-          },
-          {
-            "name": "Vasanthapura Lake",
-            "distance_m": 1241,
-            "area_acres": 4.5
-          },
-          {
-            "name": "Doddakalasandra Lake",
-            "distance_m": 1262,
-            "area_acres": 12.8
-          },
-          {
-            "name": "ISRO Layout Lake",
-            "distance_m": 1498,
-            "area_acres": 4.2
-          },
-          {
-            "name": "Vasantapura Temple Kalyani",
-            "distance_m": 1557,
-            "area_acres": 0.7
-          },
-          {
-            "name": "Puttenhalli Lake",
-            "distance_m": 1891,
-            "area_acres": 8.4
-          },
-          {
-            "name": "Gowdana Kere",
-            "distance_m": 1982,
-            "area_acres": 6.1
-          }
-        ],
-        "water_bodies_within_2km": 11,
-        "nearest_lake": {
-          "name": "Konanakunte Lake",
-          "distance_m": 104,
-          "area_acres": 5.0
-        },
-        "nearest_drain": {
-          "name": null,
-          "type": "drain",
-          "distance_m": 608
-        },
-        "drains_within_500m": 0,
-        "upcoming_metro_within_5km": [],
-        "elevation": {
-          "site_m": 905.4,
-          "nearest_lake_surface_m": 902.5,
-          "height_above_lake_m": 2.9,
           "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
           "status": "calculated"
         }
@@ -117425,8 +113518,8 @@
       }
     },
     {
-      "id": "mantri-central-u-c",
-      "name": "Mantri Central (u/c)",
+      "id": "mantri-central",
+      "name": "Mantri Central",
       "builder": "Mantri Developers",
       "address": null,
       "lat": 12.990364,
@@ -117967,8 +114060,8 @@
       }
     },
     {
-      "id": "adarsh-stratuss-u-c",
-      "name": "Adarsh Stratuss (u/c)",
+      "id": "adarsh-stratuss",
+      "name": "Adarsh Stratuss",
       "builder": "Adarsh Developers",
       "address": null,
       "lat": 12.901928,
@@ -120388,8 +116481,8 @@
       }
     },
     {
-      "id": "sobha-athena-u-c",
-      "name": "Sobha Athena (u/c)",
+      "id": "sobha-athena",
+      "name": "Sobha Athena",
       "builder": "Sobha",
       "address": null,
       "lat": 13.077285,
@@ -122790,8 +118883,8 @@
       }
     },
     {
-      "id": "embassy-classic-u-c",
-      "name": "Embassy Classic (u/c)",
+      "id": "embassy-classic",
+      "name": "Embassy Classic",
       "builder": "Embassy Group",
       "address": null,
       "lat": 12.98139,
@@ -125599,8 +121692,8 @@
       }
     },
     {
-      "id": "sobha-insignia-u-c",
-      "name": "Sobha Insignia (u/c)",
+      "id": "sobha-insignia",
+      "name": "Sobha Insignia",
       "builder": "Sobha",
       "address": null,
       "lat": 12.927665,
@@ -127455,8 +123548,8 @@
       }
     },
     {
-      "id": "embassy-vertex-u-c",
-      "name": "Embassy Vertex (u/c)",
+      "id": "embassy-vertex",
+      "name": "Embassy Vertex",
       "builder": "Embassy Group",
       "address": null,
       "lat": 12.966545,
@@ -130636,8 +126729,8 @@
       }
     },
     {
-      "id": "nitesh-park-avenue-u-c",
-      "name": "Nitesh Park Avenue (u/c)",
+      "id": "nitesh-park-avenue",
+      "name": "Nitesh Park Avenue",
       "builder": "Nitesh Estates",
       "address": null,
       "lat": 12.993102,
