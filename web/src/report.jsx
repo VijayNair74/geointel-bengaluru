@@ -3,7 +3,14 @@ import { Icon } from './icons.jsx';
 import { haversineM } from './geo.js';
 
 // Distances: under 1 km in metres (rounded to 10 m), otherwise km.
-export const fmtDist = (km) => (km == null ? '—' : km < 1 ? `${Math.max(10, Math.round((km * 1000) / 10) * 10)} m` : `${km.toFixed(1)} km`);
+// Under 100 m round to 5 m (short distances matter, e.g. drains); under 1 km to 10 m; otherwise 0.1 km.
+export const fmtDist = (km) => {
+  if (km == null) return '—';
+  const m = km * 1000;
+  if (m < 100) return `${Math.max(5, Math.round(m / 5) * 5)} m`;
+  if (m < 1000) return `${Math.round(m / 10) * 10} m`;
+  return `${km.toFixed(1)} km`;
+};
 const val = (m) => (m?.status === 'calculated' ? m.value : null);
 
 // Operational stations near the site, from the published metro layer (for the "within walking distance" line).
