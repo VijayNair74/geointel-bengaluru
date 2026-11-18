@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Verify compiled HTML and visible React dashboard at public URL
         env:
-          SITE_URL: https://geointel-bengaluru.vijaynath-nair.workers.dev/
+          SITE_URL: https://blr.geointel.workers.dev/
         run: |
           set -eu
           CHROME=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)
