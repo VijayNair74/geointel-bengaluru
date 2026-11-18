@@ -53,7 +53,9 @@ function App(){
  useEffect(()=>{
   if(!mapEl.current)return;
   // No public OSM raster tile endpoint: map renders only locally published GeoJSON.
-  const map=new maplibregl.Map({container:mapEl.current,style:{version:8,sources:{},layers:[{id:'background',type:'background',paint:{'background-color':'#101c2b'}}]},center:[77.64,12.98],zoom:10.3,attributionControl:false});
+  let map;
+  try{map=new maplibregl.Map({container:mapEl.current,style:{version:8,sources:{},layers:[{id:'background',type:'background',paint:{'background-color':'#101c2b'}}]},center:[77.64,12.98],zoom:10.3,attributionControl:false});}
+  catch(err){setMapError(`Map unavailable: ${err?.message||'WebGL not supported'}`);return;}
   mapRef.current=map;
   map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
   map.on('load',()=>{setLoaded(true);
