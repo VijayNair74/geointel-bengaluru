@@ -1,6 +1,6 @@
 {
   "project": "GeoIntel Bengaluru",
-  "generated_at_utc": "2026-11-18T23:05:05.487354+00:00",
+  "generated_at_utc": "2026-11-18T23:24:13.988234+00:00",
   "metric_crs": "EPSG:32643",
   "source_manifest": "source_manifest.json",
   "aoi_bbox_wsen": [
@@ -20,6 +20,7 @@
     "airports",
     "highways",
     "developer_projects",
+    "employment_hubs",
     "metro_upcoming",
     "drains"
   ],
@@ -117,6 +118,24 @@
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+          "status": "calculated"
+        },
+        "nearest_tech_park_km": {
+          "value": 1.368,
+          "unit": "km",
+          "nearest_feature": "Sigma Soft Tech Park",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the edge of the nearest mapped tech or business park (>= 2 acres).",
+          "status": "calculated"
+        },
+        "tech_parks_within_5km": {
+          "value": 14,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count of mapped tech / business parks within 5 km of the point.",
           "status": "calculated"
         },
         "nearest_airport_km": {
@@ -255,6 +274,24 @@
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
           "status": "calculated"
         },
+        "nearest_tech_park_km": {
+          "value": 1.678,
+          "unit": "km",
+          "nearest_feature": "Kirloskar Business Park",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the edge of the nearest mapped tech or business park (>= 2 acres).",
+          "status": "calculated"
+        },
+        "tech_parks_within_5km": {
+          "value": 6,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count of mapped tech / business parks within 5 km of the point.",
+          "status": "calculated"
+        },
         "nearest_airport_km": {
           "value": 21.637,
           "unit": "km",
@@ -389,6 +426,24 @@
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+          "status": "calculated"
+        },
+        "nearest_tech_park_km": {
+          "value": 0.988,
+          "unit": "km",
+          "nearest_feature": "Wipro Corporate Office",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the edge of the nearest mapped tech or business park (>= 2 acres).",
+          "status": "calculated"
+        },
+        "tech_parks_within_5km": {
+          "value": 17,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count of mapped tech / business parks within 5 km of the point.",
           "status": "calculated"
         },
         "nearest_airport_km": {
@@ -527,6 +582,24 @@
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
           "status": "calculated"
         },
+        "nearest_tech_park_km": {
+          "value": 0.041,
+          "unit": "km",
+          "nearest_feature": "Salarpuria Sattva Alexandria Tech Park",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the edge of the nearest mapped tech or business park (>= 2 acres).",
+          "status": "calculated"
+        },
+        "tech_parks_within_5km": {
+          "value": 12,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count of mapped tech / business parks within 5 km of the point.",
+          "status": "calculated"
+        },
         "nearest_airport_km": {
           "value": 39.873,
           "unit": "km",
@@ -661,6 +734,24 @@
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+          "status": "calculated"
+        },
+        "nearest_tech_park_km": {
+          "value": 7.037,
+          "unit": "km",
+          "nearest_feature": "Boeing India Engineering and Technology Center",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the edge of the nearest mapped tech or business park (>= 2 acres).",
+          "status": "calculated"
+        },
+        "tech_parks_within_5km": {
+          "value": 0,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count of mapped tech / business parks within 5 km of the point.",
           "status": "calculated"
         },
         "nearest_airport_km": {

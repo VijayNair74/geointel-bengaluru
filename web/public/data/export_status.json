@@ -13,6 +13,7 @@
     "highways.geojson",
     "metro_upcoming.geojson",
     "drains.geojson",
+    "employment_hubs.geojson",
     "demo_location_metrics.json",
     "project_reports.json",
     "data_status.json",
