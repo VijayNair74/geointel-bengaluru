@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-18T22:12:19.475668+00:00",
+  "generated_at_utc": "2026-11-18T22:19:43.593608+00:00",
   "layers": [
     {
       "layer": "airports",
@@ -25,7 +25,7 @@
     },
     {
       "layer": "developer_projects",
-      "feature_count": 578,
+      "feature_count": 788,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
