@@ -169,6 +169,19 @@ def _match_developers(gdf: gpd.GeoDataFrame, developers: list[dict[str, Any]]) -
     return out.reset_index(drop=True)
 
 
+def _named_hubs(gdf: gpd.GeoDataFrame, pattern: str, min_area_acres: float) -> gpd.GeoDataFrame:
+    """Named areas matching a pattern, at least min_area_acres, one row per name (largest)."""
+    if gdf.empty or "name" not in gdf.columns:
+        return _empty_gdf()
+    g = gdf.loc[gdf["name"].notna() & gdf["name"].str.contains(pattern, regex=True)].copy()
+    if g.empty:
+        return _empty_gdf()
+    area = g.geometry.to_crs("EPSG:32643").area / 4046.86
+    g = g.assign(_a=area.values).loc[lambda d: d["_a"] >= min_area_acres]
+    g = g.assign(_k=g["name"].str.lower().str.replace(r"[^a-z0-9]+", " ", regex=True).str.strip())
+    return g.sort_values("_a", ascending=False).drop_duplicates("_k").drop(columns=["_a", "_k"]).reset_index(drop=True)
+
+
 def _normalize_osm(gdf: gpd.GeoDataFrame, layer: str) -> gpd.GeoDataFrame:
     if gdf.empty:
         return _empty_gdf()
@@ -368,6 +381,8 @@ def fetch_osm_layers(refresh: bool = False, pbf_path: str | Path | None = None) 
                 fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s, endpoints)
             gdf = _apply_exclude(_normalize_osm(fetched, layer), definition.get("exclude"),
                                  definition.get("require"), definition.get("exclude_name_pattern"))
+            if definition.get("name_include_pattern"):
+                gdf = _named_hubs(gdf, definition["name_include_pattern"], float(definition.get("min_area_acres", 0)))
             if definition.get("developer_match"):
                 gdf = _match_developers(gdf, cfg.get("developers", []))
             if definition.get("upcoming_only"):
@@ -514,6 +529,17 @@ def _point_metrics(point: Point, layers: dict[str, gpd.GeoDataFrame], metric_crs
         "status": "calculated" if coverage is not None else "no_layer_data"
     }
 
+    hubs = layers.get("employment_hubs", _empty_gdf()).to_crs(metric_crs)
+    hub_km, hub_label = _nearest_feature(hubs, point)
+    m["nearest_tech_park_km"] = {
+        "value": hub_km, "unit": "km", "nearest_feature": hub_label, "source": "OpenStreetMap contributors",
+        "license": "ODbL-1.0", "method": "Planar distance to the edge of the nearest mapped tech or business park (>= 2 acres).",
+        "status": "calculated" if hub_km is not None else "no_layer_data"}
+    m["tech_parks_within_5km"] = {
+        "value": _count_within(hubs, point, 5000), "unit": "mapped_features", "radius_m": 5000,
+        "source": "OpenStreetMap contributors", "license": "ODbL-1.0",
+        "method": "Count of mapped tech / business parks within 5 km of the point.",
+        "status": "calculated" if not hubs.empty else "no_layer_data"}
     connectivity = [
         ("nearest_airport_km", "airports", True,
          "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport)."),

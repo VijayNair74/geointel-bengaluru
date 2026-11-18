@@ -118,3 +118,11 @@ def test_match_developers_prefix_and_dedupe():
     out = _match_developers(gdf, devs)
     assert sorted(out["name"]) == ["Mana Tranquilla", "Navami Vruksha"]   # 'Manasa' is not 'Mana'; duplicate kept once
     assert dict(zip(out["name"], out["builder"]))["Navami Vruksha"] == "Navami"
+def test_named_hubs_pattern_area_dedupe():
+    from geointel.pipeline import _named_hubs, load_config
+    pat = load_config()["osm_layers"]["employment_hubs"]["name_include_pattern"]
+    big, small = box(77.60, 12.90, 77.605, 12.905), box(77.60, 12.90, 77.6001, 12.9001)
+    gdf = gpd.GeoDataFrame({"name": ["Manyata Tech Park", "Manyata Tech Park", "Bagmane Tech Park", "City Mall", None]},
+                           geometry=[big, small, small, big, big], crs="EPSG:4326")
+    out = _named_hubs(gdf, pat, 2)
+    assert out["name"].tolist() == ["Manyata Tech Park"]   # small Bagmane fails area; mall fails pattern

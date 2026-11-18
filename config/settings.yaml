@@ -88,6 +88,12 @@ osm_layers:
     tags: {landuse: [residential, construction], building: [apartments, residential]}
     developer_match: true
     fetch_scope: aoi
+  # Employment hubs: named tech / business parks (landuse=commercial, >= 2 acres).
+  employment_hubs:
+    tags: {landuse: [commercial]}
+    name_include_pattern: '(?i)(?:tech ?park|tech ?village|business park|\bit park|itpl|itpb|software|\bsez\b|ecospace|eco ?world|global city|infosys|wipro|technology|tech ?zone|cyber|knowledge park|tech ?hub|tech cent(?:er|re)|infotech|tech city)'
+    min_area_acres: 2
+    fetch_scope: aoi
   # Proposed / under-construction metro stations, shown separately and never
   # mixed into operational distances.
   metro_upcoming:

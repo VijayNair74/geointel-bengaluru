@@ -154,6 +154,11 @@ export function computeMetrics(p, data) {
   near('nearest_metro_station_km', 'metro_stations', 'Distance to the nearest mapped operational metro station.');
   near('nearest_rail_station_km', 'rail_stations', 'Distance to the nearest mapped railway station or halt, excluding metro.');
   near('nearest_highway_km', 'highways', 'Distance to the nearest mapped motorway or trunk road.');
+  near('nearest_tech_park_km', 'employment_hubs', 'Distance to the edge of the nearest mapped tech or business park (computed in browser).');
+  m.tech_parks_within_5km = data.employment_hubs
+    ? { ...OSM, value: countWithin(data.employment_hubs, p, 5000), unit: 'mapped_features', radius_m: 5000, status: 'calculated',
+        method: 'Count of mapped tech / business parks within 5 km (computed in browser).' }
+    : { status: 'loading' };
   for (const key of ['road_density_within_1km', 'building_footprint_coverage_within_1km'])
     m[key] = { status: 'pilot_only', method: 'City-wide road and building layers are not published yet; available for the five pilot locations only.' };
   return m;
