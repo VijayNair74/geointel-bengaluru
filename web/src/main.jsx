@@ -213,7 +213,7 @@ function App() {
   }, [theme]);
   // Data layers + pins (re-run after every style load).
   useEffect(() => {
-    const map = mapRef.current; if (!map || !styleRev || !map.isStyleLoaded()) return;
+    const map = mapRef.current; if (!map || !styleRev || !styleOk.current) return;
     const pinColor = theme === 'dark' ? '#7EE0C3' : '#1F7A63', ink = theme === 'dark' ? '#0C1016' : '#FFFFFF';
     for (const l of layerDefs) {
       const src = `osm-${l.id}`, base = `visual-${l.id}`, col = l.color[theme], geo = available[l.id] || empty;

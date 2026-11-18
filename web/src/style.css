@@ -90,7 +90,7 @@ a { color: inherit; }
 .card h1 { margin: 8px 0 4px; font: 600 30px 'Space Grotesk', sans-serif; letter-spacing: -.8px; line-height: 1.15; overflow-wrap: anywhere; }
 .coords { font-size: 13px; color: var(--muted); }
 .tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin: 18px 0 4px; padding: 4px; border-radius: 12px; background: var(--seg-bg); }
-.tabs button { height: 36px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 500; }
+.tabs button { height: 36px; padding: 0 4px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font-size: 12.5px; font-weight: 500; white-space: nowrap; }
 .tabs button[aria-selected='true'] { background: var(--selected); color: var(--text); font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, .08); }
 .row { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid var(--line); }
 .rows .row:first-child { border-top: 0; }
@@ -149,7 +149,7 @@ td.is-best .num { color: var(--best); }
 .maplibregl-ctrl-group button { width: 40px !important; height: 40px !important; }
 .maplibregl-ctrl-group button + button { border-top: 1px solid var(--line) !important; }
 [data-theme='dark'] .maplibregl-ctrl-icon { filter: invert(1); }
-.attribution { position: absolute; right: 76px; bottom: 4px; font-size: 10.5px; color: var(--muted); z-index: 2; text-shadow: 0 0 4px var(--bg); }
+.attribution { position: absolute; right: 72px; bottom: 2px; padding: 2px 8px; border-radius: 6px; background: var(--glass); font-size: 10.5px; color: var(--muted); z-index: 2; }
 .attribution a { text-decoration: none; }
 .attribution .err { color: #D14343; margin-right: 6px; }
 .toast { position: absolute; top: 80px; left: 50%; transform: translateX(-50%); padding: 10px 16px; border-radius: 12px; font-size: 13.5px; font-weight: 500; z-index: 10; }
