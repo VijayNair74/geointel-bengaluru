@@ -25,12 +25,33 @@ def load_config() -> dict[str, Any]:
 
 
 def load_projects() -> list[dict[str, Any]]:
-    """Named development projects (config/projects.yaml) that get full location reports."""
+    """Hand-curated projects (config/projects.yaml), which carry facts from the builder's listing."""
     path = ROOT / "config" / "projects.yaml"
     if not path.exists():
         return []
     with path.open("r", encoding="utf-8") as f:
         return (yaml.safe_load(f) or {}).get("projects", [])
+
+
+def _slug(text: str) -> str:
+    return "-".join("".join(c.lower() if c.isalnum() else " " for c in text).split())
+
+
+def discover_projects(processed_dir: Path) -> list[dict[str, Any]]:
+    """Projects auto-discovered from the developer_projects OSM layer."""
+    layer = _read_layer(processed_dir, "developer_projects")
+    out = []
+    for _, r in layer.iterrows():
+        g = r.geometry
+        pt = g.representative_point() if g.geom_type != "Point" else g
+        addr = ", ".join(str(r.get(k)) for k in ("addr:street", "addr:suburb", "addr:city", "addr:postcode")
+                         if isinstance(r.get(k), str) and r.get(k).strip())
+        osm_type, osm_id = r.get("osm_type"), r.get("osm_id")
+        out.append({"id": _slug(str(r["name"])), "name": str(r["name"]), "builder": r.get("builder"), "address": addr or None,
+                    "lat": round(pt.y, 6), "lon": round(pt.x, 6), "status": None, "facts": None,
+                    "source_url": f"https://www.openstreetmap.org/{osm_type}/{int(osm_id)}" if osm_type and osm_id == osm_id else None,
+                    "source": "osm", "search_terms": [str(r.get("builder") or "")]})
+    return out
 
 
 def ensure_dirs(cfg: dict[str, Any]) -> tuple[Path, Path]:
@@ -75,7 +96,7 @@ def _write_geojson(gdf: gpd.GeoDataFrame, path: Path) -> None:
 _KEEP_COLUMNS = ("osm_type", "osm_id", "name", "ref", "amenity", "leisure", "shop",
                  "highway", "natural", "water", "landuse", "building",
                  "railway", "station", "public_transport", "aeroway", "iata", "waterway",
-                 "construction", "proposed")
+                 "construction", "proposed", "residential", "addr:street", "addr:suburb", "addr:city", "addr:postcode")
 
 
 def _apply_exclude(gdf: gpd.GeoDataFrame, exclude: dict[str, list[str]] | None,
@@ -115,6 +136,28 @@ def _upcoming_only(gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
         for nm, rw in zip(n, r)
     ]
     out["name"] = n.str.replace(r"\s*\((?:proposed|u/c|under construction)\)\s*", "", regex=True, case=False).str.strip()
+    return out.reset_index(drop=True)
+
+
+def _match_developers(gdf: gpd.GeoDataFrame, developers: list[dict[str, Any]]) -> gpd.GeoDataFrame:
+    """Keep named complexes whose name starts with a developer brand; one row per complex."""
+    import re
+    if gdf.empty or "name" not in gdf.columns:
+        return _empty_gdf()
+    rows = []
+    for _, r in gdf.loc[gdf["name"].notna()].iterrows():
+        name = str(r["name"]).strip()
+        for d in developers:
+            if any(re.match(rf"(?i){re.escape(px)}\b", name) for px in d["prefixes"]):
+                rows.append({**r.to_dict(), "builder": d["builder"]})
+                break
+    if not rows:
+        return _empty_gdf()
+    out = gpd.GeoDataFrame(rows, geometry="geometry", crs=gdf.crs)
+    # Same complex is often mapped as a landuse area plus several buildings: keep the largest.
+    area = out.geometry.to_crs("EPSG:32643").area
+    out = out.assign(_a=area.values, _k=out["name"].str.lower().str.replace(r"[^a-z0-9]+", " ", regex=True).str.strip())
+    out = out.sort_values("_a", ascending=False).drop_duplicates("_k").drop(columns=["_a", "_k"])
     return out.reset_index(drop=True)
 
 
@@ -317,6 +360,8 @@ def fetch_osm_layers(refresh: bool = False, pbf_path: str | Path | None = None) 
                 fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s, endpoints)
             gdf = _apply_exclude(_normalize_osm(fetched, layer), definition.get("exclude"),
                                  definition.get("require"), definition.get("exclude_name_pattern"))
+            if definition.get("developer_match"):
+                gdf = _match_developers(gdf, cfg.get("developers", []))
             if definition.get("upcoming_only"):
                 gdf = _upcoming_only(gdf)
             gdf = _simplify(gdf)
@@ -620,11 +665,24 @@ def build_project_reports() -> Path:
     manifest_path = processed_dir / "source_manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {"layers": {}}
     retrieved = sorted({v.get("retrieved_at_utc", "")[:10] for v in manifest.get("layers", {}).values()} - {""})
+    curated = load_projects()
+    seen = {_slug(p["name"]) for p in curated}
+    projects = [{**p, "source": "curated"} for p in curated]
+    for p in discover_projects(processed_dir):
+        if p["id"] not in seen:
+            seen.add(p["id"])
+            projects.append(p)
     out = []
-    for p in load_projects():
+    for p in projects:
         pt = gpd.GeoSeries([Point(p["lon"], p["lat"])], crs="EPSG:4326").to_crs(metric_crs).iloc[0]
-        out.append({**{k: p.get(k) for k in ("id", "name", "builder", "address", "lat", "lon", "status", "facts", "source_url", "search_terms")},
-                    "metrics": _point_metrics(pt, layers, metric_crs),
+        metrics = _point_metrics(pt, layers, metric_crs)
+        if p.get("source") != "curated":
+            # Roads/buildings are only fetched around pilots and curated projects.
+            for k in ("road_density_within_1km", "building_footprint_coverage_within_1km"):
+                metrics[k] = {"value": None, "status": "not_computed",
+                              "method": "Road and building layers are fetched only around pilot areas and curated projects."}
+        out.append({**{k: p.get(k) for k in ("id", "name", "builder", "address", "lat", "lon", "status", "facts", "source_url", "search_terms", "source")},
+                    "metrics": metrics,
                     "evidence": _project_evidence(pt, layers, metric_crs)})
     path = processed_dir / "project_reports.json"
     path.write_text(json.dumps({"generated_at_utc": utc_now(), "osm_retrieved": retrieved[-1] if retrieved else None,

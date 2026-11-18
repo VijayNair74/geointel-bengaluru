@@ -82,6 +82,12 @@ osm_layers:
   highways:
     tags: {highway: [motorway, trunk]}
     fetch_scope: aoi
+  # Named residential complexes by known developers (see `developers` below);
+  # each becomes a project with its own location report.
+  developer_projects:
+    tags: {landuse: [residential], building: [apartments, residential]}
+    developer_match: true
+    fetch_scope: aoi
   # Proposed / under-construction metro stations, shown separately and never
   # mixed into operational distances.
   metro_upcoming:
@@ -92,3 +98,30 @@ osm_layers:
   drains:
     tags: {waterway: [drain, canal, stream, river]}
     fetch_scope: aoi
+
+# Developer brands used to auto-discover projects in OpenStreetMap. A complex is
+# matched when its OSM name starts with one of the prefixes (whole word).
+developers:
+  - {builder: Navami, prefixes: [Navami]}
+  - {builder: Prestige Group, prefixes: [Prestige]}
+  - {builder: Sobha, prefixes: [Sobha]}
+  - {builder: Brigade Group, prefixes: [Brigade]}
+  - {builder: Puravankara, prefixes: [Purva, Provident]}
+  - {builder: Godrej Properties, prefixes: [Godrej]}
+  - {builder: Salarpuria Sattva, prefixes: [Salarpuria, Sattva]}
+  - {builder: Shriram Properties, prefixes: [Shriram]}
+  - {builder: Mantri Developers, prefixes: [Mantri]}
+  - {builder: Total Environment, prefixes: [Total Environment]}
+  - {builder: Embassy Group, prefixes: [Embassy]}
+  - {builder: Assetz, prefixes: [Assetz]}
+  - {builder: Mahindra Lifespaces, prefixes: [Mahindra]}
+  - {builder: Adarsh Developers, prefixes: [Adarsh]}
+  - {builder: Sumadhura, prefixes: [Sumadhura]}
+  - {builder: SNN Raj Corp, prefixes: [SNN]}
+  - {builder: Vaswani Group, prefixes: [Vaswani]}
+  - {builder: DLF, prefixes: [DLF]}
+  - {builder: Tata Housing, prefixes: [Tata]}
+  - {builder: Ozone Group, prefixes: [Ozone]}
+  - {builder: Mana Projects, prefixes: [Mana]}
+  - {builder: Nitesh Estates, prefixes: [Nitesh]}
+  - {builder: Century Real Estate, prefixes: [Century]}

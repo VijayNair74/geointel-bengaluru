@@ -109,3 +109,12 @@ def test_project_evidence_lakes_drains_upcoming_and_dem(tmp_path, monkeypatch):
     assert ev["nearest_drain"]["distance_m"] == 80 and ev["drains_within_500m"] == 1
     assert ev["upcoming_metro_within_5km"][0]["name"] == "Future Stn"
     assert ev["elevation"]["height_above_lake_m"] == 10.0
+def test_match_developers_prefix_and_dedupe():
+    from geointel.pipeline import _match_developers
+    devs = [{"builder": "Navami", "prefixes": ["Navami"]}, {"builder": "Mana Projects", "prefixes": ["Mana"]}]
+    gdf = gpd.GeoDataFrame({"name": ["Navami Vruksha", "navami vruksha", "Manasa Layout", "Mana Tranquilla", None, "HSR Layout"]},
+                           geometry=[box(77.6, 12.9, 77.602, 12.902), box(77.6, 12.9, 77.6005, 12.9005), box(0, 0, 1, 1),
+                                     box(77.7, 12.9, 77.701, 12.901), box(0, 0, 1, 1), box(0, 0, 1, 1)], crs="EPSG:4326")
+    out = _match_developers(gdf, devs)
+    assert sorted(out["name"]) == ["Mana Tranquilla", "Navami Vruksha"]   # 'Manasa' is not 'Mana'; duplicate kept once
+    assert dict(zip(out["name"], out["builder"]))["Navami Vruksha"] == "Navami"
