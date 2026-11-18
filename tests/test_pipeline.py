@@ -49,3 +49,13 @@ def test_features_from_osm_xml(tmp_path):
         '<node id="2" lat="12.97" lon="77.75"><tag k="amenity" v="bench"/></node></osm>')
     gdf = _normalize_osm(_features_from_osm_xml(ox, xml, {"amenity": ["school"]}, (77.7, 12.9, 77.8, 13.0)), "schools")
     assert len(gdf) == 1 and gdf.iloc[0]["name"] == "X"
+def test_apply_exclude_drops_metro_from_rail():
+    from geointel.pipeline import _apply_exclude
+    gdf = gpd.GeoDataFrame({"station": ["subway", None, "train"]}, geometry=[Point(0, 0)] * 3, crs="EPSG:32643")
+    assert len(_apply_exclude(gdf, {"station": ["subway"]})) == 2
+def test_nearest_feature_returns_label():
+    from geointel.pipeline import _nearest_feature
+    gdf = gpd.GeoDataFrame({"name": ["Far", None], "ref": [None, "NH 44"]},
+                           geometry=[Point(5000, 0), Point(1200, 0)], crs="EPSG:32643")
+    assert _nearest_feature(gdf, Point(0, 0)) == (1.2, "NH 44")
+    assert _nearest_feature(gpd.GeoDataFrame(geometry=[], crs="EPSG:32643"), Point(0, 0)) == (None, None)

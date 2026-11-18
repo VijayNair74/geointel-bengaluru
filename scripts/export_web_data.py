@@ -7,7 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / 'data' / 'processed'
 DEST = ROOT / 'web' / 'public' / 'data'
-LAYERS = ['schools','healthcare','parks','water','retail','roads','buildings']
+LAYERS = ['schools','healthcare','parks','water','retail','roads','buildings',
+          'metro_stations','rail_stations','airports','highways']
 METADATA = ['demo_location_metrics.json','data_status.json','source_manifest.json','quality_report.json']
 # Cloudflare Workers static assets reject files over 25 MiB; stay well under it.
 MAX_ASSET_BYTES = 20 * 1024 * 1024

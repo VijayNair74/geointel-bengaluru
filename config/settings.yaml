@@ -56,3 +56,19 @@ osm_layers:
   buildings:
     tags: {building: true}
     fetch_radius_m: 1200
+  # Connectivity layers: fetched for the whole AOI (fetch_scope: aoi) because the
+  # nearest airport/metro/highway can be far outside the per-location radius.
+  # Only operational features: OSM tags construction/proposed lines differently.
+  metro_stations:
+    tags: {station: [subway]}
+    fetch_scope: aoi
+  rail_stations:
+    tags: {railway: [station, halt]}
+    exclude: {station: [subway, light_rail, monorail]}
+    fetch_scope: aoi
+  airports:
+    tags: {aeroway: [aerodrome]}
+    fetch_scope: aoi
+  highways:
+    tags: {highway: [motorway, trunk]}
+    fetch_scope: aoi

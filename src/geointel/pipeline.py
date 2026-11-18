@@ -62,8 +62,17 @@ def _write_geojson(gdf: gpd.GeoDataFrame, path: Path) -> None:
 
 # Tag columns worth keeping per feature; everything else OSM returns is dropped so
 # the published GeoJSON stays compact.
-_KEEP_COLUMNS = ("osm_type", "osm_id", "name", "amenity", "leisure", "shop",
-                 "highway", "natural", "water", "landuse", "building")
+_KEEP_COLUMNS = ("osm_type", "osm_id", "name", "ref", "amenity", "leisure", "shop",
+                 "highway", "natural", "water", "landuse", "building",
+                 "railway", "station", "public_transport", "aeroway", "iata")
+
+
+def _apply_exclude(gdf: gpd.GeoDataFrame, exclude: dict[str, list[str]] | None) -> gpd.GeoDataFrame:
+    """Drop features whose tag value is in an exclusion list, e.g. metro stations from rail."""
+    for key, values in (exclude or {}).items():
+        if key in gdf.columns:
+            gdf = gdf.loc[~gdf[key].isin(values)]
+    return gdf.reset_index(drop=True)
 
 
 def _normalize_osm(gdf: gpd.GeoDataFrame, layer: str) -> gpd.GeoDataFrame:
@@ -171,12 +180,15 @@ def _pbf_layer_fetcher(ox, pbf: Path, work: Path, aoi: dict[str, float]):
     _run_osmium("extract", "-b", f"{aoi['west']},{aoi['south']},{aoi['east']},{aoi['north']}",
                 "--strategy", "smart", "--overwrite", "-o", str(aoi_pbf), str(pbf))
 
-    def fetch(layer: str, tags: dict[str, Any], points, dist_m: float) -> gpd.GeoDataFrame:
+    def fetch(layer: str, tags: dict[str, Any], points, dist_m: float, scope: str = "points") -> gpd.GeoDataFrame:
         layer_pbf = work / f"{layer}.osm.pbf"
         _run_osmium("tags-filter", "--overwrite", "-o", str(layer_pbf), str(aoi_pbf), *_osmium_filters(tags))
+        if scope == "aoi":
+            boxes = [(aoi["west"], aoi["south"], aoi["east"], aoi["north"])]
+        else:
+            boxes = [ox.utils_geo.bbox_from_point((lat, lon), dist=dist_m) for lat, lon in points]
         frames = []
-        for i, (lat, lon) in enumerate(points):
-            left, bottom, right, top = ox.utils_geo.bbox_from_point((lat, lon), dist=dist_m)
+        for i, (left, bottom, right, top) in enumerate(boxes):
             xml = work / f"{layer}_{i}.osm"
             _run_osmium("extract", "-b", f"{left},{bottom},{right},{top}", "--strategy", "smart",
                         "--overwrite", "-f", "osm", "-o", str(xml), str(layer_pbf))
@@ -236,13 +248,19 @@ def fetch_osm_layers(refresh: bool = False, pbf_path: str | Path | None = None) 
             continue
 
         dist_m = float(definition.get("fetch_radius_m", 3000))
-        print(f"[fetch] {layer} — {definition['tags']} within {dist_m:.0f} m of {len(points)} locations")
+        where = "whole AOI" if definition.get("fetch_scope") == "aoi" else f"{dist_m:.0f} m of {len(points)} locations"
+        print(f"[fetch] {layer} — {definition['tags']} within {where}")
         try:
+            scope = definition.get("fetch_scope", "points")
             if pbf_fetch:
-                fetched = pbf_fetch(layer, definition["tags"], points, dist_m)
+                fetched = pbf_fetch(layer, definition["tags"], points, dist_m, scope)
+            elif scope == "aoi":
+                aoi = cfg["aoi"]
+                fetched = ox.features_from_bbox(bbox=(aoi["west"], aoi["south"], aoi["east"], aoi["north"]),
+                                                tags=definition["tags"])
             else:
                 fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s, endpoints)
-            gdf = _normalize_osm(fetched, layer)
+            gdf = _apply_exclude(_normalize_osm(fetched, layer), definition.get("exclude"))
         except Exception as exc:
             raise RuntimeError(
                 f"Failed to fetch OSM layer '{layer}'. Public Overpass services are shared "
@@ -258,7 +276,8 @@ def fetch_osm_layers(refresh: bool = False, pbf_path: str | Path | None = None) 
             "source_url": "https://www.openstreetmap.org/",
             "query_tags": definition["tags"],
             "fetch_strategy": "per_demo_location" + (" (local PBF extract)" if pbf_fetch else " (Overpass)"),
-            "fetch_radius_m": dist_m,
+            "fetch_scope": definition.get("fetch_scope", "points"),
+            "fetch_radius_m": dist_m if definition.get("fetch_scope", "points") == "points" else None,
             "demo_locations": [name for name, _, _ in cfg["demo_locations"]],
             "retrieved_at_utc": utc_now(),
             "license": "ODbL 1.0",
@@ -296,6 +315,26 @@ def _nearest_distance_km(gdf: gpd.GeoDataFrame, point: Point) -> float | None:
     if distances.empty:
         return None
     return round(float(distances.min()) / 1000, 3)
+
+
+def _feature_label(row) -> str | None:
+    for col in ("name", "ref", "iata"):
+        val = row.get(col) if hasattr(row, "get") else None
+        if isinstance(val, str) and val.strip():
+            return val.strip()
+    return None
+
+
+def _nearest_feature(gdf: gpd.GeoDataFrame, point: Point, use_centroid: bool = False) -> tuple[float | None, str | None]:
+    """Distance (km) to the nearest feature plus its OSM name/ref, for metric drill-down."""
+    if gdf.empty:
+        return None, None
+    geoms = gdf.geometry.centroid if use_centroid else gdf.geometry
+    distances = geoms.distance(point)
+    if distances.dropna().empty:
+        return None, None
+    idx = distances.idxmin()
+    return round(float(distances[idx]) / 1000, 3), _feature_label(gdf.loc[idx])
 
 
 def _road_density_km_per_sqkm(gdf: gpd.GeoDataFrame, point: Point, radius_m: int = 1000) -> float | None:
@@ -346,7 +385,7 @@ def build_metrics() -> Path:
             "latitude": point_row["latitude"],
             "longitude": point_row["longitude"],
             "metrics": {},
-            "method_version": "0.2.0",
+            "method_version": "0.3.0",
             "data_status": "computed_from_available_layers",
             "caveat": "These are indicative counts and distances to OpenStreetMap-mapped features around reference points, not parcel-level assessments. Missing mapped features do not imply real-world absence."
         }
@@ -367,9 +406,9 @@ def build_metrics() -> Path:
                 }
 
         water = layers.get("water", _empty_gdf()).to_crs(metric_crs)
-        nearest_water = _nearest_distance_km(water, point)
+        nearest_water, water_label = _nearest_feature(water, point)
         item["metrics"]["nearest_mapped_water_km"] = {
-            "value": nearest_water, "unit": "km", "source": "OpenStreetMap contributors",
+            "value": nearest_water, "unit": "km", "nearest_feature": water_label, "source": "OpenStreetMap contributors",
             "license": "ODbL-1.0", "method": "Minimum planar distance to mapped water feature geometry.",
             "status": "calculated" if nearest_water is not None else "no_layer_data"
         }
@@ -391,6 +430,27 @@ def build_metrics() -> Path:
             "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
             "status": "calculated" if coverage is not None else "no_layer_data"
         }
+
+        connectivity = [
+            ("nearest_airport_km", "airports", True,
+             "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport)."),
+            ("nearest_metro_station_km", "metro_stations", False,
+             "Planar distance to the nearest mapped operational metro station (OSM station=subway)."),
+            ("nearest_rail_station_km", "rail_stations", False,
+             "Planar distance to the nearest mapped railway station or halt, excluding metro."),
+            ("nearest_highway_km", "highways", False,
+             "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways)."),
+        ]
+        for key, layer_name, centroid, method in connectivity:
+            layer = layers.get(layer_name, _empty_gdf()).to_crs(metric_crs)
+            if layer_name == "airports" and "iata" in layer.columns:
+                layer = layer.loc[layer["iata"].notna() & (layer["iata"].astype(str).str.len() == 3)]
+            dist_km, label = _nearest_feature(layer, point, use_centroid=centroid)
+            item["metrics"][key] = {
+                "value": dist_km, "unit": "km", "nearest_feature": label,
+                "source": "OpenStreetMap contributors", "license": "ODbL-1.0", "method": method,
+                "status": "calculated" if dist_km is not None else "no_layer_data"
+            }
         results.append(item)
 
     output = processed_dir / "demo_location_metrics.json"
