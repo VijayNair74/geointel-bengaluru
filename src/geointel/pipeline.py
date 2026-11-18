@@ -131,7 +131,65 @@ def _fetch_layer_around_points(ox, tags: dict[str, Any], points: list[tuple[floa
     return gpd.GeoDataFrame(pd.concat(frames), geometry="geometry", crs=frames[0].crs)
 
 
-def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
+def _osmium_filters(tags: dict[str, Any]) -> list[str]:
+    """Translate OSMnx-style tags into osmium tags-filter expressions."""
+    exprs = []
+    for key, value in tags.items():
+        if value is True:
+            exprs.append(f"nwr/{key}")
+        elif isinstance(value, (list, tuple)):
+            exprs.append(f"nwr/{key}={','.join(map(str, value))}")
+        else:
+            exprs.append(f"nwr/{key}={value}")
+    return exprs
+
+
+def _run_osmium(*args: str) -> None:
+    import subprocess
+    subprocess.run(["osmium", *args], check=True)
+
+
+def _features_from_osm_xml(ox, path: Path, tags: dict[str, Any], bbox_lbrt) -> gpd.GeoDataFrame:
+    from shapely.geometry import box
+    from osmnx._errors import InsufficientResponseError
+    try:
+        return ox.features_from_xml(path, polygon=box(*bbox_lbrt), tags=tags)
+    except InsufficientResponseError:
+        return _empty_gdf()
+
+
+def _pbf_layer_fetcher(ox, pbf: Path, work: Path, aoi: dict[str, float]):
+    """Return fetch(layer, tags, points, dist) that reads a local OSM PBF extract.
+
+    Public Overpass servers refuse or time out from cloud CI runners, so CI uses a
+    Geofabrik extract: clip it to the AOI once, filter tags per layer, then clip
+    small XML files around each demo location for OSMnx to parse.
+    """
+    import pandas as pd
+    work.mkdir(parents=True, exist_ok=True)
+    aoi_pbf = work / "aoi.osm.pbf"
+    _run_osmium("extract", "-b", f"{aoi['west']},{aoi['south']},{aoi['east']},{aoi['north']}",
+                "--strategy", "smart", "--overwrite", "-o", str(aoi_pbf), str(pbf))
+
+    def fetch(layer: str, tags: dict[str, Any], points, dist_m: float) -> gpd.GeoDataFrame:
+        layer_pbf = work / f"{layer}.osm.pbf"
+        _run_osmium("tags-filter", "--overwrite", "-o", str(layer_pbf), str(aoi_pbf), *_osmium_filters(tags))
+        frames = []
+        for i, (lat, lon) in enumerate(points):
+            left, bottom, right, top = ox.utils_geo.bbox_from_point((lat, lon), dist=dist_m)
+            xml = work / f"{layer}_{i}.osm"
+            _run_osmium("extract", "-b", f"{left},{bottom},{right},{top}", "--strategy", "smart",
+                        "--overwrite", "-f", "osm", "-o", str(xml), str(layer_pbf))
+            frames.append(_features_from_osm_xml(ox, xml, tags, (left, bottom, right, top)))
+        frames = [f for f in frames if not f.empty]
+        if not frames:
+            return _empty_gdf()
+        return gpd.GeoDataFrame(pd.concat(frames), geometry="geometry", crs=frames[0].crs)
+
+    return fetch
+
+
+def fetch_osm_layers(refresh: bool = False, pbf_path: str | Path | None = None) -> dict[str, int]:
     # Lazy import keeps config validation and metric tests usable before GIS
     # dependencies are installed, and gives a clear message on first fetch.
     try:
@@ -157,6 +215,9 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
     # mirrors; we already pause between requests ourselves.
     ox.settings.overpass_rate_limit = False
     ox.settings.http_user_agent = acq["user_agent"]
+    pbf_fetch = None
+    if pbf_path:
+        pbf_fetch = _pbf_layer_fetcher(ox, Path(pbf_path), ROOT / cfg["outputs"]["raw_dir"] / "pbf_work", cfg["aoi"])
 
     manifest_path = processed_dir / "source_manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {
@@ -177,7 +238,10 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
         dist_m = float(definition.get("fetch_radius_m", 3000))
         print(f"[fetch] {layer} — {definition['tags']} within {dist_m:.0f} m of {len(points)} locations")
         try:
-            fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s, endpoints)
+            if pbf_fetch:
+                fetched = pbf_fetch(layer, definition["tags"], points, dist_m)
+            else:
+                fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s, endpoints)
             gdf = _normalize_osm(fetched, layer)
         except Exception as exc:
             raise RuntimeError(
@@ -193,7 +257,7 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
             "source": "OpenStreetMap contributors",
             "source_url": "https://www.openstreetmap.org/",
             "query_tags": definition["tags"],
-            "fetch_strategy": "per_demo_location",
+            "fetch_strategy": "per_demo_location" + (" (local PBF extract)" if pbf_fetch else " (Overpass)"),
             "fetch_radius_m": dist_m,
             "demo_locations": [name for name, _, _ in cfg["demo_locations"]],
             "retrieved_at_utc": utc_now(),
@@ -204,7 +268,9 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
             "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record."
         }
         manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-        if index < len(cfg["osm_layers"]) - 1:
+        if pbf_fetch:
+            manifest["layers"][layer]["source_extract"] = Path(pbf_path).name
+        elif index < len(cfg["osm_layers"]) - 1:
             time.sleep(pause_s)
 
     return counts

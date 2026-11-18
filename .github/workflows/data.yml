@@ -32,10 +32,20 @@ jobs:
         run: pip install -e '.[dev]'
       - name: Tests
         run: pytest -q
+      # Public Overpass servers return 403 or time out for GitHub-hosted runners,
+      # so CI reads a Geofabrik regional extract (Karnataka is in India's southern zone).
+      - name: Install osmium-tool
+        run: sudo apt-get update -q && sudo apt-get install -y -q osmium-tool
+      - name: Download Geofabrik extract
+        run: |
+          mkdir -p data/raw
+          curl -fL --retry 3 -o data/raw/southern-zone-latest.osm.pbf \
+            https://download.geofabrik.de/asia/india/southern-zone-latest.osm.pbf
+          ls -lh data/raw/southern-zone-latest.osm.pbf
       - name: Fetch OSM layers, build metrics and reports
         run: |
           geointel validate-config
-          geointel fetch-osm --refresh
+          geointel fetch-osm --refresh --pbf data/raw/southern-zone-latest.osm.pbf
           geointel build-metrics
           geointel report
           geointel data-status

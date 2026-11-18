@@ -10,6 +10,7 @@ def main() -> None:
     sub.add_parser("validate-config")
     fetch = sub.add_parser("fetch-osm")
     fetch.add_argument("--refresh", action="store_true", help="Re-fetch layers instead of using cached processed files")
+    fetch.add_argument("--pbf", help="Read from a local OSM .pbf extract (needs osmium-tool) instead of Overpass")
     sub.add_parser("build-metrics")
     sub.add_parser("report")
     sub.add_parser("data-status")
@@ -18,7 +19,7 @@ def main() -> None:
         validate_config(load_config())
         print("Configuration valid.")
     elif args.command == "fetch-osm":
-        print(fetch_osm_layers(refresh=args.refresh))
+        print(fetch_osm_layers(refresh=args.refresh, pbf_path=args.pbf))
     elif args.command == "build-metrics":
         print(f"Metrics written to: {build_metrics()}")
     elif args.command == "report":

@@ -35,3 +35,17 @@ def test_normalize_osm_dedups_on_type_and_id():
     assert len(out) == 3
     assert "junk" not in out.columns
     assert {"osm_type", "osm_id", "name", "layer"}.issubset(out.columns)
+def test_osmium_filters():
+    from geointel.pipeline import _osmium_filters
+    assert _osmium_filters({"building": True}) == ["nwr/building"]
+    assert _osmium_filters({"amenity": ["school", "college"], "natural": "water"}) == [
+        "nwr/amenity=school,college", "nwr/natural=water"]
+def test_features_from_osm_xml(tmp_path):
+    import osmnx as ox
+    from geointel.pipeline import _features_from_osm_xml, _normalize_osm
+    xml = tmp_path / "t.osm"
+    xml.write_text('<?xml version="1.0"?><osm version="0.6">'
+        '<node id="1" lat="12.97" lon="77.75"><tag k="amenity" v="school"/><tag k="name" v="X"/></node>'
+        '<node id="2" lat="12.97" lon="77.75"><tag k="amenity" v="bench"/></node></osm>')
+    gdf = _normalize_osm(_features_from_osm_xml(ox, xml, {"amenity": ["school"]}, (77.7, 12.9, 77.8, 13.0)), "schools")
+    assert len(gdf) == 1 and gdf.iloc[0]["name"] == "X"
