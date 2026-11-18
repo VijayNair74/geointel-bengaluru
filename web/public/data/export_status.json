@@ -1,0 +1,16 @@
+{
+  "copied": [],
+  "missing": [
+    "schools.geojson",
+    "healthcare.geojson",
+    "parks.geojson",
+    "water.geojson",
+    "retail.geojson",
+    "roads.geojson",
+    "buildings.geojson",
+    "demo_location_metrics.json",
+    "data_status.json",
+    "source_manifest.json",
+    "quality_report.json"
+  ]
+}
