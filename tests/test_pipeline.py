@@ -67,3 +67,10 @@ def test_operational_metro_filter():
                            geometry=[Point(0, 0)] * 4, crs="EPSG:4326")
     out = _apply_exclude(gdf, d.get("exclude"), d.get("require"), d.get("exclude_name_pattern"))
     assert out["name"].tolist() == ["Hebbal"]
+def test_simplify_keeps_points_and_shrinks_lines():
+    from geointel.pipeline import _simplify
+    line = LineString([(77.6, 12.9), (77.60001, 12.9000001), (77.61, 12.9)])
+    gdf = gpd.GeoDataFrame(geometry=[Point(77.6, 12.9), line], crs="EPSG:4326")
+    out = _simplify(gdf)
+    assert out.geometry.iloc[0].equals(Point(77.6, 12.9))
+    assert len(out.geometry.iloc[1].coords) == 2

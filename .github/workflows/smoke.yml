@@ -28,7 +28,7 @@ jobs:
               echo "Cloudflare is not serving compiled Vite assets in HTML yet."
             fi
             timeout 30 "$CHROME" --headless --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader --enable-unsafe-swiftshader --virtual-time-budget=5000 --dump-dom "$SITE_URL" > /tmp/geointel-dom.html 2>/tmp/chrome-errors.txt || true
-            if grep -q 'Explore Bengaluru' /tmp/geointel-dom.html && grep -q 'Connectivity' /tmp/geointel-dom.html && grep -q '/assets/index-' /tmp/geointel-index.html; then
+            if grep -q 'Explore Bengaluru' /tmp/geointel-dom.html && grep -q 'Connectivity' /tmp/geointel-dom.html && grep -q 'FIND A LOCATION' /tmp/geointel-dom.html && grep -q '/assets/index-' /tmp/geointel-index.html; then
               echo "PASS: Production HTML contains compiled assets and Chromium rendered React dashboard."
               exit 0
             fi

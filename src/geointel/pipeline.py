@@ -113,6 +113,18 @@ def _normalize_osm(gdf: gpd.GeoDataFrame, layer: str) -> gpd.GeoDataFrame:
     return gdf.reset_index(drop=True)
 
 
+def _simplify(gdf: gpd.GeoDataFrame, tolerance_m: float = 2.0) -> gpd.GeoDataFrame:
+    """Simplify line/polygon geometry by ~2 m (in metres, UTM 43N) to shrink published files."""
+    if gdf.empty:
+        return gdf
+    mask = ~gdf.geom_type.isin(["Point", "MultiPoint"])
+    if mask.any():
+        gdf = gdf.copy()
+        simplified = gdf.loc[mask].geometry.to_crs("EPSG:32643").simplify(tolerance_m, preserve_topology=True)
+        gdf.loc[mask, "geometry"] = simplified.to_crs("EPSG:4326")
+    return gdf
+
+
 def _fetch_layer_around_points(ox, tags: dict[str, Any], points: list[tuple[float, float]],
                                dist_m: float, pause_s: float, endpoints: list[str]) -> gpd.GeoDataFrame:
     """Fetch one layer within dist_m of each (lat, lon) point and concatenate.
@@ -273,6 +285,7 @@ def fetch_osm_layers(refresh: bool = False, pbf_path: str | Path | None = None) 
                 fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s, endpoints)
             gdf = _apply_exclude(_normalize_osm(fetched, layer), definition.get("exclude"),
                                  definition.get("require"), definition.get("exclude_name_pattern"))
+            gdf = _simplify(gdf)
         except Exception as exc:
             raise RuntimeError(
                 f"Failed to fetch OSM layer '{layer}'. Public Overpass services are shared "
@@ -469,6 +482,8 @@ def build_metrics() -> Path:
     output.write_text(json.dumps({
         "project": "GeoIntel Bengaluru", "generated_at_utc": utc_now(),
         "metric_crs": metric_crs, "source_manifest": "source_manifest.json",
+        "aoi_bbox_wsen": [cfg["aoi"]["west"], cfg["aoi"]["south"], cfg["aoi"]["east"], cfg["aoi"]["north"]],
+        "citywide_layers": [k for k, d in cfg["osm_layers"].items() if d.get("fetch_scope") == "aoi"],
         "locations": results
     }, indent=2), encoding="utf-8")
     return output

@@ -4,7 +4,7 @@ Open-data geospatial intelligence MVP for Bengaluru.
 
 ## Status
 
-Early prototype. The React/Vite dashboard shows OpenStreetMap-derived indicators around five reference locations on an OpenFreeMap basemap. This is not a parcel, zoning, flood, or title verification product.
+Early prototype. Search any address, enter coordinates or click the map to get connectivity and amenity indicators (computed in the browser from city-wide OSM layers); five pilot locations also get road density and building coverage from the Python pipeline. This is not a parcel, zoning, flood, or title verification product.
 
 ## Cloudflare Worker deployment
 

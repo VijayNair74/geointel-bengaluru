@@ -38,18 +38,23 @@ osm_layers:
   schools:
     tags: {amenity: [school, college, university, kindergarten]}
     fetch_radius_m: 3500
+    fetch_scope: aoi   # city-wide so the browser can compute any point
   healthcare:
     tags: {amenity: [hospital, clinic, doctors, health_centre]}
     fetch_radius_m: 5500
+    fetch_scope: aoi   # city-wide so the browser can compute any point
   parks:
     tags: {leisure: [park, garden, playground]}
     fetch_radius_m: 3500
+    fetch_scope: aoi   # city-wide so the browser can compute any point
   water:
     tags: {natural: [water], water: [lake, pond, reservoir], landuse: [reservoir]}
     fetch_radius_m: 8000
+    fetch_scope: aoi   # city-wide so the browser can compute any point
   retail:
     tags: {shop: [supermarket, mall, department_store, convenience]}
     fetch_radius_m: 2500
+    fetch_scope: aoi   # city-wide so the browser can compute any point
   roads:
     tags: {highway: [motorway, trunk, primary, secondary, tertiary, residential, unclassified, service]}
     fetch_radius_m: 1500
