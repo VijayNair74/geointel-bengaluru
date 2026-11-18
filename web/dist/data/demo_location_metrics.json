@@ -1,13 +1,13 @@
 {
   "project": "GeoIntel Bengaluru",
-  "generated_at_utc": "2026-11-18T20:40:55.193345+00:00",
+  "generated_at_utc": "2026-11-18T21:03:06.307571+00:00",
   "metric_crs": "EPSG:32643",
   "source_manifest": "source_manifest.json",
   "aoi_bbox_wsen": [
     77.35,
     12.75,
     77.85,
-    13.25
+    13.35
   ],
   "citywide_layers": [
     "schools",
@@ -580,7 +580,7 @@
           "status": "calculated"
         },
         "schools_within_3km": {
-          "value": 7,
+          "value": 8,
           "unit": "mapped_features",
           "radius_m": 3000,
           "source": "OpenStreetMap contributors",
@@ -589,7 +589,7 @@
           "status": "calculated"
         },
         "healthcare_within_1km": {
-          "value": 1,
+          "value": 2,
           "unit": "mapped_features",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -598,7 +598,7 @@
           "status": "calculated"
         },
         "healthcare_within_5km": {
-          "value": 1,
+          "value": 3,
           "unit": "mapped_features",
           "radius_m": 5000,
           "source": "OpenStreetMap contributors",
@@ -616,7 +616,7 @@
           "status": "calculated"
         },
         "parks_within_3km": {
-          "value": 12,
+          "value": 13,
           "unit": "mapped_features",
           "radius_m": 3000,
           "source": "OpenStreetMap contributors",
@@ -625,7 +625,7 @@
           "status": "calculated"
         },
         "retail_within_2km": {
-          "value": 3,
+          "value": 4,
           "unit": "mapped_features",
           "radius_m": 2000,
           "source": "OpenStreetMap contributors",
@@ -643,7 +643,7 @@
           "status": "calculated"
         },
         "road_density_within_1km": {
-          "value": 15.985,
+          "value": 18.899,
           "unit": "km_of_mapped_roads_per_sq_km",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -652,7 +652,7 @@
           "status": "calculated"
         },
         "building_footprint_coverage_within_1km": {
-          "value": 1.09,
+          "value": 1.18,
           "unit": "percent",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",

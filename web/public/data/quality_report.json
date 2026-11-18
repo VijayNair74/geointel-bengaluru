@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-18T20:40:56.607496+00:00",
+  "generated_at_utc": "2026-11-18T21:03:07.134401+00:00",
   "layers": [
     {
       "layer": "airports",
@@ -13,7 +13,7 @@
     },
     {
       "layer": "buildings",
-      "feature_count": 27013,
+      "feature_count": 27026,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -25,7 +25,7 @@
     },
     {
       "layer": "healthcare",
-      "feature_count": 2349,
+      "feature_count": 2378,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -36,7 +36,7 @@
     },
     {
       "layer": "highways",
-      "feature_count": 1988,
+      "feature_count": 2239,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -57,7 +57,7 @@
     },
     {
       "layer": "parks",
-      "feature_count": 3784,
+      "feature_count": 3817,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -70,7 +70,7 @@
     },
     {
       "layer": "rail_stations",
-      "feature_count": 39,
+      "feature_count": 43,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -81,7 +81,7 @@
     },
     {
       "layer": "retail",
-      "feature_count": 1363,
+      "feature_count": 1365,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -92,7 +92,7 @@
     },
     {
       "layer": "roads",
-      "feature_count": 6544,
+      "feature_count": 6802,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -102,7 +102,7 @@
     },
     {
       "layer": "schools",
-      "feature_count": 2775,
+      "feature_count": 2796,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -115,7 +115,7 @@
     },
     {
       "layer": "water",
-      "feature_count": 6496,
+      "feature_count": 9202,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
