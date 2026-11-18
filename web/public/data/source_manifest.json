@@ -14,8 +14,8 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
-      "fetch_scope": "points",
-      "fetch_radius_m": 3500.0,
+      "fetch_scope": "aoi",
+      "fetch_radius_m": null,
       "demo_locations": [
         "Whitefield",
         "Hebbal",
@@ -23,10 +23,10 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:29:19.617044+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:02.473102+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
-      "feature_count": 421,
+      "feature_count": 2775,
       "output": "data/processed/schools.geojson",
       "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
       "source_extract": "southern-zone-latest.osm.pbf"
@@ -43,8 +43,8 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
-      "fetch_scope": "points",
-      "fetch_radius_m": 5500.0,
+      "fetch_scope": "aoi",
+      "fetch_radius_m": null,
       "demo_locations": [
         "Whitefield",
         "Hebbal",
@@ -52,10 +52,10 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:29:23.127757+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:05.988738+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
-      "feature_count": 789,
+      "feature_count": 2349,
       "output": "data/processed/healthcare.geojson",
       "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
       "source_extract": "southern-zone-latest.osm.pbf"
@@ -71,8 +71,8 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
-      "fetch_scope": "points",
-      "fetch_radius_m": 3500.0,
+      "fetch_scope": "aoi",
+      "fetch_radius_m": null,
       "demo_locations": [
         "Whitefield",
         "Hebbal",
@@ -80,10 +80,10 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:29:27.988710+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:11.088909+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
-      "feature_count": 803,
+      "feature_count": 3784,
       "output": "data/processed/parks.geojson",
       "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
       "source_extract": "southern-zone-latest.osm.pbf"
@@ -105,8 +105,8 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
-      "fetch_scope": "points",
-      "fetch_radius_m": 8000.0,
+      "fetch_scope": "aoi",
+      "fetch_radius_m": null,
       "demo_locations": [
         "Whitefield",
         "Hebbal",
@@ -114,10 +114,10 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:29:34.325249+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:17.446341+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
-      "feature_count": 2317,
+      "feature_count": 6496,
       "output": "data/processed/water.geojson",
       "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
       "source_extract": "southern-zone-latest.osm.pbf"
@@ -134,8 +134,8 @@
         ]
       },
       "fetch_strategy": "per_demo_location (local PBF extract)",
-      "fetch_scope": "points",
-      "fetch_radius_m": 2500.0,
+      "fetch_scope": "aoi",
+      "fetch_radius_m": null,
       "demo_locations": [
         "Whitefield",
         "Hebbal",
@@ -143,10 +143,10 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:29:36.260664+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:20.490102+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
-      "feature_count": 139,
+      "feature_count": 1363,
       "output": "data/processed/retail.geojson",
       "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
       "source_extract": "southern-zone-latest.osm.pbf"
@@ -176,7 +176,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:29:44.505327+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:28.584096+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 6544,
@@ -200,7 +200,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:29:57.845533+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:42.598128+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 27013,
@@ -226,7 +226,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:29:59.318940+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:44.179660+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 88,
@@ -253,7 +253,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:30:01.358890+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:45.809962+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 39,
@@ -279,7 +279,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:30:02.998886+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:47.800801+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 4,
@@ -306,7 +306,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:30:06.696045+00:00",
+      "retrieved_at_utc": "2026-11-18T20:40:51.904560+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 1988,

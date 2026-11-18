@@ -1,8 +1,25 @@
 {
   "project": "GeoIntel Bengaluru",
-  "generated_at_utc": "2026-11-18T20:30:09.329228+00:00",
+  "generated_at_utc": "2026-11-18T20:40:55.193345+00:00",
   "metric_crs": "EPSG:32643",
   "source_manifest": "source_manifest.json",
+  "aoi_bbox_wsen": [
+    77.35,
+    12.75,
+    77.85,
+    13.25
+  ],
+  "citywide_layers": [
+    "schools",
+    "healthcare",
+    "parks",
+    "water",
+    "retail",
+    "metro_stations",
+    "rail_stations",
+    "airports",
+    "highways"
+  ],
   "locations": [
     {
       "location": "Whitefield",
@@ -73,7 +90,7 @@
           "status": "calculated"
         },
         "nearest_mapped_water_km": {
-          "value": 0.671,
+          "value": 0.673,
           "unit": "km",
           "nearest_feature": "Pattandur Agrahara Lake",
           "source": "OpenStreetMap contributors",
@@ -82,7 +99,7 @@
           "status": "calculated"
         },
         "road_density_within_1km": {
-          "value": 20.036,
+          "value": 20.016,
           "unit": "km_of_mapped_roads_per_sq_km",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -91,7 +108,7 @@
           "status": "calculated"
         },
         "building_footprint_coverage_within_1km": {
-          "value": 23.16,
+          "value": 23.14,
           "unit": "percent",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -127,7 +144,7 @@
           "status": "calculated"
         },
         "nearest_highway_km": {
-          "value": 3.84,
+          "value": 3.841,
           "unit": "km",
           "nearest_feature": "Dabaspete - Hosur Highway",
           "source": "OpenStreetMap contributors",
@@ -218,7 +235,7 @@
           "status": "calculated"
         },
         "road_density_within_1km": {
-          "value": 29.153,
+          "value": 29.14,
           "unit": "km_of_mapped_roads_per_sq_km",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -227,7 +244,7 @@
           "status": "calculated"
         },
         "building_footprint_coverage_within_1km": {
-          "value": 30.92,
+          "value": 30.88,
           "unit": "percent",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -263,7 +280,7 @@
           "status": "calculated"
         },
         "nearest_highway_km": {
-          "value": 0.674,
+          "value": 0.676,
           "unit": "km",
           "nearest_feature": "Outer Ring Road",
           "source": "OpenStreetMap contributors",
@@ -354,7 +371,7 @@
           "status": "calculated"
         },
         "road_density_within_1km": {
-          "value": 18.462,
+          "value": 18.443,
           "unit": "km_of_mapped_roads_per_sq_km",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -363,7 +380,7 @@
           "status": "calculated"
         },
         "building_footprint_coverage_within_1km": {
-          "value": 14.83,
+          "value": 14.82,
           "unit": "percent",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -490,7 +507,7 @@
           "status": "calculated"
         },
         "road_density_within_1km": {
-          "value": 18.307,
+          "value": 18.292,
           "unit": "km_of_mapped_roads_per_sq_km",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -626,7 +643,7 @@
           "status": "calculated"
         },
         "road_density_within_1km": {
-          "value": 15.996,
+          "value": 15.985,
           "unit": "km_of_mapped_roads_per_sq_km",
           "radius_m": 1000,
           "source": "OpenStreetMap contributors",
@@ -671,7 +688,7 @@
           "status": "calculated"
         },
         "nearest_highway_km": {
-          "value": 0.717,
+          "value": 0.718,
           "unit": "km",
           "nearest_feature": "Ballari Road",
           "source": "OpenStreetMap contributors",

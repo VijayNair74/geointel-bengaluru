@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-18T20:30:10.319072+00:00",
+  "generated_at_utc": "2026-11-18T20:40:56.607496+00:00",
   "layers": [
     {
       "layer": "airports",
@@ -25,7 +25,7 @@
     },
     {
       "layer": "healthcare",
-      "feature_count": 789,
+      "feature_count": 2349,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -57,7 +57,7 @@
     },
     {
       "layer": "parks",
-      "feature_count": 803,
+      "feature_count": 3784,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -81,7 +81,7 @@
     },
     {
       "layer": "retail",
-      "feature_count": 139,
+      "feature_count": 1363,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -102,7 +102,7 @@
     },
     {
       "layer": "schools",
-      "feature_count": 421,
+      "feature_count": 2775,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -115,7 +115,7 @@
     },
     {
       "layer": "water",
-      "feature_count": 2317,
+      "feature_count": 6496,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
