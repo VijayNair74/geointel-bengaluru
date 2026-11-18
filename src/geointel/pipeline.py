@@ -632,7 +632,9 @@ def _project_evidence(point: Point, layers: dict[str, gpd.GeoDataFrame], metric_
     named = [l for l in lakes if l["name"]]
     ev["lakes_within_2km"] = [{k: v for k, v in l.items() if k != "_geom"} for l in named[:10]]
     ev["water_bodies_within_2km"] = len(lakes)
-    nearest = lakes[0] if lakes else None
+    # "Lake" = a named water body or one of at least 1 acre (skips small ponds and pools).
+    real = [l for l in lakes if l["name"] or l["area_acres"] >= 1]
+    nearest = real[0] if real else None
     ev["nearest_lake"] = {k: v for k, v in nearest.items() if k != "_geom"} if nearest else None
 
     drains = layers.get("drains", _empty_gdf())
