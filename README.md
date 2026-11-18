@@ -13,8 +13,7 @@ This repository is currently connected to a **Cloudflare Worker with static asse
 - Root directory: `/`
 - Wrangler static assets directory: `./web/dist`
 - Current Cloudflare deploy command: `npx wrangler deploy`
-- Production frontend assets are built and checked by `.github/workflows/validate.yml` and committed to `web/dist` automatically.
-- For a regular dashboard build, set the Cloudflare build command to `npm run build`. The checked-in compiled assets also permit the existing no-build-command deployment workflow.
+- Frontend assets are built fresh in every deploy job; `web/dist` is not committed.
 - Production site: https://blr.geointel.workers.dev/
 - Every push to `main` is deployed by the `deploy` job in `.github/workflows/validate.yml` (`wrangler deploy`), which needs the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repository secrets. The production smoke test runs after that workflow succeeds.
 

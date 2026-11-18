@@ -76,21 +76,11 @@ jobs:
           python scripts/export_web_data.py
           ls -la web/public/data
           du -sh web/public/data
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Rebuild committed web/dist so any repo-based deploy also has the data
-        run: |
-          npm install --prefix web --no-audit --no-fund
-          npm run build --prefix web
-          test -f web/dist/data/demo_location_metrics.json
       - name: Commit published data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add web/public/data
-          git add -f web/dist
-          git add -u web/dist
           if git diff --cached --quiet; then
             echo "Published data unchanged."
             exit 0
