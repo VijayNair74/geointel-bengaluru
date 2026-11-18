@@ -92,7 +92,7 @@ function readUrl() {
     const p = places.find((x) => x.location === s); if (p) return pilotEntry(p);
     const ll = parseLatLon(s || ''); return ll ? pointEntry(ll[0], ll[1]) : null;
   };
-  const compare = (u.get('c') || '').split('~').map(decodeURIComponent).map(parseEntry).filter(Boolean).slice(0, MAX_COMPARE);
+  const compare = (u.get('c') || '').split(/[|~]/).map(parseEntry).filter(Boolean).slice(0, MAX_COMPARE);
   const lat = parseFloat(u.get('lat')), lon = parseFloat(u.get('lon'));
   const current = Number.isFinite(lat) && Number.isFinite(lon) ? pointEntry(lon, lat, u.get('label') || '')
     : pilotEntry(places.find((x) => x.location === u.get('place')) || places[0]);
@@ -102,7 +102,7 @@ function writeUrl(mode, current, compare) {
   const u = new URLSearchParams();
   if (current.kind === 'pilot') u.set('place', current.name);
   else { u.set('lat', current.lat.toFixed(5)); u.set('lon', current.lon.toFixed(5)); if (current.name !== 'Selected point') u.set('label', current.name); }
-  if (compare.length) u.set('c', compare.map((e) => encodeURIComponent(e.kind === 'pilot' ? e.name : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`)).join('~'));
+  if (compare.length) u.set('c', compare.map((e) => (e.kind === 'pilot' ? e.name : `${e.lat.toFixed(5)},${e.lon.toFixed(5)}`)).join('|'));
   if (mode === 'compare') u.set('mode', 'compare');
   history.replaceState(null, '', `${location.pathname}?${u}`);
 }
