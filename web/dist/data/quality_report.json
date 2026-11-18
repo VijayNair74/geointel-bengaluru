@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-18T21:03:07.134401+00:00",
+  "generated_at_utc": "2026-11-18T21:48:17.280290+00:00",
   "layers": [
     {
       "layer": "airports",
@@ -13,7 +13,7 @@
     },
     {
       "layer": "buildings",
-      "feature_count": 27026,
+      "feature_count": 29405,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
@@ -21,6 +21,16 @@
         "MultiPolygon",
         "Point",
         "Polygon"
+      ]
+    },
+    {
+      "layer": "drains",
+      "feature_count": 3114,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "LineString"
       ]
     },
     {
@@ -53,6 +63,17 @@
       "geometry_types": [
         "Point",
         "Polygon"
+      ]
+    },
+    {
+      "layer": "metro_upcoming",
+      "feature_count": 9,
+      "crs": "EPSG:4326",
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "geometry_types": [
+        "LineString",
+        "Point"
       ]
     },
     {
@@ -92,7 +113,7 @@
     },
     {
       "layer": "roads",
-      "feature_count": 6802,
+      "feature_count": 8783,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,

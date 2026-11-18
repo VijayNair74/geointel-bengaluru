@@ -1,6 +1,6 @@
 {
   "project": "GeoIntel Bengaluru",
-  "generated_at_utc": "2026-11-18T21:03:07.409973+00:00",
+  "generated_at_utc": "2026-11-18T21:48:17.684256+00:00",
   "expected_layers": [
     "schools",
     "healthcare",
@@ -12,14 +12,18 @@
     "metro_stations",
     "rail_stations",
     "airports",
-    "highways"
+    "highways",
+    "metro_upcoming",
+    "drains"
   ],
   "available_layers": [
     "airports",
     "buildings",
+    "drains",
     "healthcare",
     "highways",
     "metro_stations",
+    "metro_upcoming",
     "parks",
     "rail_stations",
     "retail",

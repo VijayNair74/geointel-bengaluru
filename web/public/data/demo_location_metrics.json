@@ -1,6 +1,6 @@
 {
   "project": "GeoIntel Bengaluru",
-  "generated_at_utc": "2026-11-18T21:03:06.307571+00:00",
+  "generated_at_utc": "2026-11-18T21:48:13.867062+00:00",
   "metric_crs": "EPSG:32643",
   "source_manifest": "source_manifest.json",
   "aoi_bbox_wsen": [
@@ -18,7 +18,9 @@
     "metro_stations",
     "rail_stations",
     "airports",
-    "highways"
+    "highways",
+    "metro_upcoming",
+    "drains"
   ],
   "locations": [
     {

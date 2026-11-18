@@ -11,7 +11,10 @@
     "rail_stations.geojson",
     "airports.geojson",
     "highways.geojson",
+    "metro_upcoming.geojson",
+    "drains.geojson",
     "demo_location_metrics.json",
+    "project_reports.json",
     "data_status.json",
     "source_manifest.json",
     "quality_report.json"

@@ -1,0 +1,236 @@
+{
+  "generated_at_utc": "2026-11-18T21:48:15.724464+00:00",
+  "osm_retrieved": "2026-11-18",
+  "projects": [
+    {
+      "id": "navami-dm-enclave",
+      "name": "Navami DM Enclave",
+      "builder": "Navami",
+      "address": "88/4, Chikka Begur, Wellington Paradise, Begur, Bengaluru, Karnataka 560068",
+      "lat": 12.88625,
+      "lon": 77.64097,
+      "status": "Pre-launch",
+      "facts": {
+        "land_area_acres": 1.66,
+        "total_units": 144,
+        "configurations": "2BHK, 2.5BHK, 3BHK"
+      },
+      "source_url": "https://discover.talkinglands.com/navami/properties/navami-dm-enclave",
+      "search_terms": [
+        "navami",
+        "dm enclave",
+        "chikka begur",
+        "wellington paradise",
+        "begur"
+      ],
+      "metrics": {
+        "schools_within_1km": {
+          "value": 11,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "schools_within_3km": {
+          "value": 102,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_1km": {
+          "value": 6,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "healthcare_within_5km": {
+          "value": 196,
+          "unit": "mapped_features",
+          "radius_m": 5000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_1km": {
+          "value": 4,
+          "unit": "mapped_features",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "parks_within_3km": {
+          "value": 81,
+          "unit": "mapped_features",
+          "radius_m": 3000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "retail_within_2km": {
+          "value": 15,
+          "unit": "mapped_features",
+          "radius_m": 2000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Count mapped feature geometries with minimum distance to reference point within radius.",
+          "status": "calculated"
+        },
+        "nearest_mapped_water_km": {
+          "value": 0.25,
+          "unit": "km",
+          "nearest_feature": "Chikka Beguru Lake",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Minimum planar distance to mapped water feature geometry.",
+          "status": "calculated"
+        },
+        "road_density_within_1km": {
+          "value": 26.914,
+          "unit": "km_of_mapped_roads_per_sq_km",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Sum of mapped road-line lengths clipped to a 1 km radius circle, divided by circle area.",
+          "status": "calculated"
+        },
+        "building_footprint_coverage_within_1km": {
+          "value": 12.71,
+          "unit": "percent",
+          "radius_m": 1000,
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Union area of mapped building footprints clipped to a 1 km radius circle divided by circle area.",
+          "status": "calculated"
+        },
+        "nearest_airport_km": {
+          "value": 35.341,
+          "unit": "km",
+          "nearest_feature": "Kempegowda International Airport",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the centroid of the nearest mapped aerodrome with an IATA code (scheduled-service airport).",
+          "status": "calculated"
+        },
+        "nearest_metro_station_km": {
+          "value": 0.449,
+          "unit": "km",
+          "nearest_feature": "Kudlu Gate",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
+          "status": "calculated"
+        },
+        "nearest_rail_station_km": {
+          "value": 7.423,
+          "unit": "km",
+          "nearest_feature": "Carmelaram",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped railway station or halt, excluding metro.",
+          "status": "calculated"
+        },
+        "nearest_highway_km": {
+          "value": 0.06,
+          "unit": "km",
+          "nearest_feature": "Hosur Road",
+          "source": "OpenStreetMap contributors",
+          "license": "ODbL-1.0",
+          "method": "Planar distance to the nearest mapped motorway or trunk road (typically national/state highways).",
+          "status": "calculated"
+        }
+      },
+      "evidence": {
+        "lakes_within_2km": [
+          {
+            "name": "Chikka Beguru Lake",
+            "distance_m": 250,
+            "area_acres": 24.3
+          },
+          {
+            "name": "Singasandra Lake",
+            "distance_m": 585,
+            "area_acres": 5.0
+          },
+          {
+            "name": "Begur Kere",
+            "distance_m": 689,
+            "area_acres": 7.1
+          },
+          {
+            "name": "Begur Lake",
+            "distance_m": 1270,
+            "area_acres": 105.8
+          },
+          {
+            "name": "Somasundarapalya Lake",
+            "distance_m": 1467,
+            "area_acres": 6.1
+          },
+          {
+            "name": "Kudlu Lake/Kere",
+            "distance_m": 1513,
+            "area_acres": 7.9
+          },
+          {
+            "name": "ITI Layout Lake",
+            "distance_m": 1684,
+            "area_acres": 4.2
+          },
+          {
+            "name": "Basapura Lake",
+            "distance_m": 1851,
+            "area_acres": 6.5
+          },
+          {
+            "name": "Basapura Lake",
+            "distance_m": 1963,
+            "area_acres": 5.4
+          }
+        ],
+        "water_bodies_within_2km": 15,
+        "nearest_lake": {
+          "name": "Chikka Beguru Lake",
+          "distance_m": 250,
+          "area_acres": 24.3
+        },
+        "nearest_drain": {
+          "name": null,
+          "type": "drain",
+          "distance_m": 35
+        },
+        "drains_within_500m": 1,
+        "upcoming_metro_within_5km": [
+          {
+            "name": "HSR Layout",
+            "status": "under construction",
+            "distance_km": 3.41
+          },
+          {
+            "name": "Agara Lake",
+            "status": "proposed",
+            "distance_km": 3.76
+          }
+        ],
+        "elevation": {
+          "site_m": 898.6,
+          "nearest_lake_surface_m": 892.2,
+          "height_above_lake_m": 6.4,
+          "source": "Copernicus DEM GLO-30 (surface model incl. buildings and trees; approximate)",
+          "status": "calculated"
+        }
+      }
+    }
+  ]
+}
