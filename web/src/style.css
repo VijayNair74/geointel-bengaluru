@@ -158,13 +158,17 @@ td.is-best .num { color: var(--best); }
 @media (max-width: 760px) {
   .topbar { top: 10px; left: 10px; right: 10px; flex-wrap: wrap; gap: 8px; }
   .brand { min-width: 0; }
-  .brand-city { display: none; }
+  .brand-city, .brand-name { display: none; }
+  .topbar { flex-wrap: wrap; }
+  .top-actions { gap: 6px; }
+  .segmented button { padding: 0 11px; height: 36px; }
+  .icon-btn { width: 44px; height: 44px; }
   .search { order: 3; flex: 1 1 100%; margin: 0; }
   .top-actions { margin-left: auto; }
   .select { display: none; }
   .card { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 52%; border-radius: 22px 22px 0 0; padding-top: 16px; }
   .compare { left: 0; right: 0; bottom: 0; max-height: 58%; border-radius: 22px 22px 0 0; }
-  .layers { left: 10px; right: 10px; max-width: none; width: auto; bottom: auto; top: 128px; }
+  .layers { left: 10px; right: 10px; max-width: none; width: auto; bottom: auto; top: 122px; box-shadow: none; }
   .compare ~ .layers { left: 10px; max-width: none; }
   .attribution { display: none; }
   .maplibregl-ctrl-bottom-right { display: none; }
