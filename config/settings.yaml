@@ -14,7 +14,11 @@ aoi:
 acquisition:
   overpass_url: https://overpass-api.de/api/interpreter
   request_timeout_seconds: 240
-  pause_between_requests_seconds: 10
+  pause_between_requests_seconds: 5
+  # Features are fetched only around each demo location (radius = largest metric
+  # radius for that layer + margin), not for the whole AOI. A whole-city building
+  # query is far too large for the shared Overpass service and for static hosting.
+  fetch_strategy: per_demo_location
   user_agent: GeoIntelBengaluruMVP/0.3 (local research/demo; configure a contact address before public release)
 outputs:
   raw_dir: data/raw
@@ -29,15 +33,22 @@ demo_locations:
 osm_layers:
   schools:
     tags: {amenity: [school, college, university, kindergarten]}
+    fetch_radius_m: 3500
   healthcare:
     tags: {amenity: [hospital, clinic, doctors, health_centre]}
+    fetch_radius_m: 5500
   parks:
     tags: {leisure: [park, garden, playground]}
+    fetch_radius_m: 3500
   water:
     tags: {natural: [water], water: [lake, pond, reservoir], landuse: [reservoir]}
+    fetch_radius_m: 8000
   retail:
     tags: {shop: [supermarket, mall, department_store, convenience]}
+    fetch_radius_m: 2500
   roads:
     tags: {highway: [motorway, trunk, primary, secondary, tertiary, residential, unclassified, service]}
+    fetch_radius_m: 1500
   buildings:
     tags: {building: true}
+    fetch_radius_m: 1200

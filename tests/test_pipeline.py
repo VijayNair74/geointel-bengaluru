@@ -25,3 +25,13 @@ def test_building_coverage_is_bounded():
     gdf = gpd.GeoDataFrame(geometry=[box(-100, -100, 100, 100)], crs="EPSG:32643")
     value = _building_coverage_pct(gdf, Point(0, 0))
     assert value is not None and 0 < value <= 100
+def test_normalize_osm_dedups_on_type_and_id():
+    import pandas as pd
+    from geointel.pipeline import _normalize_osm
+    idx = pd.MultiIndex.from_tuples([("node", 1), ("node", 2), ("node", 1), ("way", 1)], names=["element", "id"])
+    gdf = gpd.GeoDataFrame({"name": ["a", "b", "a", "c"], "amenity": ["school"] * 4, "junk": [1, 2, 3, 4]},
+                           geometry=[Point(77.6, 12.9)] * 4, index=idx, crs="EPSG:4326")
+    out = _normalize_osm(gdf, "schools")
+    assert len(out) == 3
+    assert "junk" not in out.columns
+    assert {"osm_type", "osm_id", "name", "layer"}.issubset(out.columns)

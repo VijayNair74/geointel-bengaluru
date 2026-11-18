@@ -56,7 +56,14 @@ def _write_geojson(gdf: gpd.GeoDataFrame, path: Path) -> None:
     if gdf.empty:
         path.write_text('{"type":"FeatureCollection","features":[]}', encoding="utf-8")
     else:
-        gdf.to_file(path, driver="GeoJSON")
+        # 6 decimals ~= 0.1 m; keeps the published files small enough for static hosting.
+        gdf.to_file(path, driver="GeoJSON", layer_options={"COORDINATE_PRECISION": 6})
+
+
+# Tag columns worth keeping per feature; everything else OSM returns is dropped so
+# the published GeoJSON stays compact.
+_KEEP_COLUMNS = ("osm_type", "osm_id", "name", "amenity", "leisure", "shop",
+                 "highway", "natural", "water", "landuse", "building")
 
 
 def _normalize_osm(gdf: gpd.GeoDataFrame, layer: str) -> gpd.GeoDataFrame:
@@ -68,16 +75,42 @@ def _normalize_osm(gdf: gpd.GeoDataFrame, layer: str) -> gpd.GeoDataFrame:
         gdf = gdf.to_crs("EPSG:4326")
     gdf = gdf.reset_index()
     gdf = gdf.loc[~gdf.geometry.isna()].copy()
-    # OSMnx represents OSM elements with a stable element/osmid index. Avoid
-    # double-counting duplicate representations returned by the query.
-    id_cols = [c for c in ("element", "osmid") if c in gdf.columns]
-    if id_cols:
-        gdf = gdf.drop_duplicates(subset=id_cols)
-    gdf["source"] = "OpenStreetMap contributors"
-    gdf["source_license"] = "ODbL-1.0"
-    gdf["acquired_at_utc"] = utc_now()
+    # OSMnx 2.x indexes features by (element, id); 1.x used (element_type, osmid).
+    # Both columns are required: de-duplicating on the element type alone would
+    # collapse every layer to at most three rows (node/way/relation).
+    for type_col, id_col in (("element", "id"), ("element_type", "osmid")):
+        if type_col in gdf.columns and id_col in gdf.columns:
+            gdf = gdf.rename(columns={type_col: "osm_type", id_col: "osm_id"})
+            break
+    if {"osm_type", "osm_id"}.issubset(gdf.columns):
+        gdf = gdf.drop_duplicates(subset=["osm_type", "osm_id"])
+    keep = [c for c in _KEEP_COLUMNS if c in gdf.columns]
+    gdf = gpd.GeoDataFrame(gdf[keep + ["geometry"]].copy(), geometry="geometry", crs="EPSG:4326")
+    for col in keep:
+        if col != "osm_id":
+            gdf[col] = gdf[col].astype("string")
     gdf["layer"] = layer
-    return gdf
+    return gdf.reset_index(drop=True)
+
+
+def _fetch_layer_around_points(ox, tags: dict[str, Any], points: list[tuple[float, float]],
+                               dist_m: float, pause_s: float) -> gpd.GeoDataFrame:
+    """Fetch one layer within dist_m of each (lat, lon) point and concatenate."""
+    import pandas as pd
+    from osmnx._errors import InsufficientResponseError
+
+    frames = []
+    for i, (lat, lon) in enumerate(points):
+        try:
+            frames.append(ox.features_from_point((lat, lon), tags=tags, dist=dist_m))
+        except InsufficientResponseError:
+            pass  # no matching features mapped around this point
+        if i < len(points) - 1:
+            time.sleep(pause_s)
+    frames = [f for f in frames if not f.empty]
+    if not frames:
+        return _empty_gdf()
+    return gpd.GeoDataFrame(pd.concat(frames), geometry="geometry", crs=frames[0].crs)
 
 
 def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
@@ -94,13 +127,14 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
     cfg = load_config()
     validate_config(cfg)
     raw_dir, processed_dir = ensure_dirs(cfg)
-    aoi = cfg["aoi"]
-    bbox = (aoi["west"], aoi["south"], aoi["east"], aoi["north"])
+    acq = cfg["acquisition"]
+    pause_s = float(acq["pause_between_requests_seconds"])
+    points = [(lat, lon) for _, lat, lon in cfg["demo_locations"]]
     ox.settings.use_cache = True
     ox.settings.log_console = True
-    ox.settings.requests_timeout = int(cfg["acquisition"]["request_timeout_seconds"])
-    ox.settings.overpass_url = os.getenv("OVERPASS_URL", cfg["acquisition"]["overpass_url"])
-    ox.settings.http_user_agent = cfg["acquisition"]["user_agent"]
+    ox.settings.requests_timeout = int(acq["request_timeout_seconds"])
+    ox.settings.overpass_url = os.getenv("OVERPASS_URL", acq["overpass_url"])
+    ox.settings.http_user_agent = acq["user_agent"]
 
     manifest_path = processed_dir / "source_manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {
@@ -118,9 +152,10 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
             print(f"[cache] {layer}: {len(existing)} features")
             continue
 
-        print(f"[fetch] {layer} — {definition['tags']}")
+        dist_m = float(definition.get("fetch_radius_m", 3000))
+        print(f"[fetch] {layer} — {definition['tags']} within {dist_m:.0f} m of {len(points)} locations")
         try:
-            fetched = ox.features_from_bbox(bbox=bbox, tags=definition["tags"])
+            fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s)
             gdf = _normalize_osm(fetched, layer)
         except Exception as exc:
             raise RuntimeError(
@@ -131,11 +166,14 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
         _write_geojson(gdf, raw_path)
         _write_geojson(gdf, output_path)
         counts[layer] = len(gdf)
+        print(f"[done] {layer}: {len(gdf)} features")
         manifest["layers"][layer] = {
             "source": "OpenStreetMap contributors",
             "source_url": "https://www.openstreetmap.org/",
             "query_tags": definition["tags"],
-            "aoi_bbox_wsen": [aoi["west"], aoi["south"], aoi["east"], aoi["north"]],
+            "fetch_strategy": "per_demo_location",
+            "fetch_radius_m": dist_m,
+            "demo_locations": [name for name, _, _ in cfg["demo_locations"]],
             "retrieved_at_utc": utc_now(),
             "license": "ODbL 1.0",
             "attribution": "© OpenStreetMap contributors",
@@ -145,7 +183,7 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
         }
         manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
         if index < len(cfg["osm_layers"]) - 1:
-            time.sleep(float(cfg["acquisition"]["pause_between_requests_seconds"]))
+            time.sleep(pause_s)
 
     return counts
 

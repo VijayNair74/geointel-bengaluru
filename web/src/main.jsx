@@ -25,6 +25,8 @@ const layers = [
  {id:'buildings',label:'Buildings',color:'#c4d0dd'}
 ];
 const empty = {type:'FeatureCollection',features:[]};
+const BASEMAP_STYLE = 'https://tiles.openfreemap.org/styles/dark';
+const PLAIN_STYLE = {version:8,sources:{},layers:[{id:'background',type:'background',paint:{'background-color':'#101c2b'}}]};
 const fetchJSON = async (path) => {const res=await fetch(path,{cache:'no-store'});if(!res.ok) throw new Error(`HTTP ${res.status}`);return res.json()};
 const metricDisplay = (key,m) => {
  if(!m || m.status!=='calculated' || m.value===null || m.value===undefined) return 'No data';
@@ -37,7 +39,7 @@ function App(){
  const mapEl=useRef(null), mapRef=useRef(null);
  const [selected,setSelected]=useState('Whitefield'),[metrics,setMetrics]=useState(null),[status,setStatus]=useState(null);
  const [available,setAvailable]=useState({}),[enabled,setEnabled]=useState(['schools','healthcare','parks','water']);
- const [mapError,setMapError]=useState(''),[loaded,setLoaded]=useState(false);
+ const [mapError,setMapError]=useState(''),[loaded,setLoaded]=useState(false),[basemap,setBasemap]=useState(true);
  const selectedPlace=places.find(p=>p.location===selected);
  const result=metrics?.locations?.find(p=>p.location===selected);
  useEffect(()=>{
@@ -52,10 +54,17 @@ function App(){
  },[]);
  useEffect(()=>{
   if(!mapEl.current)return;
-  // No public OSM raster tile endpoint: map renders only locally published GeoJSON.
-  let map;
-  try{map=new maplibregl.Map({container:mapEl.current,style:{version:8,sources:{},layers:[{id:'background',type:'background',paint:{'background-color':'#101c2b'}}]},center:[77.64,12.98],zoom:10.3,attributionControl:false});}
+  // Free, keyless OpenFreeMap vector basemap (OpenMapTiles schema). If it cannot
+  // load, fall back to a plain background so the data layers still render.
+  let map, styleReady=false, fellBack=false;
+  try{map=new maplibregl.Map({container:mapEl.current,style:BASEMAP_STYLE,center:[77.64,12.98],zoom:10.3,attributionControl:false});}
   catch(err){setMapError(`Map unavailable: ${err?.message||'WebGL not supported'}`);return;}
+  map.once('styledata',()=>{styleReady=true});
+  map.on('error',e=>{
+   if(!styleReady&&!fellBack){fellBack=true;setBasemap(false);map.setStyle(PLAIN_STYLE);return;}
+   if(e.sourceId||e.tile)return; // a single missing tile is not worth alarming the user
+   setMapError(e.error?.message||'Map rendering error');
+  });
   mapRef.current=map;
   map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
   map.on('load',()=>{setLoaded(true);
@@ -66,7 +75,6 @@ function App(){
    map.on('mouseenter','place-points',()=>map.getCanvas().style.cursor='pointer');
    map.on('mouseleave','place-points',()=>map.getCanvas().style.cursor='');
   });
-  map.on('error',e=>setMapError(e.error?.message||'Map rendering error'));
   return()=>{map.remove();mapRef.current=null};
  },[]);
  useEffect(()=>{const map=mapRef.current;if(map&&loaded)map.flyTo({center:[selectedPlace.longitude,selectedPlace.latitude],zoom:12,essential:true,duration:800})},[selected,loaded]);
@@ -94,7 +102,7 @@ function App(){
  <p className="notice">{hasData?'Indicators describe mapped features, not verified real-world inventories.':'No live metrics have been published. Run the local data pipeline and export outputs to populate this dashboard.'}</p>
  </aside><main className="map-area"><div className="map" ref={mapEl}></div><div className="map-top"><div><strong>{selected}</strong><span>{selectedPlace.latitude.toFixed(4)}° N · {selectedPlace.longitude.toFixed(4)}° E</span></div></div>
  <div className="layer-panel"><div className="layer-title">MAP LAYERS <span>{Object.values(available).filter(g=>g.features?.length).length} with features</span></div>{layers.map(l=><label className="layer" key={l.id}><input type="checkbox" checked={enabled.includes(l.id)} onChange={e=>setEnabled(old=>e.target.checked?[...old,l.id]:old.filter(v=>v!==l.id))}/><span className="swatch" style={{background:l.color}}/>{l.label}<span className="layer-count">{available[l.id]?.features?.length??'—'}</span></label>)}</div>
- <div className="map-bottom">{mapError?<span className="error">{mapError}</span>:<span>Local vector layers · No third-party basemap</span>}<span>© OpenStreetMap contributors · ODbL</span></div></main></div>
+ <div className="map-bottom">{mapError?<span className="error">{mapError}</span>:<span>{basemap?<>Basemap <a href="https://openfreemap.org" target="_blank" rel="noreferrer">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/" target="_blank" rel="noreferrer">OpenMapTiles</a></>:'Basemap unavailable · showing data layers only'}</span>}<span>Data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a> · ODbL</span></div></main></div>
  <footer><span>GeoIntel is a research prototype. Not for title, zoning, flood, or legal decisions.</span><span>{status?.generated_at_utc?`Data status generated ${new Date(status.generated_at_utc).toLocaleDateString()}`:'No published acquisition timestamp'}</span></footer></div>;
 }
 createRoot(document.getElementById('root')).render(<App/>);

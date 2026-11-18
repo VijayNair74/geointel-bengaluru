@@ -4,7 +4,7 @@ Open-data geospatial intelligence MVP for Bengaluru.
 
 ## Status
 
-Early prototype. The React/Vite dashboard displays five reference locations and reports **No data** until the local OpenStreetMap ingestion pipeline has exported verified inputs. This is not a parcel, zoning, flood, or title verification product.
+Early prototype. The React/Vite dashboard shows OpenStreetMap-derived indicators around five reference locations on an OpenFreeMap basemap. This is not a parcel, zoning, flood, or title verification product.
 
 ## Cloudflare Worker deployment
 
@@ -21,5 +21,8 @@ This repository is currently connected to a **Cloudflare Worker with static asse
 A GitHub Action must pass the frontend compilation check before declaring a frontend build validated. A successful Cloudflare deploy alone is **not** proof that the app renders; verify the public page, its JS/CSS assets, and actual visible dashboard.
 
 ## Data
+
+Published data is produced by `.github/workflows/data.yml` (manual run, monthly schedule, or a push touching the pipeline/config). It fetches each OSM layer only within `fetch_radius_m` of the five demo locations, builds metrics, exports to `web/public/data`, commits, and deploys. Overpass is not reachable from every environment; run the workflow from the Actions tab to refresh.
+
 
 OpenStreetMap attribution: © OpenStreetMap contributors (ODbL). Avoid assuming that incomplete OSM data means a feature does not exist. Do not scrape proprietary/official GIS datasets without permission.

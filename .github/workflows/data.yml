@@ -1,0 +1,98 @@
+name: Refresh OSM data and deploy
+# Runs the Python pipeline (OSM via Overpass -> metrics), publishes the outputs to
+# web/public/data, commits them, and deploys. Commits pushed with GITHUB_TOKEN do
+# not trigger other workflows, so this workflow deploys on its own.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 1 * *'   # monthly; Overpass is a shared service, keep refreshes rare
+  push:
+    branches: [main]
+    paths:
+      - config/settings.yaml
+      - src/geointel/**
+      - scripts/export_web_data.py
+      - .github/workflows/data.yml
+concurrency:
+  group: osm-data-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install pipeline
+        run: pip install -e '.[dev]'
+      - name: Tests
+        run: pytest -q
+      - name: Fetch OSM layers, build metrics and reports
+        run: |
+          geointel validate-config
+          geointel fetch-osm --refresh
+          geointel build-metrics
+          geointel report
+          geointel data-status
+      - name: Publish to web/public/data
+        run: |
+          python scripts/export_web_data.py
+          ls -la web/public/data
+          du -sh web/public/data
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rebuild committed web/dist so any repo-based deploy also has the data
+        run: |
+          npm install --prefix web --no-audit --no-fund
+          npm run build --prefix web
+          test -f web/dist/data/demo_location_metrics.json
+      - name: Commit published data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/data
+          git add -f web/dist
+          git add -u web/dist
+          if git diff --cached --quiet; then
+            echo "Published data unchanged."
+            exit 0
+          fi
+          git commit -m "Refresh published OSM data [skip ci]"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 5
+          done
+          exit 1
+
+  deploy:
+    needs: refresh
+    runs-on: ubuntu-latest
+    concurrency:
+      group: cloudflare-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build React app
+        run: |
+          npm install --prefix web --no-audit --no-fund
+          npm run build --prefix web
+          grep -q '/assets/index-' web/dist/index.html
+          test -f web/dist/data/demo_location_metrics.json
+      - name: Deploy to Cloudflare Workers
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 deploy
