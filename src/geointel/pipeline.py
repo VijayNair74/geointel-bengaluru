@@ -94,17 +94,35 @@ def _normalize_osm(gdf: gpd.GeoDataFrame, layer: str) -> gpd.GeoDataFrame:
 
 
 def _fetch_layer_around_points(ox, tags: dict[str, Any], points: list[tuple[float, float]],
-                               dist_m: float, pause_s: float) -> gpd.GeoDataFrame:
-    """Fetch one layer within dist_m of each (lat, lon) point and concatenate."""
+                               dist_m: float, pause_s: float, endpoints: list[str]) -> gpd.GeoDataFrame:
+    """Fetch one layer within dist_m of each (lat, lon) point and concatenate.
+
+    If an Overpass endpoint errors (e.g. 403 to cloud runners, 429/504 when busy),
+    the same request is retried on the next endpoint; the working endpoint is kept
+    for later requests.
+    """
     import pandas as pd
     from osmnx._errors import InsufficientResponseError
 
     frames = []
     for i, (lat, lon) in enumerate(points):
-        try:
-            frames.append(ox.features_from_point((lat, lon), tags=tags, dist=dist_m))
-        except InsufficientResponseError:
-            pass  # no matching features mapped around this point
+        last_exc: Exception | None = None
+        for _ in range(len(endpoints)):
+            try:
+                frames.append(ox.features_from_point((lat, lon), tags=tags, dist=dist_m))
+                last_exc = None
+                break
+            except InsufficientResponseError:
+                last_exc = None
+                break  # no matching features mapped around this point
+            except Exception as exc:  # noqa: BLE001 - rotate endpoint and retry
+                last_exc = exc
+                endpoints.append(endpoints.pop(0))
+                ox.settings.overpass_url = endpoints[0]
+                print(f"[retry] {type(exc).__name__}: {exc} -> switching to {endpoints[0]}")
+                time.sleep(pause_s)
+        if last_exc is not None:
+            raise last_exc
         if i < len(points) - 1:
             time.sleep(pause_s)
     frames = [f for f in frames if not f.empty]
@@ -133,7 +151,11 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
     ox.settings.use_cache = True
     ox.settings.log_console = True
     ox.settings.requests_timeout = int(acq["request_timeout_seconds"])
-    ox.settings.overpass_url = os.getenv("OVERPASS_URL", acq["overpass_url"])
+    endpoints = [os.getenv("OVERPASS_URL", acq["overpass_url"]), *acq.get("overpass_fallback_urls", [])]
+    ox.settings.overpass_url = endpoints[0]
+    # The pre-request /status probe is specific to overpass-api.de and fails on
+    # mirrors; we already pause between requests ourselves.
+    ox.settings.overpass_rate_limit = False
     ox.settings.http_user_agent = acq["user_agent"]
 
     manifest_path = processed_dir / "source_manifest.json"
@@ -155,7 +177,7 @@ def fetch_osm_layers(refresh: bool = False) -> dict[str, int]:
         dist_m = float(definition.get("fetch_radius_m", 3000))
         print(f"[fetch] {layer} — {definition['tags']} within {dist_m:.0f} m of {len(points)} locations")
         try:
-            fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s)
+            fetched = _fetch_layer_around_points(ox, definition["tags"], points, dist_m, pause_s, endpoints)
             gdf = _normalize_osm(fetched, layer)
         except Exception as exc:
             raise RuntimeError(
