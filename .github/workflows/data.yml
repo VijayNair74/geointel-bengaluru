@@ -36,17 +36,30 @@ jobs:
       # so CI reads a Geofabrik regional extract (Karnataka is in India's southern zone).
       - name: Install osmium-tool
         run: sudo apt-get update -q && sudo apt-get install -y -q osmium-tool
+      # Cache the 500+ MB extract for a week: code-only pushes reuse it instead of
+      # re-downloading (Geofabrik throttles repeated downloads).
+      - name: Week key
+        id: week
+        run: echo "key=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+      - name: Restore cached Geofabrik extract
+        id: pbf-cache
+        uses: actions/cache@v4
+        with:
+          path: data/raw/southern-zone-latest.osm.pbf
+          key: geofabrik-southern-zone-${{ steps.week.outputs.key }}
       - name: Download Geofabrik extract
+        if: steps.pbf-cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p data/raw
-          curl -fL --retry 3 -o data/raw/southern-zone-latest.osm.pbf \
+          curl -fL --retry 6 --retry-delay 60 --retry-all-errors -o data/raw/southern-zone-latest.osm.pbf \
             https://download.geofabrik.de/asia/india/southern-zone-latest.osm.pbf
-          ls -lh data/raw/southern-zone-latest.osm.pbf
+      - name: Extract size
+        run: ls -lh data/raw/southern-zone-latest.osm.pbf
       - name: Download Copernicus GLO-30 elevation tiles (public AWS open data)
         run: |
           mkdir -p data/raw/dem
           for t in N12_00_E077_00 N13_00_E077_00; do
-            curl -fL --retry 3 -o data/raw/dem/$t.tif \
+            curl -fL --retry 4 --retry-delay 20 --retry-all-errors -o data/raw/dem/$t.tif \
               https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_${t}_DEM/Copernicus_DSM_COG_10_${t}_DEM.tif
           done
           ls -lh data/raw/dem
