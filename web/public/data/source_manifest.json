@@ -23,7 +23,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:22.107202+00:00",
+      "retrieved_at_utc": "2026-11-18T20:29:19.617044+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 421,
@@ -52,7 +52,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:25.008235+00:00",
+      "retrieved_at_utc": "2026-11-18T20:29:23.127757+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 789,
@@ -80,7 +80,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:28.954653+00:00",
+      "retrieved_at_utc": "2026-11-18T20:29:27.988710+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 803,
@@ -114,7 +114,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:34.877396+00:00",
+      "retrieved_at_utc": "2026-11-18T20:29:34.325249+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 2317,
@@ -143,7 +143,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:36.754832+00:00",
+      "retrieved_at_utc": "2026-11-18T20:29:36.260664+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 139,
@@ -176,7 +176,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:43.517896+00:00",
+      "retrieved_at_utc": "2026-11-18T20:29:44.505327+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 6544,
@@ -200,7 +200,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:54.715745+00:00",
+      "retrieved_at_utc": "2026-11-18T20:29:57.845533+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 27013,
@@ -226,10 +226,10 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:56.048834+00:00",
+      "retrieved_at_utc": "2026-11-18T20:29:59.318940+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
-      "feature_count": 97,
+      "feature_count": 88,
       "output": "data/processed/metro_stations.geojson",
       "limitations": "Community-mapped and incomplete; not an authoritative property, title, zoning or safety record.",
       "source_extract": "southern-zone-latest.osm.pbf"
@@ -253,7 +253,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:57.411548+00:00",
+      "retrieved_at_utc": "2026-11-18T20:30:01.358890+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 39,
@@ -279,7 +279,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:20:58.933078+00:00",
+      "retrieved_at_utc": "2026-11-18T20:30:02.998886+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 4,
@@ -306,7 +306,7 @@
         "Electronic City",
         "Devanahalli"
       ],
-      "retrieved_at_utc": "2026-11-18T20:21:02.278895+00:00",
+      "retrieved_at_utc": "2026-11-18T20:30:06.696045+00:00",
       "license": "ODbL 1.0",
       "attribution": "\u00a9 OpenStreetMap contributors",
       "feature_count": 1988,

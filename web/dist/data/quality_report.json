@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-18T20:21:05.680974+00:00",
+  "generated_at_utc": "2026-11-18T20:30:10.319072+00:00",
   "layers": [
     {
       "layer": "airports",
@@ -46,12 +46,11 @@
     },
     {
       "layer": "metro_stations",
-      "feature_count": 97,
+      "feature_count": 88,
       "crs": "EPSG:4326",
       "null_geometry_count": 0,
       "invalid_geometry_count": 0,
       "geometry_types": [
-        "LineString",
         "Point",
         "Polygon"
       ]

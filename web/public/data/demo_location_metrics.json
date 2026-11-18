@@ -1,6 +1,6 @@
 {
   "project": "GeoIntel Bengaluru",
-  "generated_at_utc": "2026-11-18T20:21:04.745229+00:00",
+  "generated_at_utc": "2026-11-18T20:30:09.329228+00:00",
   "metric_crs": "EPSG:32643",
   "source_manifest": "source_manifest.json",
   "locations": [
@@ -245,9 +245,9 @@
           "status": "calculated"
         },
         "nearest_metro_station_km": {
-          "value": 3.107,
+          "value": 5.223,
           "unit": "km",
-          "nearest_feature": "Nagawara (Proposed)",
+          "nearest_feature": "Sandal Soap Factory",
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
@@ -381,9 +381,9 @@
           "status": "calculated"
         },
         "nearest_metro_station_km": {
-          "value": 5.716,
+          "value": 6.201,
           "unit": "km",
-          "nearest_feature": "Agara Lake (u/c)",
+          "nearest_feature": "Hosa Road",
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
@@ -653,9 +653,9 @@
           "status": "calculated"
         },
         "nearest_metro_station_km": {
-          "value": 24.598,
+          "value": 27.622,
           "unit": "km",
-          "nearest_feature": "Nagawara (Proposed)",
+          "nearest_feature": "Krishnarajapura",
           "source": "OpenStreetMap contributors",
           "license": "ODbL-1.0",
           "method": "Planar distance to the nearest mapped operational metro station (OSM station=subway).",
