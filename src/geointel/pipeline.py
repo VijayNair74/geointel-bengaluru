@@ -41,15 +41,22 @@ def discover_projects(processed_dir: Path) -> list[dict[str, Any]]:
     """Projects auto-discovered from the developer_projects OSM layer."""
     layer = _read_layer(processed_dir, "developer_projects")
     out = []
+    import re
+    brands = {px.lower() for d in load_config().get("developers", []) for px in d["prefixes"]}
+    uc = re.compile(r"\s*\((?:u/c|under construction)\)\s*", re.I)
     for _, r in layer.iterrows():
+        raw = str(r["name"])
+        name = uc.sub(" ", raw).strip()
+        if name.lower() in brands:
+            continue  # e.g. "Sobha (u/c)": an unnamed site, not a project
         g = r.geometry
         pt = g.representative_point() if g.geom_type != "Point" else g
         addr = ", ".join(str(r.get(k)) for k in ("addr:street", "addr:suburb", "addr:city", "addr:postcode")
                          if isinstance(r.get(k), str) and r.get(k).strip())
         osm_type, osm_id = r.get("osm_type"), r.get("osm_id")
-        out.append({"id": _slug(str(r["name"])), "name": str(r["name"]), "builder": r.get("builder"), "address": addr or None,
+        out.append({"id": _slug(name), "name": name, "builder": r.get("builder"), "address": addr or None,
                     "lat": round(pt.y, 6), "lon": round(pt.x, 6),
-                    "status": "Under construction (per OpenStreetMap)" if r.get("landuse") == "construction" else None, "facts": None,
+                    "status": "Under construction (per OpenStreetMap)" if (r.get("landuse") == "construction" or uc.search(raw)) else None, "facts": None,
                     "source_url": f"https://www.openstreetmap.org/{osm_type}/{int(osm_id)}" if osm_type and osm_id == osm_id else None,
                     "source": "osm", "search_terms": [str(r.get("builder") or "")]})
     return out
